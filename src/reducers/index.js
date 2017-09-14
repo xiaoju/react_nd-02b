@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import postsReducer from './postsReducer'
 
 const readableApp = combineReducers({
-  postsReducer
+  Posts: postsReducer
 })
 
 export default readableApp

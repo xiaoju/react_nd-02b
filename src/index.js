@@ -1,9 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import App from './components/App'
 import './css/index.css'
 import readableApp from './reducers'
-import { createStore } from 'redux'
 import registerServiceWorker from './registerServiceWorker'
 
 const store = createStore(
@@ -12,7 +13,9 @@ const store = createStore(
 )
 
 render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 )
 

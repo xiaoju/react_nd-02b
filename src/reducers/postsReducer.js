@@ -3,9 +3,9 @@ import {
   POST_FLUSH
 } from '../actions'
 
-const emptyState = {
-  Posts: {}
-}
+// const emptyState = {
+//   Posts: {}
+// }
 
 const dummyPosts = {
   '8xf0y6ziyjabvozdd253nd': {

@@ -37,7 +37,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   border-width: medium;*/
 }
 
-.posts {
+.PostsList {
   order: 2;
   flex-grow: 2;
   flex-shrink: 2;
@@ -84,6 +84,11 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 }
 
 /* fonts etc */
+
+.postItem{
+  /*TODO (especially define the separator below each postItem before the next one in the list)*/
+}
+
 .title {
   color: rgb(209, 154, 102);
   /*marron des titres css*/
