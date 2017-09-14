@@ -1,1 +1,119 @@
+html {font-size: 100%;}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fira Mono', monospace;
+  font-size: .8em;
+  color: rgb(157, 165, 180);
+}
 
+/*
+flexbox settings
+First 3 things, grouped into the 'flex-container': categories, list of posts, and 'post details + comments'
+These 3 things wrap if page is too narrow.
+The 3rd one, postDetails and comments are on top of each other, as described in 'PostDetails-Comments'
+flexbox doc: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-avec-les-em.html
+*/
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.categories {
+  order: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  background-color: rgb(33, 37, 43);
+  color: rgb(157, 165, 180);
+  /*border-top-color: rgb(24, 26, 31);
+  border-style: solid;
+  border-width: medium;*/
+}
+
+.posts {
+  order: 2;
+  flex-grow: 2;
+  flex-shrink: 2;
+  background-color: rgb(40, 44, 52);
+  color: rgb(171, 178, 191);
+  border-top-color: rgb(24, 26, 31);
+  border-top-style: solid;
+  border-top-width: medium;
+}
+
+.PostDetails-Comments {
+  order: 3;
+  flex-grow: 8;
+  flex-shrink: 8;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.postDetails {
+    background-color: rgb(33, 37, 43);
+    color: rgb(157, 165, 180);
+    order: 10;
+    border-top-color: rgb(24, 26, 31);
+    border-top-style: solid;
+    border-top-width: medium;
+}
+
+.comments {
+  order: 20;
+  background-color: rgb(33, 37, 43);
+  color: rgb(157, 165, 180);
+  border-top-color: rgb(24, 26, 31);
+  border-top-style: solid;
+  border-top-width: medium;
+}
+
+.settings {
+  background-color: purple;
+}
+
+/* fonts etc */
+.title {
+  color: rgb(209, 154, 102);
+  /*marron des titres css*/
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.author {
+  color: rgb(86, 182, 194);
+}
+
+.timeStamp {
+  color: rgb(152, 195, 121);
+}
+
+.content {
+  color: rgb(157, 165, 180);
+}
+
+.score {
+  color: rgb(97, 175, 239);
+}
+
+.count {
+  color: rgb(190, 80, 70);
+}
+
+
+/*color: rgb(190, 80, 70);    rouge bordeaux
+rgb(152, 195, 121)          vert des strings
+rgb(198, 120, 221);         violet des import
+rgb(86, 182, 194);      the green of rgb
+rgb(97, 175, 239);      bleu ciel
+  */
