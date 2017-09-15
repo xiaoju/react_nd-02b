@@ -122,6 +122,18 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   color: rgb(190, 80, 70);
 }
 
+.toggleAllButton {
+/* https://www.w3schools.com/css/css3_buttons.asp */
+    background-color: rgb(33, 37, 43);
+    border-style: solid;
+    border-width: thin;
+    color: rgb(157, 165, 180);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 
 /*color: rgb(190, 80, 70);    rouge bordeaux
 rgb(152, 195, 121)          vert des strings

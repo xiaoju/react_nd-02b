@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectPost } from '../actions/index'
-import '../css/App.css'
 import { bindActionCreators } from 'redux'
 
 class List extends Component {

@@ -1,7 +1,9 @@
 import {
   POST_FETCH,
   POST_FLUSH,
-  SELECT_POST
+  SELECT_POST,
+  SELECT_NONE_POST,
+  SELECT_ALL_POST
 } from '../actions'
 
 // const emptyState = {
@@ -30,6 +32,26 @@ const dummyPosts = {
       voteScore: -5,
       deleted: false
     },
+    '6ni6ok3aaaaaaaa3lnez': {
+      id: '6ni6ok3aaaaaaaa3lnez',
+      timestamp: 1468471167190,
+      title: 'ddddddddd',
+      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+      author: 'thfsdone',
+      category: 'redux',
+      voteScore: -5,
+      deleted: false
+    },
+    '6nvvvvvvvvvvaaaaa3lnez': {
+      id: '6nvvvvvvvvvvaaaaa3lnez',
+      timestamp: 1400471167190,
+      title: 'gggddd',
+      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+      author: 'thfsdone',
+      category: 'redux',
+      voteScore: -5,
+      deleted: false
+    },
     'qqqqqqqqqqqqqqqqqqqq': {
       id: 'qqqqqqqqqqqqqqqqqqqq',
       timestamp: 1467111872111,
@@ -44,7 +66,9 @@ const dummyPosts = {
   'allIds': [
     '8xf0y6ziyjabvozdd253nd',
     '6ni6ok3ym7mf1p33lnez',
-    'qqqqqqqqqqqqqqqqqqqq'
+    'qqqqqqqqqqqqqqqqqqqq',
+    '6ni6ok3aaaaaaaa3lnez',
+    '6nvvvvvvvvvvaaaaa3lnez'
   ],
   'SelectedIds': []
 }
@@ -70,6 +94,18 @@ const listReducer = (state = dummyPosts, action) => {
           ...state,
           SelectedIds: state.SelectedIds.concat(action.postId)
         }
+      }
+
+    case SELECT_NONE_POST:
+      return {
+        ...state,
+        SelectedIds: []
+      }
+
+    case SELECT_ALL_POST:
+      return {
+        ...state,
+        SelectedIds: state.allIds
       }
 
     default:
