@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import postsReducer from './postsReducer'
+import listReducer from './listReducer'
 
 const readableApp = combineReducers({
-  Posts: postsReducer
+  Posts: listReducer
 })
 
 export default readableApp

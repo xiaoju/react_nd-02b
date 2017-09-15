@@ -79,6 +79,10 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   border-top-width: medium;
 }
 
+.ListToolbar {
+  background-color: MidnightBlue;
+}
+
 .settings {
   background-color: purple;
 }
@@ -86,7 +90,9 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 /* fonts etc */
 
 .postItem{
-  /*TODO (especially define the separator below each postItem before the next one in the list)*/
+  border-bottom-color: rgb(24, 26, 31);
+  border-bottom-style: solid;
+  border-bottom-width: medium;
 }
 
 .title {
@@ -108,7 +114,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   color: rgb(157, 165, 180);
 }
 
-.score {
+.voteScore {
   color: rgb(97, 175, 239);
 }
 

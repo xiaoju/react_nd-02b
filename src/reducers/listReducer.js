@@ -40,7 +40,7 @@ const dummyPosts = {
   }
 }
 
-const postsReducer = (state = dummyPosts, action) => {
+const listReducer = (state = dummyPosts, action) => {
   switch (action.type) {
     case POST_FETCH:
       return dummyPosts
@@ -53,4 +53,4 @@ const postsReducer = (state = dummyPosts, action) => {
   }
 }
 
-export default postsReducer
+export default listReducer
