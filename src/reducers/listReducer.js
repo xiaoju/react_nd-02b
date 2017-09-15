@@ -1,6 +1,7 @@
 import {
   POST_FETCH,
-  POST_FLUSH
+  POST_FLUSH,
+  SELECT_POST
 } from '../actions'
 
 // const emptyState = {
@@ -45,7 +46,7 @@ const dummyPosts = {
     '6ni6ok3ym7mf1p33lnez',
     'qqqqqqqqqqqqqqqqqqqq'
   ],
-  'selectedIds': ['6ni6ok3ym7mf1p33lnez','qqqqqqqqqqqqqqqqqqqq']
+  'SelectedIds': []
 }
 
 const listReducer = (state = dummyPosts, action) => {
@@ -55,6 +56,21 @@ const listReducer = (state = dummyPosts, action) => {
 
     case POST_FLUSH:
       return {}
+
+    case SELECT_POST:
+      // a toggle function: if postId belongs to array, then remove it, otherwise adds it.
+      // console.log(state)
+      if (state.SelectedIds.includes(action.postId)) {
+        return {
+          ...state,
+          SelectedIds: state.SelectedIds.filter((id)=>(id !== action.postId))
+        }
+      } else {
+        return {
+          ...state,
+          SelectedIds: state.SelectedIds.concat(action.postId)
+        }
+      }
 
     default:
       return state
