@@ -44,7 +44,8 @@ const dummyPosts = {
     '8xf0y6ziyjabvozdd253nd',
     '6ni6ok3ym7mf1p33lnez',
     'qqqqqqqqqqqqqqqqqqqq'
-    ]
+  ],
+  'selectedIds': ['6ni6ok3ym7mf1p33lnez','qqqqqqqqqqqqqqqqqqqq']
 }
 
 const listReducer = (state = dummyPosts, action) => {
