@@ -1,6 +1,6 @@
 import {
-  POST_FETCH,
-  POST_FLUSH,
+  FETCH_POST,
+  REMOVE_POST,
   SELECT_POST,
   SELECT_NONE_POST,
   SELECT_ALL_POST
@@ -9,6 +9,12 @@ import {
 // const emptyState = {
 //   Posts: {}
 // }
+
+const emptyPosts = {
+  'perId' : {},
+  'allIds' : {},
+  'SelectedIds': []
+}
 
 const dummyPosts = {
   'perId': {
@@ -75,11 +81,17 @@ const dummyPosts = {
 
 const listReducer = (state = dummyPosts, action) => {
   switch (action.type) {
-    case POST_FETCH:
+    case FETCH_POST:
       return dummyPosts
 
-    case POST_FLUSH:
-      return {}
+    case REMOVE_POST:
+      return {
+        perId: state.allIds
+            .filter(id => !state.SelectedIds.includes(id))
+            .reduce((result, id) => {result[id] = state.perId[id];return result}, {}),
+        allIds: state.allIds.filter(id => !state.SelectedIds.includes(id)),
+        SelectedIds: []
+      }
 
     case SELECT_POST:
       // a toggle function: if postId belongs to array, then remove it, otherwise adds it.

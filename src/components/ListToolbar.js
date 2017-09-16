@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {selectNonePost, selectAllPost } from '../actions/index'
+import {selectNonePost, selectAllPost, removePost } from '../actions/index'
 
 class ListToolbar extends Component {
   render() {
@@ -9,9 +9,16 @@ class ListToolbar extends Component {
       <div className='ListToolbar'>
         <div>New Post</div>
         <br />
-        <div>Delete Selected Post(s)</div>
+
+        <button
+          onClick={this.props.removePost}
+          className="deletePostsButton">
+          Delete Selected Post(s)
+        </button>
         <br />
-        {/* { (this.props.SelectedIds.length === this.props.allIds.length) ? console.log('same') : console.log('different') } */}
+
+        {/* toggle button 'select all / 'select none' */}
+        {/* TODO make this button a reusable component, incl. CSS */}
         { (this.props.SelectedIds.length === this.props.allIds.length) ?
           <button
             onClick={this.props.selectNonePost}
@@ -23,6 +30,7 @@ class ListToolbar extends Component {
             className="toggleAllButton">
             Select All
           </button> }
+
       </div>
     )
   }
@@ -38,7 +46,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
      selectNonePost: selectNonePost,
-     selectAllPost: selectAllPost
+     selectAllPost: selectAllPost,
+     removePost: removePost
    },
   dispatch)
 }

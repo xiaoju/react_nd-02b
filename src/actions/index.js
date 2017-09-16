@@ -1,19 +1,19 @@
-export const POST_FETCH = 'POST_FETCH'
-export const POST_FLUSH = 'POST_FLUSH'
+export const FETCH_POST = 'FETCH_POST'
+export const REMOVE_POST = 'REMOVE_POST'
 
 export const SELECT_POST = 'SELECT_POST'
 export const SELECT_ALL_POST = 'SELECT_ALL_POST'
 export const SELECT_NONE_POST = 'SELECT_NONE_POST'
 
-export function postFetch(){
+export function fetchPost(){
   return {
-    type: POST_FETCH
+    type: FETCH_POST
   }
 }
 
-export function postFlush () {
+export function removePost() {
   return {
-    type: POST_FLUSH
+    type: REMOVE_POST
   }
 }
 
