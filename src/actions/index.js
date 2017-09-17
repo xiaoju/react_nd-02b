@@ -1,5 +1,6 @@
 export const FETCH_POST = 'FETCH_POST'
 export const REMOVE_POST = 'REMOVE_POST'
+export const ADD_POST = 'ADD_POST'
 
 export const SELECT_POST = 'SELECT_POST'
 export const SELECT_ALL_POST = 'SELECT_ALL_POST'
@@ -14,6 +15,18 @@ export function fetchPost(){
 export function removePost() {
   return {
     type: REMOVE_POST
+  }
+}
+
+export function addPost({id, timestamp, title, body, author, category}) {
+  return {
+    type: ADD_POST,
+    id,
+    timestamp,
+    title,
+    body,
+    author,
+    category
   }
 }
 

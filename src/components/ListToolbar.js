@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {selectNonePost, selectAllPost, removePost } from '../actions/index'
+import { withRouter } from 'react-router-dom'
 
 class ListToolbar extends Component {
   render() {
@@ -52,4 +53,4 @@ function mapDispatchToProps(dispatch){
   dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListToolbar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListToolbar));

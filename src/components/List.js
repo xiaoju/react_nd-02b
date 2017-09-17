@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectPost } from '../actions/index'
 import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
 
 class List extends Component {
 
@@ -36,4 +37,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({ selectPost: selectPost}, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List))

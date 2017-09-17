@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import listReducer from './listReducer'
 
-const readableApp = combineReducers({
+const appReducer = combineReducers({
   Posts: listReducer
 })
 
-export default readableApp
+export default appReducer

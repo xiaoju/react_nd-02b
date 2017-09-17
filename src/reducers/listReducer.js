@@ -1,14 +1,12 @@
 import {
   FETCH_POST,
   REMOVE_POST,
-  SELECT_POST,
-  SELECT_NONE_POST,
-  SELECT_ALL_POST
-} from '../actions'
+  ADD_POST,
 
-// const emptyState = {
-//   Posts: {}
-// }
+  SELECT_POST,
+  SELECT_ALL_POST,
+  SELECT_NONE_POST
+} from '../actions'
 
 const emptyPosts = {
   'perId' : {},
@@ -79,18 +77,41 @@ const dummyPosts = {
   'SelectedIds': []
 }
 
+// immutable operations on arrays: https://vincent.billey.me/pure-javascript-immutable-array/
+
 const listReducer = (state = dummyPosts, action) => {
   switch (action.type) {
     case FETCH_POST:
       return dummyPosts
 
     case REMOVE_POST:
+      // for allIds, remove from allIds array any id that belongs to SelectedIds
+      // for perId, the same but more convoluted because perId is an object, not an array:
+      // the reduce function rebuilds the perId object from empty object {} by adding any sub-object
+      // that meets same criteria as for allIds.
+      const allIdsNew = state.allIds.filter(id => !state.SelectedIds.includes(id))
       return {
-        perId: state.allIds
-            .filter(id => !state.SelectedIds.includes(id))
-            .reduce((result, id) => {result[id] = state.perId[id];return result}, {}),
-        allIds: state.allIds.filter(id => !state.SelectedIds.includes(id)),
+        allIds: allIdsNew,
+        perId: allIdsNew.reduce((result, id) => {result[id] = state.perId[id];return result}, {}),
         SelectedIds: []
+      }
+
+    case ADD_POST:
+      const {id, timestamp, title, body, author, category } = action
+      return {
+        SelectedIds: [id],         // [].push(id)
+        perId: {
+          ...state.perId,
+          [id]: {
+            id,
+            timestamp,
+            title,
+            body,
+            author,
+            category
+          },
+        allIds: state.allIds.concact(id)      // other way: [].concat(state.allIds, id)
+        }
       }
 
     case SELECT_POST:

@@ -1,22 +1,25 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+// import { Router } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
+import { createStore } from 'redux'
 import App from './components/App'
-import './css/index.css'
-import readableApp from './reducers'
+// import './css/index.css'
+import appReducer from './reducers'
 import registerServiceWorker from './registerServiceWorker'
 
 const store = createStore(
-  readableApp,
+  appReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 render(
   <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+, document.getElementById('root'))
 
 registerServiceWorker()
