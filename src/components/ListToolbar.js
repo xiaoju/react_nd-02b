@@ -9,12 +9,12 @@ class ListToolbar extends Component {
   render() {
     return (
       <div className='listToolbar'>
-        <Link to="/newpost" className="button">New Post</Link>
+        <Link to="/newpost" className="linkButton">New Post</Link>
 
         <button
           onClick={this.props.removePost}
           className="button">
-          Delete Selected Post(s)
+          Delete Selected
         </button>
         <br />
 

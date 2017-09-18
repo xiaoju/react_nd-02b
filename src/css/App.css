@@ -156,6 +156,20 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   color: rgb(190, 80, 70);
 }
 
+/* BUG how to merge these 2 button css? Only width is different needed to look the same   */
+.linkButton {
+/* https://www.w3schools.com/css/css3_buttons.asp */
+    background-color: rgb(33, 37, 43);
+    border-style: solid;
+    border-width: thin;
+    color: rgb(157, 165, 180);
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    width: 118px;
+    margin: 0 auto;
+}
 .button {
 /* https://www.w3schools.com/css/css3_buttons.asp */
     background-color: rgb(33, 37, 43);
@@ -165,10 +179,10 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 1em;
+    width: 140px;
+    margin: 0 auto;
 }
-
 
 
 /*color: rgb(190, 80, 70);    rouge bordeaux
