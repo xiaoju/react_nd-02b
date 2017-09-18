@@ -165,7 +165,7 @@ const listReducer = (state = dummyPosts, action) => {
     case ADD_POST:
       const {id, timestamp, title, body, author, category } = action
       return {
-        SelectedIds: [id],         // [].push(id)
+        SelectedIds: [id],
         perId: {
           ...state.perId,
           [id]: {
@@ -176,7 +176,7 @@ const listReducer = (state = dummyPosts, action) => {
             author,
             category
           },
-        allIds: state.allIds.concact(id)      // other way: [].concat(state.allIds, id)
+        allIds: state.allIds.concat(id)      // other way: [].concat(state.allIds, id)
         }
       }
 

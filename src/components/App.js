@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router'
 import '../css/App.css'
-import NewPost from './NewPost'
+import NewpostPage from './NewpostPage'
 import MainPage from './MainPage'
 
 // react router with redux:
@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className='app' >
         <Switch>
-          <Route exact path='/newpost' component ={NewPost} />
+          <Route exact path='/newpost' component ={NewpostPage} />
           <Route path='/:category?/:post_id?' component = {MainPage} />
         </Switch>
       </div>

@@ -18,20 +18,39 @@ export function removePost() {
   }
 }
 
-export function addPost({id, timestamp, title, body, author, category}) {
-  return {
-    type: ADD_POST,
-    id,
-    timestamp,
-    title,
-    body,
-    author,
-    category
-  }
-}
+// newPost() fills in store.newPost
+// export function newPost({id, timestamp, title, body, author, category}){
+//   return {
+//     type: NEW_POST,
+//     id,
+//     timestamp,
+//     title,
+//     body,
+//     author,
+//     category
+//   }
+// }
+
+// addPost() moves data from store.newPost to store.Posts
+// store.newPost got input data from a controlled form
+// export function addPost(){
+//   return {
+//     type: ADD_POST
+//   }
+// }
+// export function addPost({id, timestamp, title, body, author, category}) {
+//   return {
+//     type: ADD_POST,
+//     id,
+//     timestamp,
+//     title,
+//     body,
+//     author,
+//     category
+//   }
+// }
 
 export function selectPost(postId){
-  // console.log('The post with following id has been selected: ', postId )
   return {
     type: SELECT_POST,
     postId
