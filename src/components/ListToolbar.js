@@ -2,18 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {selectNonePost, selectAllPost, removePost } from '../actions/index'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
+
 
 class ListToolbar extends Component {
   render() {
     return (
       <div className='listToolbar'>
-        <div>New Post</div>
-        <br />
+        <Link to="/newpost" className="button">New Post</Link>
 
         <button
           onClick={this.props.removePost}
-          className="deletePostsButton">
+          className="button">
           Delete Selected Post(s)
         </button>
         <br />
@@ -23,12 +23,12 @@ class ListToolbar extends Component {
         { (this.props.SelectedIds.length === this.props.allIds.length) ?
           <button
             onClick={this.props.selectNonePost}
-            className="toggleAllButton">
+            className="button">
             Select None
           </button> :
           <button
             onClick={this.props.selectAllPost}
-            className="toggleAllButton">
+            className="button">
             Select All
           </button> }
 
