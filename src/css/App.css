@@ -8,17 +8,26 @@ body {
   background-color: rgb(33, 37, 43);
 }
 
-/*
-flexbox settings
-First 3 things, grouped into the 'flex-container': categories, list of posts, and 'post details + comments'
-These 3 things wrap if page is too narrow.
-The 3rd one, postDetails and comments are on top of each other, as described in 'PostDetails-Comments'
+/* # flexbox tree:
+- mainPage
+  1. filterContainer
+    1. categories
+    2. searchBar
+    3. filterToolbar
+  2. listContainer
+    1. listSortbar
+    2. list
+      - post
+    3. listToolbar
+  3. detailsContainer
+    1. postDetails
+    2. commentsSortbar
+    3. comments
 flexbox doc: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-
 em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-avec-les-em.html
 */
 
-.flex-container {
+.mainPage {
   display: flex;
   flex-direction: row;
   align-content: flex-start;
@@ -26,7 +35,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   margin: auto;
 }
 
-.categories {
+.filterContainer {
   order: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -37,7 +46,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   border-width: medium;*/
 }
 
-.PostsList {
+.listContainer {
   order: 2;
   flex-grow: 2;
   flex-shrink: 2;
@@ -48,7 +57,23 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   border-top-width: medium;
 }
 
-.PostDetails-Comments {
+/* BUG listToolbar buttons get scrolled away, and I want them at bottom! */
+  .listToolbar {
+    order: 3;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  .listSortbar {
+    order: 1;
+  }
+
+  .list {
+    order: 2;
+  }
+
+.detailsContainer {
   order: 3;
   flex-grow: 8;
   flex-shrink: 8;
@@ -60,6 +85,20 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   justify-content: space-around;
   margin: auto;
 }
+
+/* filterContainer - - - - - - - - - - - - - - - - - - - - - -*/
+
+/* listContainer - - - - - - - - - - - - - - - - - - - - - - -*/
+
+/*.listTop {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+}*/
+
+
+
+/* detailsContainer - - - - - - - - - - - - - - - - - - - - - */
 
 .postDetails {
     background-color: rgb(33, 37, 43);
@@ -79,25 +118,20 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   border-top-width: medium;
 }
 
-.ListToolbar {
-  background-color: MidnightBlue;
-}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 .settings {
   background-color: purple;
 }
 
-/* fonts etc */
-
-.postItem{
+.post{
   border-bottom-color: rgb(24, 26, 31);
   border-bottom-style: solid;
   border-bottom-width: medium;
 }
 
 .title {
-  color: rgb(209, 154, 102);
-  /*marron des titres css*/
+  color: rgb(209, 154, 102);    /* marron des titres css */
   font-weight: bold;
   font-size: 1.4em;
 }

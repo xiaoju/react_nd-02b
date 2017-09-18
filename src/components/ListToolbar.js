@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom'
 class ListToolbar extends Component {
   render() {
     return (
-      <div className='ListToolbar'>
+      <div className='listToolbar'>
         <div>New Post</div>
         <br />
 

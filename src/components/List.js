@@ -8,12 +8,12 @@ class List extends Component {
 
   render() {
     return (
-      <div className='PostsList'>
+      <div className='.list'>
         {this.props.Posts.allIds.map((id)=>(
           <div
             key={id}
             onClick={()=> this.props.selectPost(this.props.Posts.perId[id].id)}
-            className='postItem' >
+            className='post' >
             <div className='title'>{this.props.Posts.perId[id].title}</div>
             <div className='author'>{this.props.Posts.perId[id].author}</div>
             <div className='timeStamp'>{this.props.Posts.perId[id].timestamp}</div>

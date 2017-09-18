@@ -11,7 +11,7 @@ import MainPage from './MainPage'
 class App extends Component {
   render() {
     return (
-      <div className='App' >
+      <div className='app' >
         <Switch>
           <Route exact path='/newpost' component ={NewPost} />
           <Route path='/:category?/:post_id?' component = {MainPage} />

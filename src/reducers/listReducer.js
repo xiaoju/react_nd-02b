@@ -65,6 +65,66 @@ const dummyPosts = {
       category: 'react',
       voteScore: 1,
       deleted: false
+    },
+    'aaa': {
+      id: 'aaa',
+      timestamp: 1400471167190,
+      title: 'gggddd',
+      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+      author: 'thfsdone',
+      category: 'redux',
+      voteScore: -5,
+      deleted: false
+    },
+    'bbb': {
+      id: 'bbb',
+      timestamp: 1400471167190,
+      title: 'gggddd',
+      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+      author: 'thfsdone',
+      category: 'redux',
+      voteScore: -5,
+      deleted: false
+    },
+    'ccc': {
+      id: 'ccc',
+      timestamp: 1400471167190,
+      title: 'gggddd',
+      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+      author: 'thfsdone',
+      category: 'redux',
+      voteScore: -5,
+      deleted: false
+    },
+    'ddd': {
+      id: 'ddd',
+      timestamp: 1400471167190,
+      title: 'gggddd',
+      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+      author: 'thfsdone',
+      category: 'redux',
+      voteScore: -5,
+      deleted: false
+    },
+    'eee': {
+      id: 'eee',
+      timestamp: 1400471167190,
+      title: 'gggddd',
+      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+      author: 'thfsdone',
+      category: 'redux',
+      voteScore: -5,
+      deleted: false
+    },
+    'fff': {
+      id: 'fff',
+      timestamp: 1400471167190,
+      title: 'gggddd',
+      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+      author: 'thfsdone',
+      category: 'redux',
+      voteScore: -5,
+      deleted: false
     }
   },
   'allIds': [
@@ -72,7 +132,13 @@ const dummyPosts = {
     '6ni6ok3ym7mf1p33lnez',
     'qqqqqqqqqqqqqqqqqqqq',
     '6ni6ok3aaaaaaaa3lnez',
-    '6nvvvvvvvvvvaaaaa3lnez'
+    '6nvvvvvvvvvvaaaaa3lnez',
+    'aaa',
+    'bbb',
+    'ccc',
+    'ddd',
+    'eee',
+    'fff'
   ],
   'SelectedIds': []
 }
