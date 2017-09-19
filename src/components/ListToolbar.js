@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {selectNonePost, selectAllPost, removePost } from '../actions/index'
-import SelectAllNoneButton from './SelectAllNoneButton'
 import { withRouter, Link } from 'react-router-dom'
 
 
@@ -57,7 +56,7 @@ class ListToolbar extends Component {
   render() {
     return (
       <div className='listToolbar'>
-        <Link to="/newpost" className="newpostButton">New Post</Link>
+        <Link to="/newpost" className="button linkButton">New Post</Link>
         {this.deleteButton()}
         {this.selectButton()}
       </div>
