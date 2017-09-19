@@ -156,19 +156,21 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   color: rgb(190, 80, 70);
 }
 
-/* BUG how to merge these 2 button css? Only width is different needed to look the same   */
-.linkButton {
+/* TODO how to merge these 2 button css? Only width is different needed to look the same   */
+.newpostButton {
 /* https://www.w3schools.com/css/css3_buttons.asp */
     background-color: rgb(33, 37, 43);
     border-style: solid;
     border-width: thin;
     color: rgb(157, 165, 180);
+    border-color: rgb(192,192,192);
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     font-size: 1em;
     width: 118px;
     margin: 0 auto;
+    margin-bottom: 5px;
 }
 .button {
 /* https://www.w3schools.com/css/css3_buttons.asp */
@@ -176,12 +178,20 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
     border-style: solid;
     border-width: thin;
     color: rgb(157, 165, 180);
+    border-color: rgb(192,192,192);
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     font-size: 1em;
     width: 140px;
     margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+.inactive_button {
+  background-color: transparent;
+  color: black;
+  border-color: black;
 }
 
 
