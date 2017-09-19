@@ -13,9 +13,10 @@ import Comments from './Comments'
 const MainPage = () => (
   <div className = 'mainPage'>
     <div className = 'filterContainer'>
+      <FilterToolbar />
       <Categories />
       <SearchBar />
-      <FilterToolbar />
+
     </div>
     <div className = 'listContainer'>
       <ListToolbar />

@@ -13,12 +13,11 @@ class List extends Component {
           <div
             key={id}
             onClick={()=> this.props.selectPost(this.props.Posts.perId[id].id)}
-            className='post' >
+            className={'post ' + (this.props.Posts.SelectedIds.includes(id) ? 'selected' : 'unselected') } >
             <div className='title'>{this.props.Posts.perId[id].title}</div>
             <div className='author'>{this.props.Posts.perId[id].author}</div>
             <div className='timeStamp'>{this.props.Posts.perId[id].timestamp}</div>
             <div className='voteScore'>{this.props.Posts.perId[id].voteScore}</div>
-            <div> Selected: { this.props.Posts.SelectedIds.includes(id) ? 'yes' : 'no'}</div>
           </div>
         ))
         }
@@ -30,7 +29,7 @@ class List extends Component {
 function mapStateToProps(state) {
   return {
     Posts: state.Posts
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch){

@@ -41,9 +41,9 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   flex-shrink: 1;
   background-color: rgb(33, 37, 43);
   color: rgb(157, 165, 180);
-  /*border-top-color: rgb(24, 26, 31);
-  border-style: solid;
-  border-width: medium;*/
+  border-top-color: rgb(24, 26, 31);
+  border-top-style: solid;
+  border-top-width: medium;
 }
 
 .listContainer {
@@ -52,12 +52,14 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   flex-shrink: 2;
   background-color: rgb(40, 44, 52);
   color: rgb(171, 178, 191);
+
+  /* below mostly useful when screen is very narrow, to separate categories from posts */
   border-top-color: rgb(24, 26, 31);
   border-top-style: solid;
   border-top-width: medium;
 }
 
-/* BUG listToolbar buttons get scrolled away, and I want them at bottom! */
+/* BUG listToolbar buttons get scrolled away, and also I want them at bottom! */
   .listToolbar {
     order: 3;
     display: flex;
@@ -88,6 +90,34 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 
 /* filterContainer - - - - - - - - - - - - - - - - - - - - - -*/
 
+.filterToolbar {
+  order: 3;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.filterSortbar {
+  order: 1;
+}
+
+.categories {
+  order: 2;
+}
+
+.category {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.path {
+
+}
+
+.name {
+
+}
+
 /* listContainer - - - - - - - - - - - - - - - - - - - - - - -*/
 
 /*.listTop {
@@ -96,33 +126,6 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   justify-content: flex-start;
 }*/
 
-
-
-/* detailsContainer - - - - - - - - - - - - - - - - - - - - - */
-
-.postDetails {
-    background-color: rgb(33, 37, 43);
-    color: rgb(157, 165, 180);
-    order: 10;
-    border-top-color: rgb(24, 26, 31);
-    border-top-style: solid;
-    border-top-width: medium;
-}
-
-.comments {
-  order: 20;
-  background-color: rgb(33, 37, 43);
-  color: rgb(157, 165, 180);
-  border-top-color: rgb(24, 26, 31);
-  border-top-style: solid;
-  border-top-width: medium;
-}
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-.settings {
-  background-color: purple;
-}
 
 .post{
   border-bottom-color: rgb(24, 26, 31);
@@ -172,7 +175,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 }
 
 .linkButton {
-    width: 118px !important;    /* otherwise the Link button is wide than the normal button! */
+    width: 118px !important;    /* otherwise the Link button is wider than the normal button! */
 }
 
 .button:focus {       /* look of the button when navigating with keyboard */
@@ -186,6 +189,47 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   border-color: black;
 }
 
+/* detailsContainer - - - - - - - - - - - - - - - - - - - - - */
+
+.postDetails {
+    background-color: rgb(33, 37, 43);
+    color: rgb(157, 165, 180);
+    order: 10;
+    border-top-color: rgb(24, 26, 31);
+    border-top-style: solid;
+    border-top-width: medium;
+}
+
+.comments {
+  order: 20;
+  background-color: rgb(33, 37, 43);
+  color: rgb(157, 165, 180);
+  border-top-color: rgb(24, 26, 31);
+  border-top-style: solid;
+  border-top-width: medium;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.settings {
+  background-color: purple;
+}
+
+/*.unselected {
+  background-color: rgb(33, 37, 43);
+}
+
+.blue {
+  background-color: blue;
+}*/
+
+.selected {
+  background-color: rgb(190, 80, 70);
+}
+
+.unselected {
+
+}
 
 /*color: rgb(190, 80, 70);    rouge bordeaux
 rgb(152, 195, 121)          vert des strings

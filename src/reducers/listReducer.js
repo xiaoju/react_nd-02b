@@ -183,15 +183,15 @@ const listReducer = (state = dummyPosts, action) => {
     case SELECT_POST:
       // a toggle function: if postId belongs to array, then remove it, otherwise adds it.
       // console.log(state)
-      if (state.SelectedIds.includes(action.postId)) {
+      if (state.SelectedIds.includes(action.id)) {
         return {
           ...state,
-          SelectedIds: state.SelectedIds.filter((id)=>(id !== action.postId))
+          SelectedIds: state.SelectedIds.filter((id)=>(id !== action.id))
         }
       } else {
         return {
           ...state,
-          SelectedIds: state.SelectedIds.concat(action.postId)
+          SelectedIds: state.SelectedIds.concat(action.id)
         }
       }
 
