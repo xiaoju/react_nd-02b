@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import NewpostForm from './NewpostForm'
+import { addPost } from '../actions/index'
+import { withRouter } from 'react-router-dom'
 
 class NewpostPage extends Component {
 
   submit = (values) => {
-    // print the form values to the console
     console.log(values)
+    this.props.addPost(values)
   }
 
   render() {
@@ -16,4 +20,17 @@ class NewpostPage extends Component {
 
 }
 
-export default NewpostPage
+function mapStateToProps(state) {
+  return {
+    allIds: state.Posts.allIds
+  };
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+     addPost: addPost
+   },
+  dispatch)
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewpostPage));

@@ -18,37 +18,20 @@ export function removePost() {
   }
 }
 
-// newPost() fills in store.newPost
-// export function newPost({id, timestamp, title, body, author, category}){
-//   return {
-//     type: NEW_POST,
-//     id,
-//     timestamp,
-//     title,
-//     body,
-//     author,
-//     category
-//   }
-// }
-
-// addPost() moves data from store.newPost to store.Posts
-// store.newPost got input data from a controlled form
-// export function addPost(){
-//   return {
-//     type: ADD_POST
-//   }
-// }
-// export function addPost({id, timestamp, title, body, author, category}) {
-//   return {
-//     type: ADD_POST,
-//     id,
-//     timestamp,
-//     title,
-//     body,
-//     author,
-//     category
-//   }
-// }
+// addPost() moves data from store.form.newPost.values to store.Posts
+// no need to look up in store, redux-form passes them as 'values'
+export function addPost({title, body, author, category, timestamp, id}){
+  console.log('adding post!')
+  return {
+    type: ADD_POST,
+    title,
+    body,
+    author,
+    category,
+    timestamp,
+    id
+  }
+}
 
 export function selectPost(postId){
   return {

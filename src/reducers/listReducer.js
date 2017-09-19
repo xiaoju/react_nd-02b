@@ -175,9 +175,9 @@ const listReducer = (state = dummyPosts, action) => {
             body,
             author,
             category
-          },
-        allIds: state.allIds.concat(id)      // other way: [].concat(state.allIds, id)
-        }
+          }
+        },
+        allIds: state.allIds.concat(id)         // other way: [].concat(state.allIds, id)
       }
 
     case SELECT_POST:
