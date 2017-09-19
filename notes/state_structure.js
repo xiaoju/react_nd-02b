@@ -23,10 +23,15 @@ emptyState = {
     'CommentIndex': [],
     'CatIndex': []
   },
-  'NewPost': {
-    newTitle: '',
-    newBody: '',
-    newAuthor: '',
-    newCat: []
+  'form': {
+    newPost: {
+      values: {
+        title: '',
+        body: '',
+        author: '',
+        category: ''
+      },
+      {etc: '...'}
+    }
   }
 }

@@ -1,9 +1,6 @@
 import {
   FETCH_CATEGORY,
-
-  SELECT_CATEGORY,
-  SELECT_ALL_CATEGORY,
-  SELECT_NONE_CATEGORY
+  SELECT_CATEGORY
 } from '../actions'
 
 const Dummy = {
@@ -21,13 +18,13 @@ const Dummy = {
     'eraddddddddddddesd',
     'eraeeeeeeeeeeeeesd'
   ],
-  'SelectedIds': ['eradaaaaaaaaaaaesd', 'eraddddddddddddesd']
+  'SelectedId': 'eradaaaaaaaaaaaesd'
 }
 
 const Empty = {
   'perId': {},
   'allIds': [],
-  'SelectedIds': []
+  'SelectedId': ''
 }
 
 const categoryReducer = (state = Dummy, action) => {
@@ -37,28 +34,9 @@ const categoryReducer = (state = Dummy, action) => {
       return Dummy
 
     case SELECT_CATEGORY:
-      if (state.SelectedIds.includes(action.id)) {
-        return {
-          ...state,
-          SelectedIds: state.SelectedIds.filter((id)=>(id !== action.id))
-        }
-      } else {
-        return {
-          ...state,
-          SelectedIds: state.SelectedIds.concat(action.id)
-        }
-      }
-
-    case SELECT_NONE_CATEGORY:
       return {
         ...state,
-        SelectedIds: []
-      }
-
-    case SELECT_ALL_CATEGORY:
-      return {
-        ...state,
-        SelectedIds: state.allIds
+        SelectedId: action.thisCategory.id
       }
 
     default:

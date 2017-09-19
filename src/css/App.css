@@ -37,13 +37,17 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 
 .filterContainer {
   order: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
+  /*display: flex;*/
+  /*flex-grow: 1;
+  flex-shrink: 1;*/
   background-color: rgb(33, 37, 43);
   color: rgb(157, 165, 180);
-  border-top-color: rgb(24, 26, 31);
+  /*border-top-color: rgb(24, 26, 31);
   border-top-style: solid;
-  border-top-width: medium;
+  border-top-width: medium;*/
+  border-bottom-color: rgb(190, 80, 70);
+  border-bottom-style: solid;
+  border-bottom-width: medium;
 }
 
 .listContainer {
@@ -90,6 +94,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 
 /* filterContainer - - - - - - - - - - - - - - - - - - - - - -*/
 
+/*
 .filterToolbar {
   order: 3;
   display: flex;
@@ -100,9 +105,10 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 .filterSortbar {
   order: 1;
 }
+*/
 
 .categories {
-  order: 2;
+  /*justify-content: center;*/
 }
 
 .category {
@@ -127,10 +133,15 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 }*/
 
 
-.post{
+.post {
   border-bottom-color: rgb(24, 26, 31);
   border-bottom-style: solid;
   border-bottom-width: medium;
+}
+
+.post:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px #719ECE;
 }
 
 .title {
@@ -170,8 +181,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
     text-decoration: none;
     font-size: 1em;
     width: 140px;
-    margin: 0 auto;
-    margin-bottom: 5px;
+    margin: 3px auto;
 }
 
 .linkButton {

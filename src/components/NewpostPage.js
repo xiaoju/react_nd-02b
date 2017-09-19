@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import NewpostForm from './NewpostForm'
 import { addPost } from '../actions/index'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 class NewpostPage extends Component {
 

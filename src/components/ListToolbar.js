@@ -14,7 +14,7 @@ class ListToolbar extends Component {
   }
 
   selectButton() {
-    switch (this.props.allIds.length) {
+    switch (this.props.VisibleIds.length) {
       case 0:
         return (
         <button
@@ -67,7 +67,7 @@ class ListToolbar extends Component {
 function mapStateToProps(state) {
   return {
     SelectedIds: state.Posts.SelectedIds,
-    allIds: state.Posts.allIds
+    VisibleIds: state.Posts.VisibleIds
   };
 }
 

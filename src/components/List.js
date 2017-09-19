@@ -9,9 +9,11 @@ class List extends Component {
   render() {
     return (
       <div className='.list'>
-        {this.props.Posts.allIds.map((id)=>(
+        {this.props.Posts.VisibleIds.map((id)=>(
           <div
             key={id}
+            role='button'
+            tabIndex='0'        /* to allow navigation with keyboard, but still BUG not clickable! */
             onClick={()=> this.props.selectPost(this.props.Posts.perId[id].id)}
             className={'post ' + (this.props.Posts.SelectedIds.includes(id) ? 'selected' : 'unselected') } >
             <div className='title'>{this.props.Posts.perId[id].title}</div>

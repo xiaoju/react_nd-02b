@@ -13,6 +13,8 @@ export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 export const SELECT_ALL_CATEGORY ='SELECT_ALL_CATEGORY'
 export const SELECT_NONE_CATEGORY = 'SELECT_NONE_CATEGORY'
 
+export const FILTER_PER_CAT = 'FILTER_PER_CAT'
+
 export function fetchPost(){
   return {
     type: FETCH_POST
@@ -65,21 +67,27 @@ export function fetchCategory(){
   }
 }
 
-export function selectCategory(id){
+export function selectCategory(thisCategory){
   return {
     type: SELECT_CATEGORY,
-    id
+    thisCategory
   }
 }
 
-export function selectAllCategory(){
-  return {
-    type: SELECT_ALL_CATEGORY
-  }
-}
+// export function selectAllCategory(){
+//   return {
+//     type: SELECT_ALL_CATEGORY
+//   }
+// }
+//
+// export function selectNoneCategory(){
+//   return {
+//     type: SELECT_NONE_CATEGORY
+//   }
+// }
 
-export function selectNoneCategory(){
-  return {
-    type: SELECT_NONE_CATEGORY
-  }
-}
+// export function filterPerCat(){
+//   return {
+//     type: FILTER_PER_CAT
+//   }
+// }

@@ -10,13 +10,13 @@ class Categories extends Component {
     return (
       <div className='.categories'>
         {this.props.Categories.allIds.map((id)=>(
-          <div
+          <button
             key={id}
-            onClick={()=> this.props.selectCategory(this.props.Categories.perId[id].id)}
-            className={'category ' + (this.props.Categories.SelectedIds.includes(id) ? 'selected' : 'unselected') } >
+            onClick={()=> this.props.selectCategory(this.props.Categories.perId[id])}
+            className={'button category ' + (this.props.Categories.SelectedId === id ? 'selected' : 'unselected') } >
             <div className='path'>{this.props.Categories.perId[id].path}</div>
             {/* <div className='name'>{this.props.Categories.perId[id].name}</div> */}
-          </div>
+          </button>
         ))
         }
       </div>

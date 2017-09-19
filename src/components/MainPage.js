@@ -1,8 +1,8 @@
 import React from 'react'
 
 import Categories from './Categories'
-import SearchBar from './SearchBar'
-import FilterToolbar from './FilterToolbar'
+// import SearchBar from './SearchBar'
+// import FilterToolbar from './FilterToolbar'
 import ListSortbar from './ListSortbar'
 import List from './List'
 import ListToolbar from './ListToolbar'
@@ -13,9 +13,9 @@ import Comments from './Comments'
 const MainPage = () => (
   <div className = 'mainPage'>
     <div className = 'filterContainer'>
-      <FilterToolbar />
+      {/* <FilterToolbar /> */}
       <Categories />
-      <SearchBar />
+      {/* <SearchBar /> */}
 
     </div>
     <div className = 'listContainer'>

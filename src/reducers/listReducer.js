@@ -5,16 +5,37 @@ import {
 
   SELECT_POST,
   SELECT_ALL_POST,
-  SELECT_NONE_POST
+  SELECT_NONE_POST,
+
+  SELECT_CATEGORY
 } from '../actions'
 
 const emptyPosts = {
   'perId' : {},
   'allIds' : {},
-  'SelectedIds': []
+  'SelectedIds': [],
+  'VisibleIds': []
 }
 
 const dummyPosts = {
+  'allIds': [
+    '8xf0y6ziyjabvozdd253nd',
+    '6ni6ok3ym7mf1p33lnez',
+    'qqqqqqqqqqqqqqqqqqqq',
+    '6ni6ok3aaaaaaaa3lnez',
+    '6nvvvvvvvvvvaaaaa3lnez',
+    'aaa',
+    'bbb',
+    'ccc',
+    'ddd',
+    'eee',
+    'fff'
+  ],
+  'SelectedIds': [],
+  'VisibleIds': [
+    '8xf0y6ziyjabvozdd253nd',
+    '6ni6ok3ym7mf1p33lnez'
+  ],
   'perId': {
     '8xf0y6ziyjabvozdd253nd': {
       id: '8xf0y6ziyjabvozdd253nd',
@@ -126,21 +147,7 @@ const dummyPosts = {
       voteScore: -5,
       deleted: false
     }
-  },
-  'allIds': [
-    '8xf0y6ziyjabvozdd253nd',
-    '6ni6ok3ym7mf1p33lnez',
-    'qqqqqqqqqqqqqqqqqqqq',
-    '6ni6ok3aaaaaaaa3lnez',
-    '6nvvvvvvvvvvaaaaa3lnez',
-    'aaa',
-    'bbb',
-    'ccc',
-    'ddd',
-    'eee',
-    'fff'
-  ],
-  'SelectedIds': []
+  }
 }
 
 // immutable operations on arrays: https://vincent.billey.me/pure-javascript-immutable-array/
@@ -151,12 +158,14 @@ const listReducer = (state = dummyPosts, action) => {
       return dummyPosts
 
     case REMOVE_POST:
-      // for allIds, remove from allIds array any id that belongs to SelectedIds
-      // for perId, the same but more convoluted because perId is an object, not an array:
+      // for allIds, remove from allIds array any id that belongs to SelectedIds.
+      // same for VisibleIds.
+      // same for perId, but more convoluted because perId is an object, not an array:
       // the reduce function rebuilds the perId object from empty object {} by adding any sub-object
       // that meets same criteria as for allIds.
       const allIdsNew = state.allIds.filter(id => !state.SelectedIds.includes(id))
       return {
+        VisibleIds: state.VisibleIds.filter(id => !state.SelectedIds.includes(id)),
         allIds: allIdsNew,
         perId: allIdsNew.reduce((result, id) => {result[id] = state.perId[id];return result}, {}),
         SelectedIds: []
@@ -165,6 +174,7 @@ const listReducer = (state = dummyPosts, action) => {
     case ADD_POST:
       const {id, timestamp, title, body, author, category } = action
       return {
+        ...state,
         SelectedIds: [id],
         perId: {
           ...state.perId,
@@ -204,7 +214,14 @@ const listReducer = (state = dummyPosts, action) => {
     case SELECT_ALL_POST:
       return {
         ...state,
-        SelectedIds: state.allIds
+        SelectedIds: state.VisibleIds
+      }
+
+    case SELECT_CATEGORY:
+      return {
+        ...state,
+        SelectedIds: [],
+        VisibleIds: state.allIds.filter((id)=>(state.perId[id].category === action.thisCategory.name))
       }
 
     default:
