@@ -189,7 +189,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
     text-decoration: none;
     font-size: 1em;
     width: 140px;
-    margin: 3px auto;
+    margin: 3px;
 }
 
 .linkButton {
@@ -247,6 +247,18 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 
 .unselected {
 
+}
+
+.formLabel {
+  font-size: 1.6em;
+}
+
+.formField {
+  background-color: rgb(33, 37, 43);
+  color: rgb(157, 165, 180);
+  border-style: solid;
+  border-width: thin;
+  font-size: 1.6em;
 }
 
 /*color: rgb(190, 80, 70);    rouge bordeaux

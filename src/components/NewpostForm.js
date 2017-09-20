@@ -1,39 +1,60 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 // https://redux-form.com
 
 let NewpostForm = props => {
   const { handleSubmit } = props
   return (
-    <form onSubmit={ handleSubmit }>
+    <form
+      onSubmit={ handleSubmit }>
+      <br />
       <div>
-        <label htmlFor="title">Title</label>
-        <Field name="title" component="input" type="text" />
+        <label htmlFor="title" className='formLabel' >Title</label>
+        <br />
+        <Field name="title" component="textarea" rows="2" cols="60"type="text" className='formField'/>
       </div>
+      <br />
       <div>
-        <label htmlFor="body">Body</label>
-        <Field name="body" component="input" type="textarea" />
+        <label htmlFor="body" className='formLabel'>Body</label>
+        <br />
+        <Field name="body" component="textarea" type="text" className='formField' rows="10" cols="60"/>
       </div>
+      <br />
       <div>
-        <label htmlFor="author">Author</label>
-        <Field name="author" component="input" type="text" />
+        <label htmlFor="author" className='formLabel'>Author</label>
+        <br />
+        <Field name="author" component="input" type="text" className='formField'/>
       </div>
+      <br />
       <div>
-        <label htmlFor="category">Category</label>
-        <Field name="category" component="input" type="text" />
-      </div>
+        <label htmlFor="category" className='formLabel'>Category</label>
+        <br />
 
-      <div>
-        <label htmlFor="id">id</label>
-        <Field name="id" component="input" type="text" />
-      </div>
+        {/* TODO connect to state to get the correct categories, and output the category ids  */}
+        <Field name="category" component="select" className='formLabel'>
+          <option value="React">React</option>
+          <option value="Redux">Redux</option>
+          <option value="Udacity">Udacity</option>
+        </Field>
 
-      <div>
-        <label htmlFor="timestamp">timestamp</label>
-        <Field name="timestamp" component="input" type="text" />
+        {/* <Field name="category" component="input" type="text" className='formField'/> */}
       </div>
-
-      <button type="submit">Submit</button>
+      <br />
+      <div>
+        <label htmlFor="id" className='formLabel'>id</label>
+        <br />
+        <Field name="id" component="input" type="text" className='formField'/>
+      </div>
+      <br />
+      <div>
+        <label htmlFor="timestamp" className='formLabel'>timestamp</label>
+        <br />
+        <Field name="timestamp" component="input" type="text" className='formField'/>
+      </div>
+      <br />
+      <br />
+      <button type="submit" className='button'>Submit</button>
     </form>
   )
 }
