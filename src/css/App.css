@@ -63,22 +63,6 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   border-top-width: medium;
 }
 
-/* BUG listToolbar buttons get scrolled away, and also I want them at bottom! */
-  .listToolbar {
-    order: 3;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-
-  .listSortbar {
-    order: 1;
-  }
-
-  .list {
-    order: 2;
-  }
-
 .detailsContainer {
   order: 3;
   flex-grow: 8;
@@ -132,6 +116,30 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   justify-content: flex-start;
 }*/
 
+.list {
+
+}
+
+.defaultMessage {
+  /* this is the message when no post exists */
+  /* BUG I want it centered in the page! */
+  color: black;
+  font-size: 1.6em;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* BUG listToolbar buttons get scrolled away, and also I want them at bottom! */
+.listToolbar {
+  order: 3;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.listSortbar {
+  order: 1;
+}
 
 .post {
   border-bottom-color: rgb(24, 26, 31);

@@ -4,6 +4,10 @@ import { bindActionCreators } from 'redux'
 import NewpostForm from './NewpostForm'
 import { addPost } from '../actions/index'
 import { withRouter, Redirect } from 'react-router-dom'
+import MainPage from './MainPage'
+
+// how to redirect afte form submission:
+// https://stackoverflow.com/questions/42123261/programmatically-navigate-using-react-router-v4
 
 class NewpostPage extends Component {
 

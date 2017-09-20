@@ -6,9 +6,52 @@ import { withRouter } from 'react-router-dom'
 
 class List extends Component {
 
+// TODO
+// if post just got added, or app just started,
+// then need initialize what are the selected category, and what are the VisibleIds
+
   render() {
+
+
+    // TODO add lifecycle stuff when page mounts: pass URL parameters into state
+
+
+    if (this.props.Posts.allIds.length === 0) {
+      return (
+        <div className='list'>
+          <div className='defaultMessage'>
+            Press 'New Post' to add content!
+          </div>
+        </div>
+      )
+    }
+
+    if (this.props.Posts.VisibleIds.length === 0) {
+      return (
+        <div className='list'>
+          <div className='defaultMessage'>
+            Select another category
+          </div>
+          <div className='defaultMessage'>
+            or
+          </div>
+          <div className='defaultMessage'>
+            press 'New Post' to add content!
+          </div>
+        </div>
+      )
+    }
+
+    if (!this.props.SelectedCategory) {
+      return (
+        <div className='defaultMessage'>
+          Select a category to show content!
+        </div>
+      )
+    }
+
     return (
-      <div className='.list'>
+      <div className='list'>
         {this.props.Posts.VisibleIds.map((id)=>(
           <div
             key={id}
@@ -30,7 +73,8 @@ class List extends Component {
 
 function mapStateToProps(state) {
   return {
-    Posts: state.Posts
+    Posts: state.Posts,
+    SelectedCategory: state.Categories.SelectedId
   }
 }
 

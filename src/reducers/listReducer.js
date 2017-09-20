@@ -10,13 +10,6 @@ import {
   SELECT_CATEGORY
 } from '../actions'
 
-const emptyPosts = {
-  'perId' : {},
-  'allIds' : {},
-  'SelectedIds': [],
-  'VisibleIds': []
-}
-
 const dummyPosts = {
   'allIds': [
     '8xf0y6ziyjabvozdd253nd',
@@ -150,6 +143,13 @@ const dummyPosts = {
   }
 }
 
+const emptyPosts = {
+  'perId' : {},
+  'allIds' : {},
+  'SelectedIds': [],
+  'VisibleIds': []
+}
+
 // immutable operations on arrays: https://vincent.billey.me/pure-javascript-immutable-array/
 
 const listReducer = (state = dummyPosts, action) => {
@@ -168,13 +168,16 @@ const listReducer = (state = dummyPosts, action) => {
         VisibleIds: state.VisibleIds.filter(id => !state.SelectedIds.includes(id)),
         allIds: allIdsNew,
         perId: allIdsNew.reduce((result, id) => {result[id] = state.perId[id];return result}, {}),
-        SelectedIds: []
+        SelectedIds: [null]
       }
 
     case ADD_POST:
       const {id, timestamp, title, body, author, category } = action
       return {
         ...state,
+        allIds: [id].concat(state.allIds),
+        // new id added at begin of array.
+        // Other ways: state.allIds.concat(id)   [].concat(state.allIds, id)   [id].concat(state.allIds)
         SelectedIds: [id],
         perId: {
           ...state.perId,
@@ -186,8 +189,7 @@ const listReducer = (state = dummyPosts, action) => {
             author,
             category
           }
-        },
-        allIds: state.allIds.concat(id)         // other way: [].concat(state.allIds, id)
+        }
       }
 
     case SELECT_POST:

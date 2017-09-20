@@ -18,13 +18,13 @@ const Dummy = {
     'eraddddddddddddesd',
     'eraeeeeeeeeeeeeesd'
   ],
-  'SelectedId': 'eradaaaaaaaaaaaesd'
+  'SelectedId': null
 }
 
 const Empty = {
   'perId': {},
   'allIds': [],
-  'SelectedId': ''
+  'SelectedId': null
 }
 
 const categoryReducer = (state = Dummy, action) => {
