@@ -13,8 +13,8 @@ import { Link } from 'react-router-dom'
 class NewpostPage extends Component {
 
   submit = (values) => {
-    console.log(values)
     this.props.addPost(values)
+    // BUG post doesn't appear in the list after it got created
   }
 
   render() {
@@ -42,7 +42,7 @@ class NewpostPage extends Component {
 function mapStateToProps(state) {
   return {
     allIds: state.Posts.allIds,
-    SelectedCatName: state.Categories.SelectedId,
+    SelectedCatName: state.Categories.SelectedPath,
     SelectedIds: state.Posts.SelectedIds
   };
 }

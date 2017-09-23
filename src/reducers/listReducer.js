@@ -2,36 +2,40 @@ import {
   FETCH_POST,
   REMOVE_POST,
   ADD_POST,
+  SHOW_POST,
 
   SELECT_POST,
   SELECT_ALL_POST,
   SELECT_NONE_POST,
 
-  SELECT_CATEGORY
+  SELECT_CATEGORY,
+  SHOW_ALL_CATEGORY
+
 } from '../actions'
 
 const dummyPosts = {
   'allIds': [
-    '8xf0y6ziyjabvozdd253nd',
-    '6ni6ok3ym7mf1p33lnez',
-    'qqqqqqqqqqqqqqqqqqqq',
-    '6ni6ok3aaaaaaaa3lnez',
-    '6nvvvvvvvvvvaaaaa3lnez',
-    'aaa',
-    'bbb',
-    'ccc',
-    'ddd',
-    'eee',
-    'fff'
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G'
   ],
   'SelectedIds': [],
   'VisibleIds': [
-    '8xf0y6ziyjabvozdd253nd',
-    '6ni6ok3ym7mf1p33lnez'
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G'
   ],
   'perId': {
-    '8xf0y6ziyjabvozdd253nd': {
-      id: '8xf0y6ziyjabvozdd253nd',
+    'A': {
+      id: 'A',
       timestamp: 1467166872634,
       title: 'Udacity is the best place to learn React',
       body: 'Everyone says so after all.',
@@ -40,8 +44,8 @@ const dummyPosts = {
       voteScore: 6,
       deleted: false
     },
-    '6ni6ok3ym7mf1p33lnez': {
-      id: '6ni6ok3ym7mf1p33lnez',
+    'B': {
+      id: 'B',
       timestamp: 1468479767190,
       title: 'Learn Redux in 10 minutes!',
       body: 'Just kidding. It takes more than 10 minutes to learn technology.',
@@ -50,8 +54,8 @@ const dummyPosts = {
       voteScore: -5,
       deleted: false
     },
-    '6ni6ok3aaaaaaaa3lnez': {
-      id: '6ni6ok3aaaaaaaa3lnez',
+    'C': {
+      id: 'C',
       timestamp: 1468471167190,
       title: 'ddddddddd',
       body: 'Just kidding. It takes more than 10 minutes to learn technology.',
@@ -60,8 +64,8 @@ const dummyPosts = {
       voteScore: -5,
       deleted: false
     },
-    '6nvvvvvvvvvvaaaaa3lnez': {
-      id: '6nvvvvvvvvvvaaaaa3lnez',
+    'D': {
+      id: 'D',
       timestamp: 1400471167190,
       title: 'gggddd',
       body: 'Just kidding. It takes more than 10 minutes to learn technology.',
@@ -70,8 +74,8 @@ const dummyPosts = {
       voteScore: -5,
       deleted: false
     },
-    'qqqqqqqqqqqqqqqqqqqq': {
-      id: 'qqqqqqqqqqqqqqqqqqqq',
+    'E': {
+      id: 'E',
       timestamp: 1467111872111,
       title: 'Another post',
       body: 'This is my body',
@@ -80,8 +84,8 @@ const dummyPosts = {
       voteScore: 1,
       deleted: false
     },
-    'aaa': {
-      id: 'aaa',
+    'F': {
+      id: 'F',
       timestamp: 1400471167190,
       title: 'gggddd',
       body: 'Just kidding. It takes more than 10 minutes to learn technology.',
@@ -90,48 +94,8 @@ const dummyPosts = {
       voteScore: -5,
       deleted: false
     },
-    'bbb': {
-      id: 'bbb',
-      timestamp: 1400471167190,
-      title: 'gggddd',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thfsdone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    },
-    'ccc': {
-      id: 'ccc',
-      timestamp: 1400471167190,
-      title: 'gggddd',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thfsdone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    },
-    'ddd': {
-      id: 'ddd',
-      timestamp: 1400471167190,
-      title: 'gggddd',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thfsdone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    },
-    'eee': {
-      id: 'eee',
-      timestamp: 1400471167190,
-      title: 'gggddd',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thfsdone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    },
-    'fff': {
-      id: 'fff',
+    'G': {
+      id: 'G',
       timestamp: 1400471167190,
       title: 'gggddd',
       body: 'Just kidding. It takes more than 10 minutes to learn technology.',
@@ -172,13 +136,12 @@ const listReducer = (state = dummyPosts, action) => {
       }
 
     case ADD_POST:
-      const {id, timestamp, title, body, author, category } = action
+      const {id, timestamp, title, body, author, path } = action
       return {
-        ...state,
         allIds: [id].concat(state.allIds),
         // new id added at begin of array.
         // Other ways: state.allIds.concat(id)   [].concat(state.allIds, id)   [id].concat(state.allIds)
-        SelectedIds: [id],
+        SelectedIds: [id],  // same as [].concat(action.thisPost.id)
         perId: {
           ...state.perId,
           [id]: {
@@ -187,14 +150,16 @@ const listReducer = (state = dummyPosts, action) => {
             title,
             body,
             author,
-            category
+            path
           }
-        }
+        },
+        VisibleIds: [id].concat(state.allIds.filter((id)=>(state.perId[id].category === path)))
+        // need add specifically the post just created through form, because that post wasn't present in previous state.
       }
 
     case SELECT_POST:
       // a toggle function: if postId belongs to array, then remove it, otherwise adds it.
-      // console.log(state)
+      // for example if want to delete several posts from the Posts List
       if (state.SelectedIds.includes(action.id)) {
         return {
           ...state,
@@ -205,6 +170,12 @@ const listReducer = (state = dummyPosts, action) => {
           ...state,
           SelectedIds: state.SelectedIds.concat(action.id)
         }
+      }
+
+    case SHOW_POST:
+      return {
+        ...state,
+        SelectedIds: [].concat(action.id)
       }
 
     case SELECT_NONE_POST:
@@ -223,7 +194,14 @@ const listReducer = (state = dummyPosts, action) => {
       return {
         ...state,
         SelectedIds: [],
-        VisibleIds: state.allIds.filter((id)=>(state.perId[id].category === action.thisCategory.name))
+        VisibleIds: (action.path === null) ? state.allIds : state.allIds.filter((id)=>(state.perId[id].category === action.path))
+      }
+
+    case SHOW_ALL_CATEGORY:
+      return {
+        ...state,
+        SelectedIds: [],
+        VisibleIds: state.allIds
       }
 
     default:

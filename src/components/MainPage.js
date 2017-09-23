@@ -20,13 +20,13 @@ const MainPage = () => (
     </div>
     <div className = 'listContainer'>
       <ListToolbar />
-      <ListSortbar />
+      {/* <ListSortbar /> */}
       <List />
     </div>
     <div className = 'detailsContainer'>
-      <Details />
-      <CommentsSortbar />
-      <Comments />
+      {/* <Details /> */}
+      {/* <CommentsSortbar /> */}
+      {/* <Comments /> */}
     </div>
   </div>
 )

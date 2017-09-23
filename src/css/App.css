@@ -45,28 +45,28 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   /*border-top-color: rgb(24, 26, 31);
   border-top-style: solid;
   border-top-width: medium;*/
-  border-bottom-color: rgb(190, 80, 70);
+  border-bottom-color: black;
   border-bottom-style: solid;
-  border-bottom-width: medium;
+  border-bottom-width: thick;
 }
 
 .listContainer {
   order: 2;
-  flex-grow: 2;
-  flex-shrink: 2;
+  /*flex-grow: 2;
+  flex-shrink: 2;*/
   background-color: rgb(40, 44, 52);
   color: rgb(171, 178, 191);
 
   /* below mostly useful when screen is very narrow, to separate categories from posts */
-  border-top-color: rgb(24, 26, 31);
+  /*border-top-color: rgb(157, 165, 180);
   border-top-style: solid;
-  border-top-width: medium;
+  border-top-width: medium;*/
 }
 
 .detailsContainer {
   order: 3;
-  flex-grow: 8;
-  flex-shrink: 8;
+  /*flex-grow: 8;
+  flex-shrink: 8;*/
   align-self: center;
   display: flex;
   flex-direction: column;

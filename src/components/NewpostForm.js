@@ -33,13 +33,12 @@ let NewpostForm = props => {
         {/* TODO connect this form to state to get correct categories and ids
           give a non-empty category as pre-filled field,
           category list shouldn't require an update to show udpated list*/}
-        <Field name="category" component="select" className='formLabel'>
+        <Field name="path" component="select" className='formLabel'>
           <option />
           <option value='react'>React</option>
           <option value='redux'>Redux</option>
           <option value='udacity'>Udacity</option>
         </Field>
-        {/* <Field name="category" component="input" type="text" className='formField'/> */}
       </div>
       <br />
       <div>
