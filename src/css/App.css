@@ -93,6 +93,7 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 
 .categories {
   /*justify-content: center;*/
+  margin: 3px auto;
 }
 
 .category {

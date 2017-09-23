@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectCategory } from '../actions/index'
+import { selectCategory, fetchCategory } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 
+// TODO refactor UI using http://www.material-ui.com
+// and http://flexboxgrid.com
+
 class Categories extends Component {
+
+  componentDidMount() {
+    this.props.fetchCategory()
+  }
 
   render() {
     return (
-      <div className='.categories'>
+      <div className='categories'>
         {this.props.Categories.allIds.map((id)=>(
           <button
             key={id}
@@ -31,7 +38,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ selectCategory: selectCategory}, dispatch)
+  return bindActionCreators({
+    selectCategory: selectCategory,
+    fetchCategory: fetchCategory
+  }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Categories))

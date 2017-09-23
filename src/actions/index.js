@@ -1,3 +1,5 @@
+import * as ReadableAPI  from '../utils/ReadableAPI'
+
 export const FETCH_POST = 'FETCH_POST'
 export const REMOVE_POST = 'REMOVE_POST'
 export const ADD_POST = 'ADD_POST'
@@ -61,11 +63,25 @@ export function selectNonePost(){
   }
 }
 
+// export function fetchCategory(){
+//   ReadableAPI.fetchCategory()
+//     .then(Categories => {
+//       console.log('Categories: ', Categories)
+//       return {
+//           type: FETCH_CATEGORY,
+//           Categories
+//         }
+//       }
+//       )
+// }
 export function fetchCategory(){
+  const Categories = ReadableAPI.fetchCategory()
+  console.log('Categories: ', Categories)
   return {
-    type: FETCH_CATEGORY
+      type: FETCH_CATEGORY,
+      Categories
+    }
   }
-}
 
 export function selectCategory(thisCategory){
   return {
