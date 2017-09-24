@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectPost, showPost } from '../actions/index'
+import { selectPost, showPost, fetchAllPosts } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 
@@ -9,6 +9,10 @@ class List extends Component {
 // TODO
 // if post just got added, or app just started,
 // then need initialize what are the selected category, and what are the VisibleIds
+
+  componentDidMount() {
+        this.props.fetchAllPosts()
+  }
 
   render() {
 
@@ -76,6 +80,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
+    fetchAllPosts: fetchAllPosts,
     selectPost: selectPost,
     showPost: showPost
   }, dispatch)

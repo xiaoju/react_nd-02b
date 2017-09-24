@@ -1,5 +1,5 @@
 import {
-  FETCH_POST,
+  ALL_POSTS_IN,
   REMOVE_POST,
   ADD_POST,
   SHOW_POST,
@@ -13,113 +13,23 @@ import {
 
 } from '../actions'
 
-const dummyPosts = {
-  'allIds': [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G'
-  ],
-  'SelectedIds': [],
-  'VisibleIds': [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G'
-  ],
-  'perId': {
-    'A': {
-      id: 'A',
-      timestamp: 1467166872634,
-      title: 'Udacity is the best place to learn React',
-      body: 'Everyone says so after all.',
-      author: 'thingtwo',
-      category: 'react',
-      voteScore: 6,
-      deleted: false
-    },
-    'B': {
-      id: 'B',
-      timestamp: 1468479767190,
-      title: 'Learn Redux in 10 minutes!',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thingone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    },
-    'C': {
-      id: 'C',
-      timestamp: 1468471167190,
-      title: 'ddddddddd',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thfsdone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    },
-    'D': {
-      id: 'D',
-      timestamp: 1400471167190,
-      title: 'gggddd',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thfsdone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    },
-    'E': {
-      id: 'E',
-      timestamp: 1467111872111,
-      title: 'Another post',
-      body: 'This is my body',
-      author: 'xiaoju',
-      category: 'react',
-      voteScore: 1,
-      deleted: false
-    },
-    'F': {
-      id: 'F',
-      timestamp: 1400471167190,
-      title: 'gggddd',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thfsdone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    },
-    'G': {
-      id: 'G',
-      timestamp: 1400471167190,
-      title: 'gggddd',
-      body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-      author: 'thfsdone',
-      category: 'redux',
-      voteScore: -5,
-      deleted: false
-    }
-  }
+const empty = {
+  perId : {},
+  allIds : {},
+  SelectedIds: [null],
+  VisibleIds: []
 }
 
-const emptyPosts = {
-  'perId' : {},
-  'allIds' : {},
-  'SelectedIds': [],
-  'VisibleIds': []
-}
-
-// immutable operations on arrays: https://vincent.billey.me/pure-javascript-immutable-array/
-
-const listReducer = (state = dummyPosts, action) => {
+const listReducer = (state = empty, action) => {
   switch (action.type) {
-    case FETCH_POST:
-      return dummyPosts
+    case ALL_POSTS_IN:
+      const allIds = action.posts.map((item) => (item.id))
+      return {
+        ...state,
+        perId: action.posts.reduce((result,item) => {result[item.id] = item;return result},{}),
+        allIds: allIds,
+        VisibleIds: allIds
+      }
 
     case REMOVE_POST:
       // for allIds, remove from allIds array any id that belongs to SelectedIds.

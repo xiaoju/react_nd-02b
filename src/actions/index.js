@@ -1,6 +1,6 @@
 import * as ReadableAPI from '../utils/ReadableAPI'
 
-export const FETCH_POST = 'FETCH_POST'
+export const ALL_POSTS_IN = 'ALL_POSTS_IN'
 export const REMOVE_POST = 'REMOVE_POST'
 export const ADD_POST = 'ADD_POST'
 
@@ -18,12 +18,6 @@ export const SELECT_ALL_CATEGORY ='SELECT_ALL_CATEGORY'
 export const SELECT_NONE_CATEGORY = 'SELECT_NONE_CATEGORY'
 
 export const FILTER_PER_CAT = 'FILTER_PER_CAT'
-
-export function fetchPost(){
-  return {
-    type: FETCH_POST
-  }
-}
 
 export function removePost() {
   return {
@@ -73,32 +67,26 @@ export function selectNonePost(){
   }
 }
 
-// export function fetchCategory(){
-//   return {
-//     type: FETCH_CATEGORY
-//   }
-// }
 
+export const fetchCategories = () => dispatch => (
+  ReadableAPI
+    .fetchCategories()
+    .then(categories => dispatch(receiveCategories(categories)))
+)
 export const receiveCategories = categories => ({
   type: FETCH_CATEGORY,
   categories
 })
-export const fetchCategories = () => dispatch => (
-  ReadableAPI
-      .fetchCategories()
-      .then(categories => dispatch(receiveCategories(categories)))
-)
 
-// export const RECEIVE_TODOS = "RECEIVE_TODOS";
-// export const receiveTodos = todos => ({
-//   type: RECEIVE_TODOS,
-//   todos
-// });
-// export const fetchTodos = () => dispatch => (
-//   TodoAPIUtil
-//       .fetchTodos()
-//       .then(todos => dispatch(receiveTodos(todos)))
-// );
+export const fetchAllPosts = () => dispatch => (
+  ReadableAPI
+    .fetchAllPosts()
+    .then(posts => dispatch(updatePostsList(posts)))
+)
+export const updatePostsList = posts => ({
+  type: ALL_POSTS_IN,
+  posts
+})
 
 export function showAllCategories() {
   return {
