@@ -1,31 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectCategory, fetchCategories, showAllCategories } from '../actions/index'
+import {
+  selectCategory,
+  fetchCategories
+} from '../actions/index'
 import { bindActionCreators } from 'redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 class Categories extends Component {
 
-  componentDidMount() {
-    this.props.fetchCategories()
-  }
-
   render() {
     return (
-      <div className='.categories'>
-        <button
-          onClick={()=> this.props.showAllCategories()}
-          className={'button category ' + (this.props.Categories.SelectedPath === null ? 'selected' : 'unselected') } >
-          Show All
-        </button>
-        {this.props.Categories.allPaths.map((path)=>(
-          <button
+      <div className='toolbar'>
+        <Link     // 'show all categories' button
+          to="/"
+          onClick={()=> this.props.selectCategory(null)}
+          className={
+            'button ' +
+            (this.props.Categories.SelectedPath === null ? 'selected' : 'unselected') }
+          >Show All</Link>
+
+        {this.props.Categories.allPaths.map(path=>(
+          <Link   // 'show this category' buttons
             key={path}
-            onClick={()=> this.props.selectCategory(this.props.Categories.perPath[path].path)}
-            className={'button category ' + (this.props.Categories.SelectedPath === path ? 'selected' : 'unselected') } >
-            <div className='path'>{this.props.Categories.perPath[path].path}</div>
-            {/* <div className='name'>{this.props.Categories.perPath[path].name}</div> */}
-          </button>
+            to={`/${path}`}
+            onClick={
+              ()=> this.props.selectCategory(path)
+              // ()=> (this.props.selectCategory(path) && this.props.fetchCatPosts(path))
+              // first we populate the view with the data from state, then we call the API,
+              // so that if network is down, we still have something to show.
+              // BUG anyway these cats are overwritten by fresh all posts from API when updating the main view!
+            }
+            className={'button ' + (this.props.Categories.SelectedPath === path ? 'selected' : 'unselected') }
+            >{path}</Link>
         ))
         }
       </div>
@@ -42,8 +49,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     selectCategory: selectCategory,
-    fetchCategories: fetchCategories,
-    showAllCategories: showAllCategories
+    fetchCategories: fetchCategories
   }, dispatch)
 }
 

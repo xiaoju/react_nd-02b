@@ -1,26 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectPost, showPost, fetchAllPosts } from '../actions/index'
+import {
+  fetchCatPosts,
+  fetchAllPosts,
+  selectPost,
+  showPost
+ } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 
 class List extends Component {
 
-// TODO
-// if post just got added, or app just started,
-// then need initialize what are the selected category, and what are the VisibleIds
-
-  componentDidMount() {
-        this.props.fetchAllPosts()
-  }
-
   render() {
-
-
-    // TODO add lifecycle stuff when page mounts: pass URL parameters into state
-
-    // TODO make the postListElement and independant component, with its own 'be red' property,
-    // so it can manage itself the color when selected
 
     if (this.props.Posts.allIds.length === 0) {
       return (
@@ -80,6 +71,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
+    fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,
     selectPost: selectPost,
     showPost: showPost

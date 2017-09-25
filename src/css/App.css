@@ -37,14 +37,8 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 
 .filterContainer {
   order: 1;
-  /*display: flex;*/
-  /*flex-grow: 1;
-  flex-shrink: 1;*/
   background-color: rgb(33, 37, 43);
   color: rgb(157, 165, 180);
-  /*border-top-color: rgb(24, 26, 31);
-  border-top-style: solid;
-  border-top-width: medium;*/
   border-bottom-color: black;
   border-bottom-style: solid;
   border-bottom-width: thick;
@@ -52,21 +46,12 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 
 .listContainer {
   order: 2;
-  /*flex-grow: 2;
-  flex-shrink: 2;*/
   background-color: rgb(40, 44, 52);
   color: rgb(171, 178, 191);
-
-  /* below mostly useful when screen is very narrow, to separate categories from posts */
-  /*border-top-color: rgb(157, 165, 180);
-  border-top-style: solid;
-  border-top-width: medium;*/
 }
 
 .detailsContainer {
   order: 3;
-  /*flex-grow: 8;
-  flex-shrink: 8;*/
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -77,6 +62,13 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 }
 
 /* filterContainer - - - - - - - - - - - - - - - - - - - - - -*/
+
+.toolbar{
+  order: 3;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
 
 /*
 .filterToolbar {
@@ -91,23 +83,6 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 }
 */
 
-.categories {
-  /*justify-content: center;*/
-}
-
-.category {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.path {
-
-}
-
-.name {
-
-}
-
 /* listContainer - - - - - - - - - - - - - - - - - - - - - - -*/
 
 /*.listTop {
@@ -116,26 +91,19 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
   justify-content: flex-start;
 }*/
 
-.list {
-
-}
-
 .defaultMessage {
-  /* this is the message when no post exists */
-  /* BUG I want it centered in the page! */
   color: black;
   font-size: 1.6em;
   font-weight: bold;
   text-align: center;
 }
 
-/* BUG listToolbar buttons get scrolled away, and also I want them at bottom! */
-.listToolbar {
+/*.listToolbar {
   order: 3;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-}
+}*/
 
 .listSortbar {
   order: 1;
@@ -190,10 +158,6 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
     font-size: 1em;
     width: 140px;
     margin: 3px;
-}
-
-.linkButton {
-    width: 118px !important;    /* otherwise the Link button is wider than the normal button! */
 }
 
 .button:focus {       /* look of the button when navigating with keyboard */

@@ -1,6 +1,7 @@
 import * as ReadableAPI from '../utils/ReadableAPI'
 
 export const ALL_POSTS_IN = 'ALL_POSTS_IN'
+export const CAT_POSTS_IN = 'CAT_POSTS_IN'
 export const REMOVE_POST = 'REMOVE_POST'
 export const ADD_POST = 'ADD_POST'
 
@@ -14,10 +15,6 @@ export const FETCH_CATEGORY = 'FETCH_CATEGORY'
 export const SHOW_ALL_CATEGORY = 'SHOW_ALL_CATEGORY'
 
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
-export const SELECT_ALL_CATEGORY ='SELECT_ALL_CATEGORY'
-export const SELECT_NONE_CATEGORY = 'SELECT_NONE_CATEGORY'
-
-export const FILTER_PER_CAT = 'FILTER_PER_CAT'
 
 export function removePost() {
   return {
@@ -25,8 +22,8 @@ export function removePost() {
   }
 }
 
-// addPost() moves data from store.form.newPost.values to store.Posts
-// no need to look up in store, redux-form passes them as 'values'
+// addPost() moves to store.Posts the form data from store.form.newPost.values
+// They are provided as 'values' by redux-from.
 export function addPost({title, body, author, path, timestamp, id}){
   return {
     type: ADD_POST,
@@ -67,7 +64,6 @@ export function selectNonePost(){
   }
 }
 
-
 export const fetchCategories = () => dispatch => (
   ReadableAPI
     .fetchCategories()
@@ -88,6 +84,17 @@ export const updatePostsList = posts => ({
   posts
 })
 
+export const fetchCatPosts = (path) => dispatch => (
+  ReadableAPI
+    .fetchCatPosts(path)
+    .then(posts => dispatch(updatedCatPosts(path, posts)))
+)
+export const updatedCatPosts = (path, posts) => ({
+  type: CAT_POSTS_IN,
+  path,
+  posts
+})
+
 export function showAllCategories() {
   return {
     type: SHOW_ALL_CATEGORY
@@ -100,21 +107,3 @@ export function selectCategory(path){
     path
   }
 }
-
-// export function selectAllCategory(){
-//   return {
-//     type: SELECT_ALL_CATEGORY
-//   }
-// }
-//
-// export function selectNoneCategory(){
-//   return {
-//     type: SELECT_NONE_CATEGORY
-//   }
-// }
-
-// export function filterPerCat(){
-//   return {
-//     type: FILTER_PER_CAT
-//   }
-// }

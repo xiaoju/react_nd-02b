@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {selectNonePost, selectAllPost, removePost } from '../actions/index'
+import { selectNonePost, selectAllPost, removePost } from '../actions/index'
 import { withRouter, Link } from 'react-router-dom'
 
 
@@ -11,6 +11,21 @@ class ListToolbar extends Component {
     super(props)
     this.selectButton = this.selectButton.bind(this)
     this.deleteButton = this.deleteButton.bind(this)
+  }
+
+  deleteButton() {
+    return (
+      (this.props.SelectedIds.length === 0) ?
+      <button
+        className="button inactive_button">
+        Delete Selected
+      </button> :
+      <button
+        onClick={this.props.removePost}
+        className="button">
+        Delete Selected
+      </button>
+    )
   }
 
   selectButton() {
@@ -38,25 +53,10 @@ class ListToolbar extends Component {
     }
   }
 
-  deleteButton() {
-    return (
-      (this.props.SelectedIds.length === 0) ?
-      <button
-        className="button inactive_button">
-        Delete Selected
-      </button> :
-      <button
-        onClick={this.props.removePost}
-        className="button">
-        Delete Selected
-      </button>
-    )
-  }
-
   render() {
     return (
-      <div className='listToolbar'>
-        <Link to="/newpost" className="button linkButton">New Post</Link>
+      <div className='toolbar'>
+        <Link to="/newpost" className="button">New Post</Link>
         {this.deleteButton()}
         {this.selectButton()}
       </div>

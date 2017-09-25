@@ -1,8 +1,9 @@
 import {
+  ALL_POSTS_IN,
+  CAT_POSTS_IN,
   FETCH_CATEGORY,
   SELECT_CATEGORY,
-  ADD_POST,
-  SHOW_ALL_CATEGORY
+  ADD_POST
 } from '../actions'
 
 // Here the data as received from API:
@@ -21,8 +22,7 @@ import {
 //             "path": "udacity"
 //         }
 //     ]
-// };
-
+// }
 //  Here the format of redux state, after conversion by FETCH_CATEGORY case:
 // {
 //   'perPath': {
@@ -34,42 +34,6 @@ import {
 //   'SelectedPath': null
 // }
 
-// const Dummy = {
-//   'perId': {
-//     'eradaaaaaaaaaaaesd': { 'id': 'eradaaaaaaaaaaaesd', 'name': 'react', 'path': 'react'},
-//     'eradbbbbbbbbbbbesd': { 'id': 'eradbbbbbbbbbbbesd', 'name': 'redux', 'path': 'redux'},
-//     'eradcccccccccccesd': { 'id': 'eradcccccccccccesd', 'name': 'udacity', 'path': 'udacity'},
-//     'eraddddddddddddesd': { 'id': 'eraddddddddddddesd', 'name': 'trolls', 'path': 'react/trolls'},
-//     'eraeeeeeeeeeeeeesd': { 'id': 'eraeeeeeeeeeeeeesd', 'name': 'trolls', 'path': 'udacity/trolls'}
-//   },
-//   'allIds': [
-//     'eradaaaaaaaaaaaesd',
-//     'eradbbbbbbbbbbbesd',
-//     'eradcccccccccccesd',
-//     'eraddddddddddddesd',
-//     'eraeeeeeeeeeeeeesd'
-//   ],
-//   'SelectedId': null
-// }
-
-// const Dummy2 = {
-//   'perPath': {
-//     'react': { 'name': 'react', 'path': 'react'},
-//     'redux': { 'name': 'redux', 'path': 'redux'},
-//     'udacity': { 'name': 'udacity', 'path': 'udacity'},
-//     'react/trolls': { 'name': 'trolls', 'path': 'react/trolls'},
-//     'udacity/trolls': { 'name': 'trolls', 'path': 'udacity/trolls'}
-//   },
-//   'allPaths': [
-//     'react',
-//     'redux',
-//     'udacity',
-//     'react/trolls',
-//     'udacity/trolls'
-//   ],
-//   'SelectedPath': null
-// }
-
 const Empty = {
   'perPath': {},
   'allPaths': [],
@@ -78,6 +42,19 @@ const Empty = {
 
 const categoryReducer = (state = Empty, action) => {
   switch (action.type) {
+
+    case ALL_POSTS_IN:
+      return {
+        ...state,
+        SelectedPath: null
+      }
+
+    case CAT_POSTS_IN:
+      return {
+        ...state,
+        SelectedPath: action.path == null ? null : action.path
+      }
+
     case FETCH_CATEGORY:
       return {
         ...state,
@@ -89,19 +66,15 @@ const categoryReducer = (state = Empty, action) => {
     case SELECT_CATEGORY:
       return {
         ...state,
-        SelectedPath: action.path
+        SelectedPath: action.path == null ? null : action.path
       }
 
+    // same as previous!!
     case ADD_POST:
+      // '== null' catches both null and undefined
       return {
         ...state,
-        SelectedPath: action.path
-      }
-
-    case SHOW_ALL_CATEGORY:
-      return {
-        ...state,
-        SelectedPath: null
+        SelectedPath: action.path == null ? null : action.path
       }
 
     default:
