@@ -145,14 +145,14 @@ const dummyPosts = {
 
 const emptyPosts = {
   'perId' : {},
-  'allIds' : [],
+  'allIds' : {},
   'SelectedIds': [],
   'VisibleIds': []
 }
 
 // immutable operations on arrays: https://vincent.billey.me/pure-javascript-immutable-array/
 
-const listReducer = (state = emptyPosts, action) => {
+const listReducer = (state = dummyPosts, action) => {
   switch (action.type) {
     case FETCH_POST:
       return dummyPosts

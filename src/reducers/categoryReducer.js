@@ -31,8 +31,7 @@ const categoryReducer = (state = Dummy, action) => {
   switch (action.type) {
 
     case FETCH_CATEGORY:
-      console.log('(inside reducer) action.Categoriess:', action.Categories)
-      return action.Categories
+      return Dummy
 
     case SELECT_CATEGORY:
       return {

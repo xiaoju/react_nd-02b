@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
+// https://redux-form.com
 
 let NewpostForm = props => {
   const { handleSubmit } = props
