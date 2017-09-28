@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  selectCategory,
-  fetchCategories
+  // selectCategory,
+  fetchAllPosts,
+  fetchCatPosts
 } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter, Link } from 'react-router-dom'
@@ -14,7 +15,12 @@ class Categories extends Component {
       <div className='toolbar'>
         <Link     // 'show all categories' button
           to="/"
-          onClick={()=> this.props.selectCategory(null)}
+          onClick={
+            ()=> {
+              // this.props.selectCategory(null);
+              this.props.fetchAllPosts();
+            }
+          }
           className={
             'button ' +
             (this.props.Categories.SelectedPath === null ? 'selected' : 'unselected') }
@@ -25,14 +31,15 @@ class Categories extends Component {
             key={path}
             to={`/${path}`}
             onClick={
-              ()=> this.props.selectCategory(path)
-              // ()=> (this.props.selectCategory(path) && this.props.fetchCatPosts(path))
-              // first we populate the view with the data from state, then we call the API,
-              // so that if network is down, we still have something to show.
-              // BUG anyway these cats are overwritten by fresh all posts from API when updating the main view!
+              ()=> {
+                // this.props.selectCategory(path);
+                this.props.fetchCatPosts(path);
+              }
             }
             className={'button ' + (this.props.Categories.SelectedPath === path ? 'selected' : 'unselected') }
-            >{path}</Link>
+            >
+              {path}
+          </Link>
         ))
         }
       </div>
@@ -48,8 +55,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    selectCategory: selectCategory,
-    fetchCategories: fetchCategories
+    // selectCategory: selectCategory,
+    fetchAllPosts: fetchAllPosts,
+    fetchCatPosts: fetchCatPosts
   }, dispatch)
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { selectNonePost, selectAllPost, removePost } from '../actions/index'
+import { selectNonePost, selectAllPost, deletePost } from '../actions/index'
 import { withRouter, Link } from 'react-router-dom'
 
 
@@ -21,7 +21,7 @@ class ListToolbar extends Component {
         Delete Selected
       </button> :
       <button
-        onClick={this.props.removePost}
+        onClick={() => this.props.deletePost(this.props.SelectedIds)}
         className="button">
         Delete Selected
       </button>
@@ -75,7 +75,7 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
      selectNonePost: selectNonePost,
      selectAllPost: selectAllPost,
-     removePost: removePost
+     deletePost: deletePost
    },
   dispatch)
 }

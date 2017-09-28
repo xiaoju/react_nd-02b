@@ -31,3 +31,12 @@ export const postPost = (payload) =>
     body : JSON.stringify( payload )
     })
     .then(res => res.json())
+
+export const deletePost = (id) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'DELETE',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    }
+  })

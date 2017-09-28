@@ -41,7 +41,7 @@ class List extends Component {
             // showPost to be done with onClick
             className={'post ' + (this.props.Posts.SelectedIds.includes(id) ? 'selected' : 'unselected') }
             >
-            {console.log(id)}
+            {/* {console.log(id)} */}
             <div className='title'>{this.props.Posts.perId[id].title}</div>
             <div className='author'>{this.props.Posts.perId[id].author}</div>
             <div className='timeStamp'>{this.props.Posts.perId[id].timestamp}</div>

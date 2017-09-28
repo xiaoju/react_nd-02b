@@ -1,8 +1,8 @@
 import {
   ALL_POSTS_IN,
   CAT_POSTS_IN,
+  SINGLE_POST_IN,
   REMOVE_POST,
-  POST_IN,
   SHOW_POST,
 
   SELECT_POST,
@@ -16,12 +16,11 @@ import {
 const empty = {
   perId : {},
   allIds : {},
-  SelectedIds: [null],
+  SelectedIds: [],
   VisibleIds: []
 }
 
 const listReducer = (state = empty, action) => {
-  // const {posts, id, timestamp, title, body, author, path } = action
   switch (action.type) {
 
     case ALL_POSTS_IN:
@@ -37,8 +36,10 @@ const listReducer = (state = empty, action) => {
           },
           {}
         ),
-        VisibleIds: action.posts.map((thisPost)=>(thisPost.id)),
-        SelectedIds: [null]
+        VisibleIds: action.posts
+          .filter((thisPost)=>(thisPost.deleted === false))
+          .map((thisPost)=>(thisPost.id)),
+        SelectedIds: []
       }
 
     case CAT_POSTS_IN:
@@ -50,31 +51,49 @@ const listReducer = (state = empty, action) => {
         },
         perId: action.posts.reduce((result,item) => {result[item.id] = item;return result}, state.perId),
         VisibleIds: idArray,
-        SelectedIds: [null]
+        SelectedIds: []
       }
 
-    case REMOVE_POST:
-      // for allIds, remove from the allIds arrays any id that belongs to SelectedIds.
-      // same for perId, but more convoluted because perId is an object, not an array:
-      // the reduce function rebuilds the perId object from empty object {} by adding any sub-object
-      // that meets same criteria as for allIds.
-        return {
-          ...state,
-          allIds: Object.keys(state.allIds)
-                .reduce(
-                  (result,thisCat) => {
-                    result[thisCat] = state.allIds[thisCat].filter( id => !state.SelectedIds.includes(id)) ;
-                    return result
-                    },
-                  {}),
-          perId: Object.keys(state.perId)
-                .filter(id => !state.SelectedIds.includes(id))
-                .reduce((result, id) => {result[id] = state.perId[id];return result;}, {}),
-          SelectedIds: [null],
-          VisibleIds: state.VisibleIds.filter(id => !state.SelectedIds.includes(id))
+    case REMOVE_POST:     // set only one post to deleted
+      return{
+        ...state,
+        VisibleIds: state.VisibleIds.filter(id => id !== action.id),
+        SelectedIds: [],
+        // SelectedIds: SelectedIds.filter( id => (id !== action.id)),
+        perId: {
+          ...state.perId,
+          [action.id]: {
+            ...state.perId[action.id],
+            deleted: true
+          }
         }
+      }
 
-    case POST_IN:
+    // case REMOVE_POST:        // in one go, set to delete all the selectedIds
+    //   // for allIds, remove from the allIds arrays any id that belongs to SelectedIds.
+    //   // same for perId, but more convoluted because perId is an object, not an array:
+    //   // the reduce function rebuilds the perId object from empty object {} by adding any sub-object
+    //   // that meets same criteria as for allIds.
+    //   return {
+    //     ...state,
+    //     // allIds: Object.keys(state.allIds)
+    //     //       .reduce(
+    //     //         (result,thisCat) => {
+    //     //           result[thisCat] = state.allIds[thisCat].filter( id => !state.SelectedIds.includes(id)) ;
+    //     //           return result
+    //     //           },
+    //     //         {}),
+    //     // perId: Object.keys(state.perId)
+    //     //       .filter(id => !state.SelectedIds.includes(id))
+    //     //       .reduce((result, id) => {result[id] = state.perId[id];return result;}, {}),
+    //     perId: Object.keys(state.perId)                     // all the ids
+    //       .filter( id => state.SelectedIds.includes(id) )   // those to delete
+    //       .reduce( (result,id) => {Object.keys(state.perId).includes(id) ? (result[id].deleted = true): ; return result;}, {} ),
+    //     SelectedIds: [],
+    //     VisibleIds: state.VisibleIds.filter(id => !state.SelectedIds.includes(id))
+    //   }
+
+    case SINGLE_POST_IN:
       return {
         allIds: {
           ...state.allIds,
@@ -114,6 +133,8 @@ const listReducer = (state = empty, action) => {
         return {
           ...state,
           SelectedIds: state.SelectedIds.concat(action.id)
+          // BUG if SelectedIds is previously 'null', then null stays in the list.
+          // better to have [] instead of [null]
         }
       }
 
@@ -126,7 +147,7 @@ const listReducer = (state = empty, action) => {
     case SELECT_NONE_POST:
       return {
         ...state,
-        SelectedIds: [null]
+        SelectedIds: []
       }
 
     case SELECT_ALL_POST:
@@ -140,7 +161,7 @@ const listReducer = (state = empty, action) => {
       // == null catches both null and undefined
       return {
         ...state,
-        SelectedIds: [null],      // this is easier, simply!
+        SelectedIds: [],      // this is easier, simply!
         VisibleIds: action.path == null ?
           Object.keys(state.allIds).reduce((resultArray, thisCat) => resultArray.concat(state.allIds[thisCat]),[]) :
           state.allIds[action.path] || []

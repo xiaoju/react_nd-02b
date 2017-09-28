@@ -2,8 +2,9 @@ import * as ReadableAPI from '../utils/ReadableAPI'
 
 export const ALL_POSTS_IN = 'ALL_POSTS_IN'
 export const CAT_POSTS_IN = 'CAT_POSTS_IN'
+export const SINGLE_POST_IN = 'SINGLE_POST_IN'
+
 export const REMOVE_POST = 'REMOVE_POST'
-export const POST_IN = 'POST_IN'
 
 export const SELECT_POST = 'SELECT_POST'
 export const SELECT_ALL_POST = 'SELECT_ALL_POST'
@@ -12,15 +13,8 @@ export const SELECT_NONE_POST = 'SELECT_NONE_POST'
 export const SHOW_POST = 'SHOW_POST'
 
 export const FETCH_CATEGORY = 'FETCH_CATEGORY'
-export const SHOW_ALL_CATEGORY = 'SHOW_ALL_CATEGORY'
 
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
-
-export function removePost() {
-  return {
-    type: REMOVE_POST
-  }
-}
 
 export function selectPost(id){
   // for example clic several posts in the list to delete several
@@ -60,16 +54,14 @@ export const receiveCategories = categories => ({
   categories
 })
 
-// addPost() calls the API with the redux-form 'values',
-// then after success of API, postIn() updates the store (with the data returned from API)
 export const postPost = (values) => dispatch => (
   ReadableAPI
     .postPost(values)
-    .then(post => dispatch(postIn(post)))
+    .then(post => dispatch(singlePostIn(post)))
 )
-export function postIn({id, timestamp, title, body, author, category, voteScore, deleted}){
+export function singlePostIn({id, timestamp, title, body, author, category, voteScore, deleted}){
   return {
-    type: POST_IN,
+    type: SINGLE_POST_IN,
     id,
     timestamp,
     title,
@@ -80,6 +72,18 @@ export function postIn({id, timestamp, title, body, author, category, voteScore,
     deleted
   }
 }
+
+export const deletePost = (selectedIds) => dispatch => (
+  selectedIds.map( id =>
+    ReadableAPI
+      .deletePost(id)
+      .then(() => dispatch(removePost(id)))
+  )
+)
+export const removePost = (id) => ({
+  type: REMOVE_POST,
+  id
+})
 
 export const fetchAllPosts = () => dispatch => (
   ReadableAPI
@@ -101,12 +105,6 @@ export const catPostsIn = (path, posts) => ({
   path,
   posts
 })
-
-export function showAllCategories() {
-  return {
-    type: SHOW_ALL_CATEGORY
-  }
-}
 
 export function selectCategory(path){
   return {

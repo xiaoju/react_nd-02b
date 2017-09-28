@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import {
-  selectCategory,
+  // selectCategory,
   fetchCategories,
   fetchCatPosts,
   fetchAllPosts
@@ -22,18 +22,19 @@ import ListToolbar from './ListToolbar'
 class MainPage extends Component {
 
   componentDidMount(){
+    console.log('component did mount!')
     // this.props.fetchCategories()
     // // this.props.match.params.category == null ? this.props.fetchAllPosts() : this.props.fetchCatPosts()
     // this.props.fetchAllPosts()
     // this.props.selectCategory(this.props.match.params.category)
 
     this.props.fetchCategories()
-      .then(this.props.selectCategory(this.props.match.params.category))
-      .then(
+      // .then(() => this.props.selectCategory(this.props.match.params.category))
+      .then( () => (
         this.props.match.params.category == null ?
           this.props.fetchAllPosts() :
           this.props.fetchCatPosts(this.props.match.params.category)
-      )
+      ))
   }
 
   render() {
@@ -69,7 +70,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    selectCategory: selectCategory,
+    // selectCategory: selectCategory,
     fetchCategories: fetchCategories,
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,

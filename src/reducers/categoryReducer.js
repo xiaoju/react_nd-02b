@@ -1,9 +1,9 @@
 import {
-  ALL_POSTS_IN,
-  CAT_POSTS_IN,
   FETCH_CATEGORY,
   SELECT_CATEGORY,
-  POST_IN
+  ALL_POSTS_IN,
+  CAT_POSTS_IN,
+  SINGLE_POST_IN
 } from '../actions'
 
 // Here the data as received from API:
@@ -54,7 +54,7 @@ const categoryReducer = (state = Empty, action) => {
     case SELECT_CATEGORY:
     case ALL_POSTS_IN:
     case CAT_POSTS_IN:
-    case POST_IN:
+    case SINGLE_POST_IN:
       return {
         ...state,
         // '== null' catches both null and undefined
