@@ -2,7 +2,7 @@ import {
   ALL_POSTS_IN,
   CAT_POSTS_IN,
   REMOVE_POST,
-  ADD_POST,
+  POST_IN,
   SHOW_POST,
 
   SELECT_POST,
@@ -74,11 +74,11 @@ const listReducer = (state = empty, action) => {
           VisibleIds: state.VisibleIds.filter(id => !state.SelectedIds.includes(id))
         }
 
-    case ADD_POST:
+    case POST_IN:
       return {
         allIds: {
           ...state.allIds,
-          [action.path]: [action.id].concat(state.allIds[action.path])
+          [action.path]: [action.id].concat(state.allIds[action.category])
         },
         // new id added at begin of array.
         // Other ways: state.allIds.concat(id)   [].concat(state.allIds, id)   [id].concat(state.allIds)
@@ -86,16 +86,19 @@ const listReducer = (state = empty, action) => {
         perId: {
           ...state.perId,
           [action.id]: {
-            id: action.id,
+            id : action.id,
             timestamp: action.timestamp,
             title: action.title,
             body: action.body,
             author: action.author,
-            path: action.path
+            category: action.category,
+            voteScore: action.voteScore,
+            deleted: action.deleted
           }
         },
         // VisibleIds: [id].concat(state.allIds.filter((id)=>(state.perId[id].category === path)))
-        VisibleIds: [action.id].concat(state.VisibleIds)
+        // VisibleIds: [action.id].concat(state.VisibleIds)
+        VisibleIds: [action.id].concat(state.allIds[action.category])
         // need add specifically the post just created through form, because that post wasn't present in previous state.
       }
 

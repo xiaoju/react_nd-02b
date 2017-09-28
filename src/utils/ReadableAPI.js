@@ -20,3 +20,14 @@ export const fetchAllPosts = () =>
 export const fetchCatPosts = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
     .then(res => res.json())
+
+export const postPost = (payload) =>
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body : JSON.stringify( payload )
+    })
+    .then(res => res.json())

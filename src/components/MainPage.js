@@ -22,15 +22,18 @@ import ListToolbar from './ListToolbar'
 class MainPage extends Component {
 
   componentDidMount(){
-    // console.log('MainPage.js: componentDidMount')
-    // console.log('MainPage.js: fetching categories')
+    // this.props.fetchCategories()
+    // // this.props.match.params.category == null ? this.props.fetchAllPosts() : this.props.fetchCatPosts()
+    // this.props.fetchAllPosts()
+    // this.props.selectCategory(this.props.match.params.category)
+
     this.props.fetchCategories()
-
-    // console.log('MainPage.js: fetching posts')
-    // this.props.match.params.category == null ? this.props.fetchAllPosts() : this.props.fetchCatPosts()
-
-    this.props.fetchAllPosts()
-    this.props.selectCategory(this.props.match.params.category)
+      .then(this.props.selectCategory(this.props.match.params.category))
+      .then(
+        this.props.match.params.category == null ?
+          this.props.fetchAllPosts() :
+          this.props.fetchCatPosts(this.props.match.params.category)
+      )
   }
 
   render() {

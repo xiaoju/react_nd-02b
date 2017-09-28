@@ -3,7 +3,7 @@ import {
   CAT_POSTS_IN,
   FETCH_CATEGORY,
   SELECT_CATEGORY,
-  ADD_POST
+  POST_IN
 } from '../actions'
 
 // Here the data as received from API:
@@ -43,37 +43,21 @@ const Empty = {
 const categoryReducer = (state = Empty, action) => {
   switch (action.type) {
 
-    case ALL_POSTS_IN:
-      return {
-        ...state,
-        SelectedPath: null
-      }
-
-    case CAT_POSTS_IN:
-      return {
-        ...state,
-        SelectedPath: action.path == null ? null : action.path
-      }
-
     case FETCH_CATEGORY:
       return {
         ...state,
-        // and now we convert the output of API into a normalized state format:
+        // converting the output of API into a normalized state format:
         perPath: action.categories.categories.reduce((acc, curr) => {acc[curr.path] = curr; return acc}, {}),
         allPaths: action.categories.categories.map((item)=>(item.name))
       }
 
     case SELECT_CATEGORY:
+    case ALL_POSTS_IN:
+    case CAT_POSTS_IN:
+    case POST_IN:
       return {
         ...state,
-        SelectedPath: action.path == null ? null : action.path
-      }
-
-    // same as previous!!
-    case ADD_POST:
-      // '== null' catches both null and undefined
-      return {
-        ...state,
+        // '== null' catches both null and undefined
         SelectedPath: action.path == null ? null : action.path
       }
 

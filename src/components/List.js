@@ -15,26 +15,16 @@ class List extends Component {
 
     if (this.props.Posts.allIds.length === 0) {
       return (
-        <div className='list'>
-          <div className='defaultMessage'>
-            Press 'New Post' to add content!
-          </div>
+        <div className='list defaultMessage'>
+          Press 'New Post' to add content!
         </div>
       )
     }
 
     if (this.props.Posts.VisibleIds.length === 0) {
       return (
-        <div className='list'>
-          <div className='defaultMessage'>
-            Select another category
-          </div>
-          <div className='defaultMessage'>
-            or
-          </div>
-          <div className='defaultMessage'>
-            press 'New Post' to add content!
-          </div>
+        <div className='list defaultMessage'>
+          Select another category<br /> or <br />press 'New Post' to add content!
         </div>
       )
     }
@@ -49,7 +39,9 @@ class List extends Component {
             onClick={()=> this.props.selectPost(this.props.Posts.perId[id].id)}
             // TODO selectPost to be done with checkBox,
             // showPost to be done with onClick
-            className={'post ' + (this.props.Posts.SelectedIds.includes(id) ? 'selected' : 'unselected') } >
+            className={'post ' + (this.props.Posts.SelectedIds.includes(id) ? 'selected' : 'unselected') }
+            >
+            {console.log(id)}
             <div className='title'>{this.props.Posts.perId[id].title}</div>
             <div className='author'>{this.props.Posts.perId[id].author}</div>
             <div className='timeStamp'>{this.props.Posts.perId[id].timestamp}</div>

@@ -3,7 +3,7 @@ import * as ReadableAPI from '../utils/ReadableAPI'
 export const ALL_POSTS_IN = 'ALL_POSTS_IN'
 export const CAT_POSTS_IN = 'CAT_POSTS_IN'
 export const REMOVE_POST = 'REMOVE_POST'
-export const ADD_POST = 'ADD_POST'
+export const POST_IN = 'POST_IN'
 
 export const SELECT_POST = 'SELECT_POST'
 export const SELECT_ALL_POST = 'SELECT_ALL_POST'
@@ -19,20 +19,6 @@ export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 export function removePost() {
   return {
     type: REMOVE_POST
-  }
-}
-
-// addPost() moves to store.Posts the form data from store.form.newPost.values
-// They are provided as 'values' by redux-from.
-export function addPost({title, body, author, path, timestamp, id}){
-  return {
-    type: ADD_POST,
-    title,
-    body,
-    author,
-    path,
-    timestamp,
-    id
   }
 }
 
@@ -74,6 +60,27 @@ export const receiveCategories = categories => ({
   categories
 })
 
+// addPost() calls the API with the redux-form 'values',
+// then after success of API, postIn() updates the store (with the data returned from API)
+export const postPost = (values) => dispatch => (
+  ReadableAPI
+    .postPost(values)
+    .then(post => dispatch(postIn(post)))
+)
+export function postIn({id, timestamp, title, body, author, category, voteScore, deleted}){
+  return {
+    type: POST_IN,
+    id,
+    timestamp,
+    title,
+    body,
+    author,
+    category,
+    voteScore,
+    deleted
+  }
+}
+
 export const fetchAllPosts = () => dispatch => (
   ReadableAPI
     .fetchAllPosts()
@@ -87,9 +94,9 @@ export const updatePostsList = posts => ({
 export const fetchCatPosts = (path) => dispatch => (
   ReadableAPI
     .fetchCatPosts(path)
-    .then(posts => dispatch(updatedCatPosts(path, posts)))
+    .then(posts => dispatch(catPostsIn(path, posts)))
 )
-export const updatedCatPosts = (path, posts) => ({
+export const catPostsIn = (path, posts) => ({
   type: CAT_POSTS_IN,
   path,
   posts
