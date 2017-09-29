@@ -21,6 +21,10 @@ export const fetchCatPosts = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
     .then(res => res.json())
 
+export const fetchComments = (id) =>
+fetch(`${api}/posts/${id}/comments`, { headers })
+  .then(res => res.json())
+
 export const postPost = (payload) =>
   fetch(`${api}/posts`, {
     method: 'POST',

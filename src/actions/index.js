@@ -4,13 +4,15 @@ export const ALL_POSTS_IN = 'ALL_POSTS_IN'
 export const CAT_POSTS_IN = 'CAT_POSTS_IN'
 export const SINGLE_POST_IN = 'SINGLE_POST_IN'
 
+export const COMMENTS_IN = 'COMMENTS_IN'
+
 export const REMOVE_POST = 'REMOVE_POST'
 
 export const SELECT_POST = 'SELECT_POST'
 export const SELECT_ALL_POST = 'SELECT_ALL_POST'
 export const SELECT_NONE_POST = 'SELECT_NONE_POST'
 
-export const SHOW_POST = 'SHOW_POST'
+// export const SHOW_POST = 'SHOW_POST'
 
 export const FETCH_CATEGORY = 'FETCH_CATEGORY'
 
@@ -24,13 +26,13 @@ export function selectPost(id){
   }
 }
 
-export function showPost(thisPost){
-  // for example show in Post Details View the post just created through form
-  return {
-    type: SHOW_POST,
-    thisPost
-  }
-}
+// export function showPost(thisPost){
+//   // for example show in Post Details View the post just created through form
+//   return {
+//     type: SHOW_POST,
+//     thisPost
+//   }
+// }
 
 export function selectAllPost(){
   return {
@@ -105,6 +107,17 @@ export const catPostsIn = (path, posts) => ({
   path,
   posts
 })
+
+export const fetchComments = (id) => dispatch => (
+  ReadableAPI
+    .fetchComments(id)
+    .then(comments => dispatch(commentsIn(id)))
+)
+export const commentsIn = (id) => ({
+  type: COMMENTS_IN,
+  id
+})
+
 
 export function selectCategory(path){
   return {

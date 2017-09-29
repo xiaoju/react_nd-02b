@@ -4,7 +4,6 @@ import {
   fetchCatPosts,
   fetchAllPosts,
   selectPost,
-  showPost
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
@@ -37,11 +36,8 @@ class List extends Component {
             role='button'
             tabIndex='0'        /* to allow navigation with keyboard, but still BUG not clickable! */
             onClick={()=> this.props.selectPost(this.props.Posts.perId[id].id)}
-            // TODO selectPost to be done with checkBox,
-            // showPost to be done with onClick
             className={'post ' + (this.props.Posts.SelectedIds.includes(id) ? 'selected' : 'unselected') }
             >
-            {/* {console.log(id)} */}
             <div className='title'>{this.props.Posts.perId[id].title}</div>
             <div className='author'>{this.props.Posts.perId[id].author}</div>
             <div className='timeStamp'>{this.props.Posts.perId[id].timestamp}</div>
@@ -66,7 +62,6 @@ function mapDispatchToProps(dispatch){
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,
     selectPost: selectPost,
-    showPost: showPost
   }, dispatch)
 }
 

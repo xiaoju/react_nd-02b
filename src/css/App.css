@@ -174,12 +174,15 @@ em doc: https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-
 /* detailsContainer - - - - - - - - - - - - - - - - - - - - - */
 
 .postDetails {
-    background-color: rgb(33, 37, 43);
+    background-color: rgb(24, 26, 31);
     color: rgb(157, 165, 180);
     order: 10;
     border-top-color: rgb(24, 26, 31);
     border-top-style: solid;
     border-top-width: medium;
+    border-bottom-color: rgb(24, 26, 31);
+    border-bottom-style: solid;
+    border-bottom-width: medium;
 }
 
 .comments {

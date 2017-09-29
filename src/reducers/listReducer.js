@@ -3,13 +3,13 @@ import {
   CAT_POSTS_IN,
   SINGLE_POST_IN,
   REMOVE_POST,
-  SHOW_POST,
+  // SHOW_POST,
 
   SELECT_POST,
   SELECT_ALL_POST,
   SELECT_NONE_POST,
 
-  SELECT_CATEGORY
+  SELECT_CATEGORY,
 
 } from '../actions'
 
@@ -93,11 +93,11 @@ const listReducer = (state = empty, action) => {
         }
       }
 
-    case SHOW_POST:
-      return {
-        ...state,
-        SelectedIds: [].concat(action.id)
-      }
+    // case SHOW_POST:
+    //   return {
+    //     ...state,
+    //     SelectedIds: [].concat(action.id)
+    //   }
 
     case SELECT_NONE_POST:
       return {

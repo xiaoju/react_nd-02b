@@ -15,7 +15,7 @@ import Categories from './Categories'
 // import ListSortbar from './ListSortbar'
 import List from './List'
 import ListToolbar from './ListToolbar'
-import Details from './Details'
+import DetailsContainer from './Details'
 // import CommentsSortbar from './CommentsSortbar'
 // import Comments from './Comments'
 
@@ -30,6 +30,8 @@ class MainPage extends Component {
       ))
   }
 
+  // let thisPost = this.props.SelectedIds[0] || null
+
   render() {
     return (
       <div className = 'mainPage'>
@@ -43,15 +45,9 @@ class MainPage extends Component {
           {/* <ListSortbar /> */}
           <List />
         </div>
-        <div className = 'detailsContainer'>
-
-          { this.props.SelectedIds[0] &&
-            <Details
-              thisPost={this.props.Posts.perId[this.props.SelectedIds[0]]}
-            />
-          }
-
-        </div>
+        <DetailsContainer
+          thisPost={this.props.Posts.perId[this.props.SelectedIds[0]] || null}
+        />
       </div>
     )
   }
