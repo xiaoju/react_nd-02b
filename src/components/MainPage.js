@@ -15,21 +15,14 @@ import Categories from './Categories'
 // import ListSortbar from './ListSortbar'
 import List from './List'
 import ListToolbar from './ListToolbar'
-// import Details from './Details'
+import Details from './Details'
 // import CommentsSortbar from './CommentsSortbar'
 // import Comments from './Comments'
 
 class MainPage extends Component {
 
   componentDidMount(){
-    console.log('component did mount!')
-    // this.props.fetchCategories()
-    // // this.props.match.params.category == null ? this.props.fetchAllPosts() : this.props.fetchCatPosts()
-    // this.props.fetchAllPosts()
-    // this.props.selectCategory(this.props.match.params.category)
-
     this.props.fetchCategories()
-      // .then(() => this.props.selectCategory(this.props.match.params.category))
       .then( () => (
         this.props.match.params.category == null ?
           this.props.fetchAllPosts() :
@@ -38,7 +31,6 @@ class MainPage extends Component {
   }
 
   render() {
-    // console.log('MainPage.js: rendering')
     return (
       <div className = 'mainPage'>
         <div className = 'filterContainer'>
@@ -51,11 +43,15 @@ class MainPage extends Component {
           {/* <ListSortbar /> */}
           <List />
         </div>
-        {/* <div className = 'detailsContainer'>
-          <Details />
-          <CommentsSortbar />
-          <Comments />
-        </div> */}
+        <div className = 'detailsContainer'>
+
+          { this.props.SelectedIds[0] &&
+            <Details
+              thisPost={this.props.Posts.perId[this.props.SelectedIds[0]]}
+            />
+          }
+
+        </div>
       </div>
     )
   }
@@ -63,6 +59,7 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
+    SelectedIds: state.Posts.SelectedIds,
     Posts: state.Posts,
     SelectedPath: state.Categories.SelectedPath
   }

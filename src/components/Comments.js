@@ -2,6 +2,7 @@ import React from 'react'
 
 const Comments = () => (
   <div>
+    Comments
   </div>
 )
 
