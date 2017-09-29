@@ -24,10 +24,12 @@ const listReducer = (state = empty, action) => {
   switch (action.type) {
 
     case ALL_POSTS_IN:
+      let allPaths = [...new Set(action.posts.reduce((result,item)=>result.concat(item.category),[]))]
+      // overly complicated and not elegant to rebuild allPaths from the posts object,
+      // as already available in the category reducer!
       return {
         perId: action.posts.reduce((result,item) => {result[item.id] = item;return result},{}),
-        // TODO categories should not be hardcoded here
-        allIds: ['redux','react','udacity'].reduce(
+        allIds: allPaths.reduce(
           (result, thisCat) => {
             result[thisCat]=action.posts
               .filter((thisPost) => (thisPost.category === thisCat))
