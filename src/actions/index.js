@@ -4,35 +4,29 @@ export const ALL_POSTS_IN = 'ALL_POSTS_IN'
 export const CAT_POSTS_IN = 'CAT_POSTS_IN'
 export const SINGLE_POST_IN = 'SINGLE_POST_IN'
 
-export const SHOW_DETAILS = 'SHOW_DETAILS'
-
-export const REMOVE_POST = 'REMOVE_POST'
+export const SHOW_MORE = 'SHOW_MORE'
+export const SHOW_LESS = 'SHOW_LESS'
 
 export const SELECT_ONE_FOR_DELETION = 'SELECT_ONE_FOR_DELETION'
 export const SELECT_ALL_FOR_DELETION = 'SELECT_ALL_FOR_DELETION'
 export const SELECT_NONE_FOR_DELETION = 'SELECT_NONE_FOR_DELETION'
 
-// export const SHOW_POST = 'SHOW_POST'
+export const REMOVE_POST = 'REMOVE_POST'
 
 export const FETCH_CATEGORY = 'FETCH_CATEGORY'
-
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
+export const SELECT_COMMENT = 'SELECT_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const NEW_COMMENT = 'NEW_COMMENT'
+
 export function selectOneForDeletion(id){
-  // for example clic several posts in the list to delete several
   return {
     type: SELECT_ONE_FOR_DELETION,
     id
   }
 }
-
-// export function showPost(thisPost){
-//   // for example show in Post Details View the post just created through form
-//   return {
-//     type: SHOW_POST,
-//     thisPost
-//   }
-// }
 
 export function selectAllForDeletion(){
   return {
@@ -108,20 +102,54 @@ export const catPostsIn = (path, posts) => ({
   posts
 })
 
-export const fetchComments = (id) => dispatch => (
+export const showMore = (postId) => dispatch => (
   ReadableAPI
-    .fetchComments(id)
-    .then(comments => dispatch(showDetails(id, comments)))
+    .fetchComments(postId)
+    .then(comments => dispatch(loadDetails(postId, comments)))
 )
-export const showDetails = (id, comments) => ({
-  type: SHOW_DETAILS,
-  id,
+export const loadDetails = (postId, comments) => ({
+  type: SHOW_MORE,
+  postId,
   comments
 })
+
+export function showLess() {
+  return {
+    type: SHOW_LESS
+  }
+}
 
 export function selectCategory(path){
   return {
     type: SELECT_CATEGORY,
     path
+  }
+}
+
+export function selectComment(commentId){
+  return {
+    type: SELECT_COMMENT,
+    commentId
+  }
+}
+
+export function deleteComment(commentId){
+  return {
+    type: DELETE_COMMENT,
+    commentId
+  }
+}
+
+export function editComment(commentId){
+  return {
+    type: EDIT_COMMENT,
+    commentId
+  }
+}
+
+export function newComment(commentId){
+  return {
+    type: NEW_COMMENT,
+    commentId
   }
 }

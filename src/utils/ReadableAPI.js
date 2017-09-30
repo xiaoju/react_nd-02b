@@ -22,25 +22,41 @@ export const fetchCatPosts = (category) =>
     .then(res => res.json())
 
 export const fetchComments = (id) =>
-fetch(`${api}/posts/${id}/comments`, { headers })
-  .then(res => res.json())
+  fetch(`${api}/posts/${id}/comments`, { headers })
+    .then(res => res.json())
 
 export const postPost = (payload) =>
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
-        ...headers,
-        'Content-Type': 'application/json'
+      ...headers,
+      'Content-Type': 'application/json'
     },
     body : JSON.stringify( payload )
     })
     .then(res => res.json())
 
+export const postComment = (payload) =>
+  fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify( payload )
+    })
+    .then(res => res.json())
+  // id: Any unique ID. As with posts, UUID is probably the best here.
+  // timestamp: timestamp. Get this however you want.
+  // body: String
+  // author: String
+  // parentId: Should match a post id in the database.
+
 export const deletePost = (id) =>
   fetch(`${api}/posts/${id}`, {
     method: 'DELETE',
     headers: {
-        ...headers,
-        'Content-Type': 'application/json'
+      ...headers,
+      'Content-Type': 'application/json'
     }
   })

@@ -18,11 +18,21 @@ class NewpostPage extends Component {
     return (
       <div>
         <NewpostForm onSubmit={this.submit} />
-        <Link
-          to={`/${this.props.SelectedPath}/`}
-          className='button'
-          >Cancel
-        </Link>
+
+        {this.props.selectedCategory ?
+          <Link
+            to={`/${this.props.selectedCategory}/`}
+            className='button'
+            >Cancel
+          </Link>
+        :
+          <Link
+            to={`/`}
+            className='button'
+            >Cancel
+          </Link>
+        }
+
       </div>
     )
   }
@@ -30,7 +40,7 @@ class NewpostPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    SelectedPath: state.Categories.SelectedPath
+    selectedCategory: state.categories.selected
   }
 }
 

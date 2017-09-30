@@ -9,14 +9,14 @@ import {
 } from '../actions/index'
 
 import Categories from './Categories'
-// import SearchBar from './SearchBar'
-// import FilterToolbar from './FilterToolbar'
+
 // import ListSortbar from './ListSortbar'
 import List from './List'
 import ListToolbar from './ListToolbar'
-// import DetailsContainer from './DetailsContainer'
+
 import Details from './Details'
 import Comments from './Comments'
+import CommentsToolbar from './CommentsToolbar'
 
 class MainPage extends Component {
 
@@ -32,28 +32,26 @@ class MainPage extends Component {
   render() {
     return (
       <div className = 'mainPage'>
-        <div className = 'filterContainer'>
-          {/* <FilterToolbar /> */}
+
+        <div className = 'categories'>
           <Categories />
-          {/* <SearchBar /> */}
         </div>
-        <div className = 'listContainer'>
+
+        <div className = 'postsContainer'>
           <ListToolbar />
           {/* <ListSortbar /> */}
           <List />
         </div>
-        {/* <DetailsContainer className='detailsContainer'
-          thisPost={this.props.posts.perId[this.props.toDelete[0]] || null} */}
 
-          <div>
-            <Details
-              thisPost={this.props.posts.perId[this.props.posts.onFocus] || null}
-            />
-            {/* <Comments
-              perId={this.props.comments.perId}
-              allIds={this.props.comments.allIds}
-            /> */}
-          </div>
+        { this.props.posts.selectedForDetails &&
+        <div className='detailsContainer'>
+          <Details
+            thisPost={this.props.posts.perId[this.props.posts.selectedForDetails]}
+          />
+          <CommentsToolbar />
+          <Comments />
+        </div>
+        }
 
       </div>
     )
@@ -62,10 +60,9 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    // toDelete: state.posts.toDelete,
     posts: state.posts,
     selectedCat: state.categories.selected,
-    // comments: state.comments,
+    comments: state.comments,
   }
 }
 

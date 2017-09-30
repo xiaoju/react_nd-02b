@@ -9,7 +9,7 @@ class ListToolbar extends Component {
 
   constructor(props) {
     super(props)
-    this.selectButton = this.selectButton.bind(this)
+    this.toggleButton = this.toggleButton.bind(this)
     this.deleteButton = this.deleteButton.bind(this)
   }
 
@@ -28,7 +28,7 @@ class ListToolbar extends Component {
     )
   }
 
-  selectButton() {
+  toggleButton() {
     switch (this.props.visible.length) {
       case 0:
         return (
@@ -58,7 +58,7 @@ class ListToolbar extends Component {
       <div className='toolbar'>
         <Link to="/newpost" className="button">New Post</Link>
         {this.deleteButton()}
-        {this.selectButton()}
+        {this.toggleButton()}
       </div>
     )
   }
