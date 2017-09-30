@@ -34,13 +34,13 @@ import {
 //   'SelectedPath': null
 // }
 
-const Empty = {
+const empty = {
   'perPath': {},
   'allPaths': [],
-  'SelectedPath': null
+  'selected': null
 }
 
-const categoryReducer = (state = Empty, action) => {
+const categoryReducer = (state = empty, action) => {
   switch (action.type) {
 
     case FETCH_CATEGORY:
@@ -58,7 +58,7 @@ const categoryReducer = (state = Empty, action) => {
       return {
         ...state,
         // '== null' catches both null and undefined
-        SelectedPath: action.path == null ? null : action.path
+        selected: action.path == null ? null : action.path
       }
 
     default:

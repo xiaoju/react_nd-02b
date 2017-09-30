@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { selectNonePost, selectAllPost, deletePost } from '../actions/index'
+import { selectNoneForDeletion, selectAllForDeletion, deletePost } from '../actions/index'
 import { withRouter, Link } from 'react-router-dom'
 
 
@@ -15,13 +15,13 @@ class ListToolbar extends Component {
 
   deleteButton() {
     return (
-      (this.props.SelectedIds.length === 0) ?
+      (this.props.toDelete.length === 0) ?
       <button
         className="button inactive_button">
         Delete Selected
       </button> :
       <button
-        onClick={() => this.props.deletePost(this.props.SelectedIds)}
+        onClick={() => this.props.deletePost(this.props.toDelete)}
         className="button">
         Delete Selected
       </button>
@@ -29,24 +29,24 @@ class ListToolbar extends Component {
   }
 
   selectButton() {
-    switch (this.props.VisibleIds.length) {
+    switch (this.props.visible.length) {
       case 0:
         return (
         <button
           className="button inactive_button">
           Select All
         </button>)
-      case this.props.SelectedIds.length:
+      case this.props.toDelete.length:
         return (
         <button
-          onClick={this.props.selectNonePost}
+          onClick={this.props.selectNoneForDeletion}
           className="button">
           Select None
         </button>)
       default:
         return (
         <button
-          onClick={this.props.selectAllPost}
+          onClick={this.props.selectAllForDeletion}
           className="button">
           Select All
         </button>)
@@ -66,15 +66,15 @@ class ListToolbar extends Component {
 
 function mapStateToProps(state) {
   return {
-    SelectedIds: state.Posts.SelectedIds,
-    VisibleIds: state.Posts.VisibleIds
+    toDelete: state.posts.toDelete,
+    visible: state.posts.visible
   };
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-     selectNonePost: selectNonePost,
-     selectAllPost: selectAllPost,
+     selectNoneForDeletion: selectNoneForDeletion,
+     selectAllForDeletion: selectAllForDeletion,
      deletePost: deletePost
    },
   dispatch)

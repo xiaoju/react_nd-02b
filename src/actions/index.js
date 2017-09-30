@@ -4,13 +4,13 @@ export const ALL_POSTS_IN = 'ALL_POSTS_IN'
 export const CAT_POSTS_IN = 'CAT_POSTS_IN'
 export const SINGLE_POST_IN = 'SINGLE_POST_IN'
 
-export const COMMENTS_IN = 'COMMENTS_IN'
+export const SHOW_DETAILS = 'SHOW_DETAILS'
 
 export const REMOVE_POST = 'REMOVE_POST'
 
-export const SELECT_POST = 'SELECT_POST'
-export const SELECT_ALL_POST = 'SELECT_ALL_POST'
-export const SELECT_NONE_POST = 'SELECT_NONE_POST'
+export const SELECT_ONE_FOR_DELETION = 'SELECT_ONE_FOR_DELETION'
+export const SELECT_ALL_FOR_DELETION = 'SELECT_ALL_FOR_DELETION'
+export const SELECT_NONE_FOR_DELETION = 'SELECT_NONE_FOR_DELETION'
 
 // export const SHOW_POST = 'SHOW_POST'
 
@@ -18,10 +18,10 @@ export const FETCH_CATEGORY = 'FETCH_CATEGORY'
 
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
-export function selectPost(id){
+export function selectOneForDeletion(id){
   // for example clic several posts in the list to delete several
   return {
-    type: SELECT_POST,
+    type: SELECT_ONE_FOR_DELETION,
     id
   }
 }
@@ -34,15 +34,15 @@ export function selectPost(id){
 //   }
 // }
 
-export function selectAllPost(){
+export function selectAllForDeletion(){
   return {
-    type: SELECT_ALL_POST
+    type: SELECT_ALL_FOR_DELETION
   }
 }
 
-export function selectNonePost(){
+export function selectNoneForDeletion(){
   return {
-    type: SELECT_NONE_POST
+    type: SELECT_NONE_FOR_DELETION
   }
 }
 
@@ -111,10 +111,11 @@ export const catPostsIn = (path, posts) => ({
 export const fetchComments = (id) => dispatch => (
   ReadableAPI
     .fetchComments(id)
-    .then(comments => dispatch(commentsIn(comments)))
+    .then(comments => dispatch(showDetails(id, comments)))
 )
-export const commentsIn = comments => ({
-  type: COMMENTS_IN,
+export const showDetails = (id, comments) => ({
+  type: SHOW_DETAILS,
+  id,
   comments
 })
 

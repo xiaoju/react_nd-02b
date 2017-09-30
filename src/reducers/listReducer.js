@@ -3,11 +3,12 @@ import {
   CAT_POSTS_IN,
   SINGLE_POST_IN,
   REMOVE_POST,
-  // SHOW_POST,
 
-  SELECT_POST,
-  SELECT_ALL_POST,
-  SELECT_NONE_POST,
+  SELECT_ONE_FOR_DELETION,
+  SELECT_ALL_FOR_DELETION,
+  SELECT_NONE_FOR_DELETION,
+
+  SHOW_DETAILS,
 
   SELECT_CATEGORY,
 
@@ -16,8 +17,9 @@ import {
 const empty = {
   perId : {},
   allIds : [],
-  SelectedIds: [],
-  VisibleIds: []
+  toDelete: [],
+  visible: [],
+  onFocus: '',
 }
 
 const listReducer = (state = empty, action) => {
@@ -25,28 +27,31 @@ const listReducer = (state = empty, action) => {
 
     case ALL_POSTS_IN:
       return {
+        onFocus: '',
         perId: action.posts.reduce((result,item) => {result[item.id] = item;return result},{}),
         allIds: action.posts.map(thisPost => thisPost.id),
-        VisibleIds: action.posts
+        visible: action.posts
           .filter(thisPost => thisPost.deleted === false)
           .map((thisPost)=>(thisPost.id)),
-        SelectedIds: []
+        toDelete: []
       }
 
     case CAT_POSTS_IN:
       const idArray = action.posts.map(thisPost => thisPost.id)
       return {
+        onFocus: '',
         allIds: [...new Set(state.allIds.concat(idArray))],
         perId: action.posts.reduce((result,item) => {result[item.id] = item;return result}, state.perId),
-        VisibleIds: idArray,
-        SelectedIds: []
+        visible: idArray,
+        toDelete: []
       }
 
     case REMOVE_POST:
       return{
         ...state,
-        VisibleIds: state.VisibleIds.filter(id => id !== action.id),
-        SelectedIds: [],
+        onFocus: '',
+        visible: state.visible.filter(id => id !== action.id),
+        toDelete: [],
         perId: {
           ...state.perId,
           [action.id]: {
@@ -59,8 +64,9 @@ const listReducer = (state = empty, action) => {
     case SINGLE_POST_IN:
       let previousVisibles = state.allIds.filter(id => state.perId[id].deleted === false && state.perId[id].category === action.path)
       return {
+        onFocus: action.id,
         allIds: [action.id].concat(state.allIds),
-        SelectedIds: [action.id],
+        toDelete: [action.id],
         perId: {
           ...state.perId,
           [action.id]: {
@@ -74,41 +80,41 @@ const listReducer = (state = empty, action) => {
             deleted: action.deleted
           }
         },
-        VisibleIds: [action.id].concat(previousVisibles)
-        // need add to VisibleIds specifically that post just created through form, because that post wasn't present in previous state.
+        visible: [action.id].concat(previousVisibles)
+        // need add to 'visible' specifically that post just created through form, because that post wasn't present in previous state.
       }
 
-    case SELECT_POST:
+    case SELECT_ONE_FOR_DELETION:
       // a toggle function: if postId belongs to array, then remove it, otherwise adds it.
       // useful to delete several posts in one clic, from the Posts List
-      if (state.SelectedIds.includes(action.id)) {
+      if (state.toDelete.includes(action.id)) {
         return {
           ...state,
-          SelectedIds: state.SelectedIds.filter((id)=>(id !== action.id))
+          toDelete: state.toDelete.filter((id)=>(id !== action.id))
         }
       } else {
         return {
           ...state,
-          SelectedIds: state.SelectedIds.concat(action.id)
+          toDelete: state.toDelete.concat(action.id)
         }
       }
 
-    // case SHOW_POST:
-    //   return {
-    //     ...state,
-    //     SelectedIds: [].concat(action.id)
-    //   }
+      case SELECT_NONE_FOR_DELETION:
+        return {
+          ...state,
+          toDelete: []
+        }
 
-    case SELECT_NONE_POST:
+      case SELECT_ALL_FOR_DELETION:
+        return {
+          ...state,
+          toDelete: state.visible
+        }
+
+    case SHOW_DETAILS:
       return {
         ...state,
-        SelectedIds: []
-      }
-
-    case SELECT_ALL_POST:
-      return {
-        ...state,
-        SelectedIds: state.VisibleIds
+        onFocus: action.id
       }
 
     case SELECT_CATEGORY:
@@ -118,8 +124,9 @@ const listReducer = (state = empty, action) => {
       // '== null' catches both null and undefined
       return {
         ...state,
-        SelectedIds: [],
-        VisibleIds: action.path == null ?
+        onFocus: '',
+        toDelete: [],
+        visible: action.path == null ?
           state.allIds.filter(id => state.perId[id].deleted === false) :
           state.allIds.filter(id => state.perId[id].deleted === false && state.perId[id].category === action.path)
         // This '|| []' at ends of above line avoids a bug where user enters the app by directly typing a category name.

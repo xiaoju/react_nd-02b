@@ -5,8 +5,8 @@ import categoryReducer from './categoryReducer'
 import commentsReducer from './commentsReducer'
 
 const appReducer = combineReducers({
-  Posts: listReducer,
-  Categories: categoryReducer,
+  posts: listReducer,
+  categories: categoryReducer,
   comments: commentsReducer,
   form: formReducer
 })

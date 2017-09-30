@@ -14,7 +14,9 @@ import Categories from './Categories'
 // import ListSortbar from './ListSortbar'
 import List from './List'
 import ListToolbar from './ListToolbar'
-import DetailsContainer from './DetailsContainer'
+// import DetailsContainer from './DetailsContainer'
+import Details from './Details'
+import Comments from './Comments'
 
 class MainPage extends Component {
 
@@ -40,9 +42,19 @@ class MainPage extends Component {
           {/* <ListSortbar /> */}
           <List />
         </div>
-        <DetailsContainer className='detailsContainer'
-          thisPost={this.props.Posts.perId[this.props.SelectedIds[0]] || null}
-        />
+        {/* <DetailsContainer className='detailsContainer'
+          thisPost={this.props.posts.perId[this.props.toDelete[0]] || null} */}
+
+          <div>
+            <Details
+              thisPost={this.props.posts.perId[this.props.posts.onFocus] || null}
+            />
+            {/* <Comments
+              perId={this.props.comments.perId}
+              allIds={this.props.comments.allIds}
+            /> */}
+          </div>
+
       </div>
     )
   }
@@ -50,9 +62,10 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    SelectedIds: state.Posts.SelectedIds,
-    Posts: state.Posts,
-    SelectedPath: state.Categories.SelectedPath
+    // toDelete: state.posts.toDelete,
+    posts: state.posts,
+    selectedCat: state.categories.selected,
+    // comments: state.comments,
   }
 }
 
