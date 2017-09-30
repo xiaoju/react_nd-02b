@@ -4,6 +4,7 @@ import {
   fetchCatPosts,
   fetchAllPosts,
   selectPost,
+  fetchComments,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
@@ -35,7 +36,10 @@ class List extends Component {
             key={id}
             role='button'
             tabIndex='0'        /* to allow navigation with keyboard, but still BUG not clickable! */
-            onClick={()=> this.props.selectPost(this.props.Posts.perId[id].id)}
+            onClick={
+              // () => this.props.selectPost(this.props.Posts.perId[id].id)
+              () => {this.props.selectPost(id); this.props.fetchComments(id)}
+            }
             className={'post ' + (this.props.Posts.SelectedIds.includes(id) ? 'selected' : 'unselected') }
             >
             <div className='title'>{this.props.Posts.perId[id].title}</div>
@@ -62,6 +66,7 @@ function mapDispatchToProps(dispatch){
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,
     selectPost: selectPost,
+    fetchComments: fetchComments,
   }, dispatch)
 }
 

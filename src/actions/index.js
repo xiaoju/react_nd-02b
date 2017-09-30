@@ -111,13 +111,12 @@ export const catPostsIn = (path, posts) => ({
 export const fetchComments = (id) => dispatch => (
   ReadableAPI
     .fetchComments(id)
-    .then(comments => dispatch(commentsIn(id)))
+    .then(comments => dispatch(commentsIn(comments)))
 )
-export const commentsIn = (id) => ({
+export const commentsIn = comments => ({
   type: COMMENTS_IN,
-  id
+  comments
 })
-
 
 export function selectCategory(path){
   return {

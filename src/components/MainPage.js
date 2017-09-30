@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import {
-  // selectCategory,
   fetchCategories,
   fetchCatPosts,
   fetchAllPosts
@@ -15,9 +14,7 @@ import Categories from './Categories'
 // import ListSortbar from './ListSortbar'
 import List from './List'
 import ListToolbar from './ListToolbar'
-import DetailsContainer from './Details'
-// import CommentsSortbar from './CommentsSortbar'
-// import Comments from './Comments'
+import DetailsContainer from './DetailsContainer'
 
 class MainPage extends Component {
 
@@ -29,8 +26,6 @@ class MainPage extends Component {
           this.props.fetchCatPosts(this.props.match.params.category)
       ))
   }
-
-  // let thisPost = this.props.SelectedIds[0] || null
 
   render() {
     return (
@@ -45,7 +40,7 @@ class MainPage extends Component {
           {/* <ListSortbar /> */}
           <List />
         </div>
-        <DetailsContainer
+        <DetailsContainer className='detailsContainer'
           thisPost={this.props.Posts.perId[this.props.SelectedIds[0]] || null}
         />
       </div>
@@ -63,7 +58,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    // selectCategory: selectCategory,
     fetchCategories: fetchCategories,
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,

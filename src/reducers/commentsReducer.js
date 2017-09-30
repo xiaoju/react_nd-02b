@@ -13,7 +13,9 @@ const commentsReducer = (state = Empty, action) => {
 
     case COMMENTS_IN:
       return {
-        state
+        perId: action.comments.reduce((result,item) => {result[item.id] = item;return result},{}),
+        allIds: action.comments.map(thisComment => thisComment.id),
+        SelectedId: ''
       }
 
     default:
