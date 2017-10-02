@@ -9,19 +9,20 @@ import { withRouter } from 'react-router-dom'
 class Comments extends Component {
 
   render() {
-
-    if (this.props.comments.visible === []) {
+    console.log(this.props.comments.allIds)
+    if (this.props.comments.allIds.length === 0) {
       return (
         <div className='list defaultMessage'>
-          Press 'New' to add a comment!
+          Press 'New Comment' to add a comment!
         </div>
       )
     }
 
     return (
       <div className='comments'>
-        {this.props.comments.visible.map((commentId)=>(
-          <div key={commentId}
+        { this.props.comments.allIds.map((commentId)=>(
+          <div
+            key={commentId}
             className={'post ' + (this.props.comments.selected === commentId ? 'showDetails' : 'showNoDetails') }
             onClick={() => this.props.selectComment(commentId)}
             >

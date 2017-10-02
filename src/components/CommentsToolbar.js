@@ -16,32 +16,32 @@ class CommentsToolbar extends Component {
 
   deleteCommentButton() {
     return (
-      this.props.selected ?
+      this.props.commentId ?
       <button
-        onClick={() => this.props.deleteComment(this.props.selected)}
+        onClick={() => this.props.deleteComment(this.props.postId, this.props.commentId)}
         className="button">
         Delete
       </button>
       :
       <button
         className="button inactive_button">
-        Delete
+        Delete Comment
       </button>
     )
   }
 
   editCommentButton() {
     return (
-      this.props.selected ?
+      this.props.commentId ?
       <button
-        onClick={() => this.props.editComment(this.props.selected)}
+        onClick={() => this.props.editComment(this.props.postId, this.props.commentId)}
         className="button">
-        Edit
+        Edit Comment
       </button>
       :
       <button
         className="button inactive_button">
-        Edit
+        Edit Comment
       </button>
     )
   }
@@ -50,9 +50,9 @@ class CommentsToolbar extends Component {
     return (
       <button
         className="button"
-        onClick={() => this.props.newComment(this.props.selected)}
+        onClick={() => this.props.newComment(this.props.postId, this.props.commentId)}
         >
-        New
+        New Comment
       </button>
     )
   }
@@ -70,7 +70,8 @@ class CommentsToolbar extends Component {
 
 function mapStateToProps(state) {
   return {
-    selected: state.comments.selected,
+    commentId: state.comments.selected,
+    postId: state.posts.selectedForDetails
   }
 }
 

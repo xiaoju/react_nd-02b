@@ -2,39 +2,48 @@ import {
   SHOW_MORE,
   SHOW_LESS,
   SELECT_COMMENT,
+  // REMOVE_POST,
 } from '../actions'
 
 const empty = {
-  'perId': {},
-  'allIds': [],
-  'visible': [],
-  'selected': ''
+  allIds: [],       // the comments to the currently 'selectedForDetails' post
+  perId: {},        // the comments to the currently 'selectedForDetails' post
+  selected: '',
 }
 
 const commentsReducer = (state = empty, action) => {
   switch (action.type) {
 
     case SHOW_MORE:
-      let allIdsNew = state.allIds.concat(action.comments.map(thisComment => thisComment.id))
       return {
-        perId: action.comments.reduce((result,thisComment) => {result[thisComment.id] = thisComment; return result;}, state.perId),
-        allIds: allIdsNew,
-        visible: allIdsNew.filter(commentId => state.perId[commentId].parentId === action.postId),
-        toDelete: '',
+        allIds: action.comments.map(thisComment => thisComment.id),
+        perId: action.comments.reduce((result,thisComment) => {result[thisComment.id] = thisComment; return result;}, {}),
+        selected: '',
       }
 
     case SHOW_LESS:
-      return {
-        ...state,
-        visible: [],
-        toDelete: '',
-      }
+      return empty
 
     case SELECT_COMMENT:
       return {
         ...state,
         selected: state.selected === action.commentId ? '' : action.commentId,
       }
+
+    // case REMOVE_POST:
+    //   let thoseToDelete = state.allIds.filter(commentId => state.perId[commentId].parentId === id)
+    //   let theKeepers = state.allIds.filter(commentId => state.perId[commentId].parentId !== id)
+    //
+    //   return {
+    //     ...state,
+    //     perId: state.allIds.reduce(
+    //       (result, thisCommentId) => { result[thisCommentId].    ; return result},
+    //       {}
+    //     )
+    //     ,
+    //     selected: '',
+    //     visible: [],
+    //   }
 
     // case UPDATE_COMMENT:
     //   return {

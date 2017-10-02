@@ -133,12 +133,11 @@ export function selectComment(commentId){
   }
 }
 
-export function deleteComment(commentId){
-  return {
-    type: DELETE_COMMENT,
-    commentId
-  }
-}
+export const deleteComment = (postId, commentId) => dispatch => (
+  ReadableAPI.deleteComment(commentId) &&
+  ReadableAPI.fetchComments(postId)
+    .then(() => dispatch(showMore(postId)))
+)
 
 export function editComment(commentId){
   return {
