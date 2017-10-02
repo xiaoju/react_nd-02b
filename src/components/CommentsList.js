@@ -6,13 +6,12 @@ import {
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 
-class Comments extends Component {
+class CommentsList extends Component {
 
   render() {
-    console.log(this.props.comments.allIds)
     if (this.props.comments.allIds.length === 0) {
       return (
-        <div className='list defaultMessage'>
+        <div className='comments defaultMessage'>
           Press 'New Comment' to add a comment!
         </div>
       )
@@ -55,4 +54,4 @@ function mapDispatchToProps(dispatch){
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Comments))
+)(CommentsList))

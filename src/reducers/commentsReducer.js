@@ -2,12 +2,11 @@ import {
   SHOW_MORE,
   SHOW_LESS,
   SELECT_COMMENT,
-  // REMOVE_POST,
 } from '../actions'
 
 const empty = {
-  allIds: [],       // the comments to the currently 'selectedForDetails' post
-  perId: {},        // the comments to the currently 'selectedForDetails' post
+  allIds: [],
+  perId: {},
   selected: '',
 }
 

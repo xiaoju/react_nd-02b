@@ -12,7 +12,7 @@ class Categories extends Component {
 
   render() {
     return (
-      <div className='toolbar'>
+      <div className='postsToolbar'>
           <Link
             to="/"
             onClick={() => this.props.fetchAllPosts()}

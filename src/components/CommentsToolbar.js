@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { deleteComment, editComment, newComment } from '../actions/index'
-import { withRouter, Link } from 'react-router-dom'
-
+import {
+  withRouter,
+  // Link,
+} from 'react-router-dom'
 
 class CommentsToolbar extends Component {
 
@@ -20,7 +22,7 @@ class CommentsToolbar extends Component {
       <button
         onClick={() => this.props.deleteComment(this.props.postId, this.props.commentId)}
         className="button">
-        Delete
+        Delete Comment
       </button>
       :
       <button
@@ -71,7 +73,7 @@ class CommentsToolbar extends Component {
 function mapStateToProps(state) {
   return {
     commentId: state.comments.selected,
-    postId: state.posts.selectedForDetails
+    postId: state.posts.selected
   }
 }
 

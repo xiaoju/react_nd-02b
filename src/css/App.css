@@ -72,7 +72,7 @@ body {
 
 /* categoriesContainer - - - - - - - - - - - - - - - - - - - - - -*/
 
-.toolbar{
+.postsToolbar{
   order: 3;
   display: flex;
   flex-flow: row wrap;
@@ -83,9 +83,6 @@ body {
 
 .listSortbar {
   order: 1;
-}
-
-.postsList {
 }
 
 .defaultMessage {

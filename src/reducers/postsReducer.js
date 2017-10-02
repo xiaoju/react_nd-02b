@@ -4,9 +4,7 @@ import {
   SINGLE_POST_IN,
   REMOVE_POST,
 
-  SELECT_ONE_FOR_DELETION,
-  SELECT_ALL_FOR_DELETION,
-  SELECT_NONE_FOR_DELETION,
+  // SELECT_POST,
 
   SHOW_MORE,
   SHOW_LESS,
@@ -18,9 +16,8 @@ import {
 const empty = {
   perId : {},
   allIds : [],
-  toDelete: [],
+  selected: '',
   visible: [],
-  selectedForDetails: '',
 }
 
 const listReducer = (state = empty, action) => {
@@ -28,31 +25,28 @@ const listReducer = (state = empty, action) => {
 
     case ALL_POSTS_IN:
       return {
-        selectedForDetails: '',
+        selected: '',
         perId: action.posts.reduce((result,item) => {result[item.id] = item;return result},{}),
         allIds: action.posts.map(thisPost => thisPost.id),
         visible: action.posts
           .filter(thisPost => thisPost.deleted === false)
           .map((thisPost)=>(thisPost.id)),
-        toDelete: []
       }
 
     case CAT_POSTS_IN:
       const idArray = action.posts.map(thisPost => thisPost.id)
       return {
-        selectedForDetails: '',
+        selected: '',
         allIds: [...new Set(state.allIds.concat(idArray))],
         perId: action.posts.reduce((result,item) => {result[item.id] = item;return result}, state.perId),
         visible: idArray,
-        toDelete: []
       }
 
     case REMOVE_POST:
       return{
         ...state,
-        selectedForDetails: '',
+        selected: '',
         visible: state.visible.filter(id => id !== action.id),
-        toDelete: [],
         perId: {
           ...state.perId,
           [action.id]: {
@@ -65,9 +59,8 @@ const listReducer = (state = empty, action) => {
     case SINGLE_POST_IN:
       let previousVisibles = state.allIds.filter(id => state.perId[id].deleted === false && state.perId[id].category === action.path)
       return {
-        selectedForDetails: action.id,
+        selected: action.id,
         allIds: [action.id].concat(state.allIds),
-        toDelete: [action.id],
         perId: {
           ...state.perId,
           [action.id]: {
@@ -85,44 +78,23 @@ const listReducer = (state = empty, action) => {
         // need add to 'visible' specifically that post just created through form, because that post wasn't present in previous state.
       }
 
-    case SELECT_ONE_FOR_DELETION:
-      // a toggle function: if postId belongs to array, then remove it, otherwise adds it.
-      // useful to delete several posts in one clic, from the Posts List
-      if (state.toDelete.includes(action.id)) {
-        return {
-          ...state,
-          toDelete: state.toDelete.filter((id)=>(id !== action.id))
-        }
-      } else {
-        return {
-          ...state,
-          toDelete: state.toDelete.concat(action.id)
-        }
-      }
-
-      case SELECT_NONE_FOR_DELETION:
-        return {
-          ...state,
-          toDelete: []
-        }
-
-      case SELECT_ALL_FOR_DELETION:
-        return {
-          ...state,
-          toDelete: state.visible
-        }
-
     case SHOW_MORE:
       return {
         ...state,
-        selectedForDetails: action.postId
+        selected: action.postId
       }
 
     case SHOW_LESS:
       return {
         ...state,
-        selectedForDetails: ''
+        selected: ''
       }
+
+    // case SELECT_POST:
+    //   return {
+    //     ...state,
+    //     selected: action.id === state.selected ? '' : action.selected
+    //   }
 
     case SELECT_CATEGORY:
       // probably this will only be used when fetchCatPosts/fetchAllPosts API
@@ -131,8 +103,7 @@ const listReducer = (state = empty, action) => {
       // '== null' catches both null and undefined
       return {
         ...state,
-        selectedForDetails: '',
-        toDelete: [],
+        selected: '',
         visible: action.path == null ?
           state.allIds.filter(id => state.perId[id].deleted === false) :
           state.allIds.filter(id => state.perId[id].deleted === false && state.perId[id].category === action.path)

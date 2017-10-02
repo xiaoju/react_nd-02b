@@ -11,11 +11,11 @@ import {
 import Categories from './Categories'
 
 // import ListSortbar from './ListSortbar'
-import List from './List'
-import ListToolbar from './ListToolbar'
+import PostsList from './PostsList'
+import PostsToolbar from './PostsToolbar'
 
 import Details from './Details'
-import Comments from './Comments'
+import CommentsList from './CommentsList'
 import CommentsToolbar from './CommentsToolbar'
 
 class MainPage extends Component {
@@ -38,18 +38,18 @@ class MainPage extends Component {
         </div>
 
         <div className = 'postsContainer'>
-          <ListToolbar />
+          <PostsToolbar />
           {/* <ListSortbar /> */}
-          <List />
+          <PostsList />
         </div>
 
-        { this.props.posts.selectedForDetails &&
+        { this.props.posts.selected &&
         <div className='detailsContainer'>
           <Details
-            thisPost={this.props.posts.perId[this.props.posts.selectedForDetails]}
+            thisPost={this.props.posts.perId[this.props.posts.selected]}
           />
           <CommentsToolbar />
-          <Comments />
+          <CommentsList />
         </div>
         }
 

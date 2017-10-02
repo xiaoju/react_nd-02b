@@ -3,40 +3,13 @@ import { connect } from 'react-redux'
 import {
   fetchCatPosts,
   fetchAllPosts,
-  selectOneForDeletion,
   showMore,
   showLess,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 
-class List extends Component {
-
-  constructor(props) {
-    super(props)
-    this.toggleButton = this.toggleButton.bind(this)
-  }
-
-  toggleButton(id) {
-    switch (this.props.selectedForDetails === id) {
-      case true:
-        return (
-        <button
-          className="button"
-          onClick={() => this.props.showLess(id)}
-          >
-          Show Less
-        </button>)
-      default:
-        return (
-        <button
-          onClick={() => this.props.showMore(id)}
-          className="button"
-          >
-          Show More
-        </button>)
-    }
-  }
+class PostsList extends Component {
 
   render() {
 
@@ -59,23 +32,21 @@ class List extends Component {
     return (
       <div className='postsList'>
         {this.props.visible.map((id)=>(
-          <div key={id}
-            className={'post ' + (this.props.selectedForDetails === id ? 'showDetails' : 'showNoDetails') }>
+          <div
+            key={id}
+            className={'post ' + (this.props.selected === id ? 'showDetails' : 'showNoDetails') }
+            onClick={
+              this.props.selected === id ?
+              () => this.props.showLess() :
+              () => this.props.showMore(id)
+            }
+          >
             <div>
               <div className='title'>{this.props.posts.perId[id].title}</div>
               <div className='author'>{this.props.posts.perId[id].author}</div>
               <div className='timeStamp'>{this.props.posts.perId[id].timestamp}</div>
               <div className='voteScore'>{this.props.posts.perId[id].voteScore}</div>
             </div>
-
-            {this.toggleButton(id)}
-
-            <button
-              onClick={() => this.props.selectOneForDeletion(id)}
-              className={'button '+ (this.props.toDelete.includes(id) ? 'selected' : 'unselected') }
-              >
-              To Delete
-            </button>
 
           </div>
         ))
@@ -88,9 +59,8 @@ class List extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts,
-    toDelete: state.posts.toDelete,
+    selected: state.posts.selected,
     visible: state.posts.visible,
-    selectedForDetails: state.posts.selectedForDetails,
   }
 }
 
@@ -98,10 +68,9 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,
-    selectOneForDeletion: selectOneForDeletion,
-    showMore: showMore,
     showLess: showLess,
+    showMore: showMore,
   }, dispatch)
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostsList))
