@@ -13,7 +13,7 @@ class CommentsToolbar extends Component {
     super(props)
     this.deleteCommentButton = this.deleteCommentButton.bind(this)
     this.editCommentButton = this.editCommentButton.bind(this)
-    this.newCommentButton = this.newCommentButton.bind(this)
+    // this.newCommentButton = this.newCommentButton.bind(this)
   }
 
   deleteCommentButton() {
@@ -48,23 +48,23 @@ class CommentsToolbar extends Component {
     )
   }
 
-  newCommentButton() {
-    return (
-      <button
-        className="button"
-        onClick={() => this.props.newComment(this.props.postId, this.props.commentId)}
-        >
-        New Comment
-      </button>
-    )
-  }
+  // newCommentButton() {
+  //   return (
+  //     <button
+  //       className="button"
+  //       onClick={() => this.props.newComment(this.props.postId)}
+  //       >
+  //       New Comment
+  //     </button>
+  //   )
+  // }
 
   render() {
     return (
       <div className='commentsToolbar'>
         {this.deleteCommentButton()}
         {this.editCommentButton()}
-        {this.newCommentButton()}
+        {/* {this.newCommentButton()} */}
       </div>
     )
   }
@@ -81,7 +81,7 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
      deleteComment: deleteComment,
      editComment: editComment,
-     newComment: newComment,
+    //  newComment: newComment,
    },
   dispatch)
 }

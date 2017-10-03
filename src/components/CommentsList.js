@@ -12,13 +12,16 @@ class CommentsList extends Component {
     if (this.props.comments.allIds.length === 0) {
       return (
         <div className='comments defaultMessage'>
-          Press 'New Comment' to add a comment!
+          <br />
+          No comment yet, please add one!
+          <br />
         </div>
       )
     }
 
     return (
       <div className='comments'>
+        <br />
         { this.props.comments.allIds.map((commentId)=>(
           <div
             key={commentId}
@@ -27,9 +30,11 @@ class CommentsList extends Component {
             >
             <div>
               <div className='body'>{this.props.comments.perId[commentId].body}</div>
-              <div className='timeStamp'>{this.props.comments.perId[commentId].timestamp}</div>
-              <div className='author'>{this.props.comments.perId[commentId].author}</div>
-              <div className='voteScore'>{this.props.comments.perId[commentId].voteScore}</div>
+                <div className='infoLabels'>
+                  <div className='timeStamp'>{this.props.comments.perId[commentId].timestamp}</div>
+                  <div className='author'>{this.props.comments.perId[commentId].author}</div>
+                  <div className='voteScore'>{this.props.comments.perId[commentId].voteScore}</div>
+                </div>
             </div>
           </div>
         ))

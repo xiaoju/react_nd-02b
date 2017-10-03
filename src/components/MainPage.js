@@ -5,7 +5,8 @@ import { withRouter } from 'react-router-dom'
 import {
   fetchCategories,
   fetchCatPosts,
-  fetchAllPosts
+  fetchAllPosts,
+  newComment,
 } from '../actions/index'
 
 import Categories from './Categories'
@@ -17,6 +18,7 @@ import PostsToolbar from './PostsToolbar'
 import Details from './Details'
 import CommentsList from './CommentsList'
 import CommentsToolbar from './CommentsToolbar'
+import NewCommentForm from './NewCommentForm'
 
 class MainPage extends Component {
 
@@ -48,8 +50,9 @@ class MainPage extends Component {
           <Details
             thisPost={this.props.posts.perId[this.props.posts.selected]}
           />
-          <CommentsToolbar />
+          <br />
           <CommentsList />
+          <NewCommentForm onSubmit={this.props.newComment}/>
         </div>
         }
 
@@ -71,6 +74,7 @@ function mapDispatchToProps(dispatch){
     fetchCategories: fetchCategories,
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,
+    newComment: newComment,
   }, dispatch)
 }
 

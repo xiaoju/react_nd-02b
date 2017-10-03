@@ -17,7 +17,7 @@ body {
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
-    font-size: 1em;
+    /*font-size: 1em;*/
     width: 140px;
     margin: 3px;
 }
@@ -87,7 +87,7 @@ body {
 
 .defaultMessage {
   color: black;
-  font-size: 1.6em;
+  font-size: 1.4em;
   font-weight: bold;
   text-align: center;
 }
@@ -115,11 +115,16 @@ body {
   border-top-width: medium;
 }
 
+.newCommentForm {
+    order: 30;
+}
+
 .commentsToolbar{
-  order: 30;
+  order: 40;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  width: 100%;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -133,7 +138,7 @@ body {
 }
 
 .formLabel {
-  font-size: 1.6em;
+  /*font-size: 1.6em;*/
 }
 
 .formField {
@@ -141,7 +146,7 @@ body {
   color: rgb(157, 165, 180);
   border-style: solid;
   border-width: thin;
-  font-size: 1.6em;
+  /*font-size: 1.6em;*/
 }
 
 .post {
@@ -158,30 +163,49 @@ body {
 .title {
   color: rgb(209, 154, 102);    /* marron des titres css */
   font-weight: bold;
-  font-size: 1.4em;
-}
-
-.author {
-  color: rgb(86, 182, 194);
-}
-
-.timeStamp {
-  color: rgb(152, 195, 121);
+  /*font-size: 1.4em;*/
 }
 
 .content {
   color: rgb(157, 165, 180);
 }
 
-.voteScore {
-  color: rgb(97, 175, 239);
-}
-
 .count {
   color: rgb(190, 80, 70);
 }
 
+.infoLabels{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
 
+.author {
+  order: 10;
+  color: rgb(86, 182, 194);
+}
+
+.timeStamp {
+  order: 20;
+  color: rgb(152, 195, 121);
+}
+
+.voteScore {
+  order: 30;
+  color: rgb(97, 175, 239);
+}
+
+.w100 {
+  width: 100%;
+}
+
+.errorMessage {
+  color: rgb(190, 80, 70);
+}
+
+.redBorder {
+  border-color: rgb(190, 80, 70);
+}
 
 /*color: rgb(190, 80, 70);    rouge bordeaux
 rgb(152, 195, 121)          vert des strings

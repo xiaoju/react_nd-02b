@@ -100,13 +100,7 @@ export const catPostsIn = (path, posts) => ({
 export const showMore = (postId) => dispatch => (
   ReadableAPI
     .fetchComments(postId)
-    .then( comments =>
-      {
-        // console.log('postId: ', postId);
-        dispatch(loadDetails(postId, comments));
-        // console.log('postId: ', postId);
-      }
-  )
+    .then( comments => dispatch(loadDetails(postId, comments)))
 )
 export const loadDetails = (postId, comments) => ({
   type: SHOW_MORE,
@@ -133,9 +127,9 @@ export function editComment(commentId){
   }
 }
 
-export function newComment(commentId){
-  return {
-    type: NEW_COMMENT,
-    commentId
-  }
-}
+export const newComment = (values) => dispatch => (
+  ReadableAPI.newComment(values)
+    .then( (newComment) => ReadableAPI.fetchComments(newComment.parentId) )
+    .then(comments => dispatch(showMore(comments[0].parentId, comments)))
+)
+// export function newComment(values) {return console.log(values)}

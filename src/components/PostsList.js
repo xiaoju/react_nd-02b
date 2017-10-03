@@ -43,9 +43,11 @@ class PostsList extends Component {
           >
             <div>
               <div className='title'>{this.props.posts.perId[id].title}</div>
-              <div className='author'>{this.props.posts.perId[id].author}</div>
-              <div className='timeStamp'>{this.props.posts.perId[id].timestamp}</div>
-              <div className='voteScore'>{this.props.posts.perId[id].voteScore}</div>
+                <div className='infoLabels'>
+                  <div className='author'>{this.props.posts.perId[id].author}</div>
+                  <div className='timeStamp'>{this.props.posts.perId[id].timestamp}</div>
+                  <div className='voteScore'>{this.props.posts.perId[id].voteScore}</div>
+                </div>
             </div>
 
           </div>

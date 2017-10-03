@@ -47,7 +47,7 @@ export const postPost = (payload) =>
     })
     .then(res => res.json())
 
-export const postComment = (payload) =>
+export const newComment = (payload) =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
