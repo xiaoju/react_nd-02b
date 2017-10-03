@@ -17,7 +17,10 @@ class NewpostPage extends Component {
   render() {
     return (
       <div>
-        <NewpostForm onSubmit={this.submit} />
+        <NewpostForm
+          onSubmit={this.submit}
+          allCats={this.props.allCats}
+        />
 
         {this.props.selectedCategory ?
           <Link
@@ -40,7 +43,9 @@ class NewpostPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    selectedCategory: state.categories.selected
+    selectedCategory: state.categories.selected,
+    allCats: state.categories.allPaths,
+    selectedCat: state.categories.selected,
   }
 }
 

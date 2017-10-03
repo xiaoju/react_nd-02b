@@ -127,7 +127,11 @@ export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
       validate,
-      form: 'newComment'
+      form: 'newComment',
+      // initialValues: {
+      //   author: 'xiaoju',
+      //   body: 'This is my comment.',
+      // }
     }
     )(NewCommentForm)
   )

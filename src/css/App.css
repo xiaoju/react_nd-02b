@@ -207,6 +207,10 @@ body {
   border-color: rgb(190, 80, 70);
 }
 
+.newPostForm {
+
+}
+
 /*color: rgb(190, 80, 70);    rouge bordeaux
 rgb(152, 195, 121)          vert des strings
 rgb(198, 120, 221);         violet des import
