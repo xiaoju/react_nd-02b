@@ -31,7 +31,7 @@ class CommentsList extends Component {
             <div>
               <div className='body'>{this.props.comments.perId[commentId].body}</div>
                 <div className='infoLabels'>
-                  <div className='timeStamp'>{this.props.comments.perId[commentId].timestamp}</div>
+                  <div className='timestamp'>{(new Date(this.props.comments.perId[commentId].timestamp)).toLocaleString()}</div>
                   <div className='author'>{this.props.comments.perId[commentId].author}</div>
                   <div className='voteScore'>{this.props.comments.perId[commentId].voteScore}</div>
                 </div>

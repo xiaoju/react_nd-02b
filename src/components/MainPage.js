@@ -3,18 +3,17 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import {
+  sortPosts,
+  sortComments,
   fetchCategories,
   fetchCatPosts,
   fetchAllPosts,
   newComment,
 } from '../actions/index'
-
 import Categories from './Categories'
-
-// import ListSortbar from './ListSortbar'
+import SortBar from './SortBar'
 import PostsList from './PostsList'
 import PostsToolbar from './PostsToolbar'
-
 import Details from './Details'
 import CommentsList from './CommentsList'
 import CommentsToolbar from './CommentsToolbar'
@@ -34,29 +33,55 @@ class MainPage extends Component {
   render() {
     return (
       <div className = 'mainPage'>
-
-        <div className = 'categories'>
-          <Categories />
-        </div>
-
         <div className = 'postsContainer'>
-          <PostsToolbar />
-          {/* <ListSortbar /> */}
-          <PostsList />
-        </div>
 
-        { this.props.posts.selected &&
-        <div className='detailsContainer'>
-          <Details
-            thisPost={this.props.posts.perId[this.props.posts.selected]}
+          <Categories
+            className = 'categories'/>
+
+          <SortBar
+            className='sortBar'
+            columns={[
+              {field: 'category', label: 'Category'},
+              {field: 'author', label: 'Author'},
+              {field: 'timestamp', label: 'Time'},
+              {field: 'commentsCount', label: 'Comments'},
+              {field: 'voteScore', label: 'Score'},
+            ]}
+            sortCriteria={this.props.posts.sortCriteria}
+            sortDirection={this.props.posts.sortDirection}
+            sortThese={this.props.sortPosts}
           />
-          <br />
-          <CommentsList />
-          <NewCommentForm onSubmit={this.props.newComment}/>
-        </div>
-        }
 
-      </div>
+          <PostsList
+            className='postsList'/>
+
+          <PostsToolbar
+            className='postsToolbar'/>
+
+        </div>
+
+          { this.props.posts.selected &&
+          <div className='detailsContainer'>
+            <Details
+              thisPost={this.props.posts.perId[this.props.posts.selected]}
+            />
+            <br />
+            <SortBar
+              className='sortBar'
+              columns={[
+                {field: 'author', label: 'Author'},
+                {field: 'timestamp', label: 'Time'},
+                {field: 'voteScore', label: 'Score'},
+              ]}
+              sortCriteria={this.props.comments.sortCriteria}
+              sortDirection={this.props.comments.sortDirection}
+              sortThese={this.props.sortComments}
+            />
+            <CommentsList />
+            <NewCommentForm onSubmit={this.props.newComment}/>
+          </div>
+          }
+        </div>
     )
   }
 }
@@ -75,6 +100,8 @@ function mapDispatchToProps(dispatch){
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,
     newComment: newComment,
+    sortPosts: sortPosts,
+    sortComments: sortComments,
   }, dispatch)
 }
 

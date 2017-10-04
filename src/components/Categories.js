@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  // selectCategory,
   fetchAllPosts,
   fetchCatPosts
 } from '../actions/index'
@@ -12,7 +11,7 @@ class Categories extends Component {
 
   render() {
     return (
-      <div className='postsToolbar'>
+      <div>
           <Link
             to="/"
             onClick={() => this.props.fetchAllPosts()}

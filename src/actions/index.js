@@ -18,6 +18,23 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const NEW_COMMENT = 'NEW_COMMENT'
 
+export const SORT_POSTS = 'SORT_POSTS'
+export const SORT_COMMENTS = 'SORT_COMMENTS'
+
+export function sortPosts(field){
+  return {
+    type: SORT_POSTS,
+    field
+  }
+}
+
+export function sortComments(field){
+  return {
+    type: SORT_COMMENTS,
+    field
+  }
+}
+
 export function selectCategory(path){
   return {
     type: SELECT_CATEGORY,

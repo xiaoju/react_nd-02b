@@ -35,9 +35,9 @@ import {
 // }
 
 const empty = {
-  'perPath': {},
-  'allPaths': [],
-  'selected': null
+  perPath: {},
+  allPaths: [],
+  selected: null
 }
 
 const categoryReducer = (state = empty, action) => {

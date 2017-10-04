@@ -30,7 +30,7 @@ class PostsList extends Component {
     }
 
     return (
-      <div className='postsList'>
+      <div>
         {this.props.visible.map((id)=>(
           <div
             key={id}
@@ -44,8 +44,10 @@ class PostsList extends Component {
             <div>
               <div className='title'>{this.props.posts.perId[id].title}</div>
                 <div className='infoLabels'>
+                  <div className='category'>{this.props.posts.perId[id].category}</div>
                   <div className='author'>{this.props.posts.perId[id].author}</div>
-                  <div className='timeStamp'>{this.props.posts.perId[id].timestamp}</div>
+                  <div className='timestamp'>{(new Date(this.props.posts.perId[id].timestamp)).toLocaleString()}</div>
+                  <div className='commentsCount'>N/A</div>
                   <div className='voteScore'>{this.props.posts.perId[id].voteScore}</div>
                 </div>
             </div>

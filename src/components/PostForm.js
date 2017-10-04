@@ -29,7 +29,6 @@ class PostForm extends Component {
         <label>{field.label}</label>
         <br />
         <select
-          // value={field.myInitialValue}
           >
           {field.allCats.map((thisCategory)=>(
             <option value={thisCategory}>{thisCategory}</option>
@@ -85,7 +84,6 @@ class PostForm extends Component {
                 name='category'
                 component={this.renderCategoryField}
                 allCats={this.props.allCats}
-                // myInitialValue={this.props.selectedCategory}
               />
 
               <Field
@@ -150,15 +148,39 @@ function mapDispatchToProps(dispatch){
   dispatch)
 }
 
-// TODO use state.categories.selected as initial value for category field
+
+// PostForm = reduxForm({
+//   form: 'newPostForm'
+// })(PostForm)
+//
+// PostForm = connect(
+//   state => ({
+//     initialValues: {
+//       category: state.categories.selected,
+//     }
+//   }),
+//   {
+//     postPost: postPost,
+//     fetchCategories: fetchCategories,
+//    }
+// )(PostForm)
+//
+// export default withRouter(PostForm)
+
+
+
+// TODO how to access state.categories.selected from here below?
+// just above I show as per redux-form example, however I don't know how to
+// replace the mapStateToProps and mapDispatchToProps
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
       validate,
       form: 'newPostForm',
-      // initialValues: {
-      //   category: 'udacity',
-      // }
+      initialValues: {
+        category: 'udacity',
+        // category: this.props.selectedCategory,
+      }
     }
   )(PostForm)
   )

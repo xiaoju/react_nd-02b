@@ -2,19 +2,30 @@ import {
   SHOW_MORE,
   SHOW_LESS,
   SELECT_COMMENT,
+  SORT_COMMENTS,
 } from '../actions'
 
 const empty = {
   allIds: [],
   perId: {},
   selected: '',
+  sortCriteria: 'timestamp',
+  sortDirection: 'descending',
 }
 
 const commentsReducer = (state = empty, action) => {
   switch (action.type) {
 
+    case SORT_COMMENTS:
+      return {
+        ...state,
+        sortCriteria: action.field,
+        sortDirection: state.sortCriteria === action.field ? (state.sortDirection === 'descending' ? 'ascending' : 'descending') : 'descending'
+      }
+
     case SHOW_MORE:
       return {
+        ...state,
         allIds: action.comments.map(thisComment => thisComment.id),
         perId: action.comments.reduce((result,thisComment) => {result[thisComment.id] = thisComment; return result;}, {}),
         selected: '',
