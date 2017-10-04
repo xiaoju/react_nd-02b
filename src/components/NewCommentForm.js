@@ -3,7 +3,11 @@ import { Field, reduxForm } from 'redux-form'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { deleteComment, editComment } from '../actions/index'
+import {
+  deleteComment,
+  editComment,
+  newComment,
+} from '../actions/index'
 import {
   withRouter,
 } from 'react-router-dom'
@@ -65,7 +69,11 @@ class NewCommentForm extends Component {
   }
 
   onSubmit(values) {
-    console.log(values)
+    // console.log(values)
+    this.props.newComment({
+      ...values,
+      parentId: this.props.postId,
+    })
   }
 
   render(){
@@ -119,6 +127,7 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
      deleteComment: deleteComment,
      editComment: editComment,
+     newComment: newComment,
    },
   dispatch)
 }

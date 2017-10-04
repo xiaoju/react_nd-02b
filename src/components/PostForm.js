@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { postPost } from '../actions/index'
+import {
+  postPost,
+  fetchCategories,
+ } from '../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -12,7 +15,12 @@ class PostForm extends Component {
 
   constructor(props) {
     super(props)
-    // this.postPost = this.postPost.bind(this)
+  }
+
+  componentDidMount(){
+    // this to avoid bug if user open app directly on /newPostForm
+    // without this code, there would be no category choice to show inside postForm
+    if (this.props.allCats.length === 0) { this.props.fetchCategories() }
   }
 
   renderCategoryField(field) {
@@ -20,14 +28,16 @@ class PostForm extends Component {
       <div>
         <label>{field.label}</label>
         <br />
-        <select value={field.myInitialValue}>
+        <select
+          // value={field.myInitialValue}
+          >
           {field.allCats.map((thisCategory)=>(
             <option value={thisCategory}>{thisCategory}</option>
           ))}
         </select>
         <br /><br />
       </div>
-
+// BUG category value doesn't connect to redux-form
     )
   }
 
@@ -50,8 +60,9 @@ class PostForm extends Component {
 
   onSubmit = (values) => {
     this.props.postPost(values)
-    this.props.history.push(`/${values.category}/${values.id}`)
-    // BUG post doesn't appear in the list after it got created
+      .then(resultPost => this.props.history.push(`/${resultPost.category}/${resultPost.id}`) )
+    // this.props.history.push(`/${values.category}/${values.id}`)
+    // BUG id is not yet created, only get created in ReadableAPI. Should create it here...
   }
 
   render(){
@@ -74,7 +85,7 @@ class PostForm extends Component {
                 name='category'
                 component={this.renderCategoryField}
                 allCats={this.props.allCats}
-                myInitialValue={this.props.selectedCategory}
+                // myInitialValue={this.props.selectedCategory}
               />
 
               <Field
@@ -133,7 +144,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-     postPost: postPost
+     postPost: postPost,
+     fetchCategories: fetchCategories,
    },
   dispatch)
 }

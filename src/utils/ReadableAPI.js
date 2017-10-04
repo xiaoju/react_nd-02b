@@ -1,3 +1,5 @@
+import uuid from 'uuid4'
+
 const api = "//localhost:5001"
 
 let token = localStorage.token
@@ -43,9 +45,13 @@ export const postPost = (payload) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify( payload )
+    body : JSON.stringify({
+      ...payload,
+      id: uuid(),
+      timestamp: Date.now(),
     })
-    .then(res => res.json())
+  })
+  .then(res => res.json())
 
 export const newComment = (payload) =>
   fetch(`${api}/comments`, {
@@ -54,14 +60,14 @@ export const newComment = (payload) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify( payload )
+    body : JSON.stringify({
+      ...payload,
+      id: uuid(),
+      timestamp: Date.now(),
     })
-    .then(res => res.json())
-  // id: Any unique ID. As with posts, UUID is probably the best here.
-  // timestamp: timestamp. Get this however you want.
-  // body: String
-  // author: String
-  // parentId: Should match a post id in the database.
+  })
+  .then(res => res.json())
+  // TODO parentId: Should match a post id in the database.
 
 export const deletePost = (id) =>
   fetch(`${api}/posts/${id}`, {
