@@ -146,27 +146,6 @@ function mapDispatchToProps(dispatch){
   dispatch)
 }
 
-
-// PostForm = reduxForm({
-//   form: 'newPostForm'
-// })(PostForm)
-//
-// PostForm = connect(
-//   state => ({
-//     initialValues: {
-//       category: state.categories.selected,
-//     }
-//   }),
-//   {
-//     postPost: postPost,
-//     fetchCategories: fetchCategories,
-//    }
-// )(PostForm)
-//
-// export default withRouter(PostForm)
-
-
-
 // TODO how to access state.categories.selected from here below?
 // just above I show as per redux-form example, however I don't know how to
 // replace the mapStateToProps and mapDispatchToProps

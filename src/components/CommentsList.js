@@ -22,26 +22,29 @@ class CommentsList extends Component {
     return (
       <div className='commentsList'>
         { this.props.comments.allIds.map((id)=>(
-          <div
-            key={id}
-            className={'post ' + (this.props.comments.selected === id ? 'showDetails' : 'showNoDetails') }
-            onClick={() => this.props.selectComment(id)}
-            >
-            <div>
-              <div className='body'>{this.props.comments.perId[id].body}</div>
-                <div className='infoLabels'>
-                  <div className='timestamp'>{(new Date(this.props.comments.perId[id].timestamp)).toLocaleString()}</div>
-                  <div className='author'>{this.props.comments.perId[id].author}</div>
-                  <VoteButton
-                    id={id}
-                    voteScore={this.props.comments.perId[id].voteScore}
-                    voteItem={this.props.voteComment}
-                  />
-                </div>
+        <div
+          key={id}
+          className={'post ' + (this.props.comments.selected === id ? 'showDetails' : 'showNoDetails') }
+          onClick={() => this.props.selectComment(id)}
+        >
+          <div className='body'>{this.props.comments.perId[id].body}</div>
+
+          <div className='infoLabels'>
+
+            <div className='passiveLabels'>
+              <div className='timestamp'>{(new Date(this.props.comments.perId[id].timestamp)).toLocaleString()}</div>
+              <div className='author'>{this.props.comments.perId[id].author}</div>
+
+              <VoteButton
+                id={id}
+                voteScore={this.props.comments.perId[id].voteScore}
+                voteItem={this.props.voteComment}
+              />
+
             </div>
           </div>
-        ))
-        }
+        </div>
+        ))}
       </div>
     )
   }

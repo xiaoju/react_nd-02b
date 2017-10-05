@@ -86,9 +86,9 @@ export const receiveCategories = categories => ({
   categories
 })
 
-export const editPost = (values) => dispatch => (
+export const editPost = (id, payload) => dispatch => (
   ReadableAPI
-    .editPost(values)
+    .editPost(id, payload)
     .then(post => dispatch(singlePostIn(post)))
 )
 export const postPost = (values) => dispatch => (
@@ -141,6 +141,21 @@ export const catPostsIn = (path, posts) => ({
   posts
 })
 
+export const deleteComment = (postId, commentId) => dispatch => (
+  ReadableAPI.deleteComment(commentId) &&
+  ReadableAPI.fetchComments(postId)
+    .then(comments => dispatch(showMore(postId, comments)))
+)
+export const editComment = (postId, commentId, payload) => dispatch => (
+  ReadableAPI.editComment(commentId, payload) &&
+  ReadableAPI.fetchComments(postId)
+    .then(comments => dispatch(showMore(postId, comments)))
+)
+export const newComment = (values) => dispatch => (
+  ReadableAPI.newComment(values)
+    .then( (newComment) => ReadableAPI.fetchComments(newComment.parentId) )
+    .then(comments => dispatch(showMore(comments[0].parentId, comments)))
+)
 export const showMore = (postId) => dispatch => (
   ReadableAPI
     .fetchComments(postId)
@@ -157,23 +172,3 @@ export function showLess() {
     type: SHOW_LESS
   }
 }
-
-export const deleteComment = (postId, commentId) => dispatch => (
-  ReadableAPI.deleteComment(commentId) &&
-  ReadableAPI.fetchComments(postId)
-    .then(comments => dispatch(showMore(postId, comments)))
-)
-
-export function editComment(commentId){
-  return {
-    type: EDIT_COMMENT,
-    commentId
-  }
-}
-
-export const newComment = (values) => dispatch => (
-  ReadableAPI.newComment(values)
-    .then( (newComment) => ReadableAPI.fetchComments(newComment.parentId) )
-    .then(comments => dispatch(showMore(comments[0].parentId, comments)))
-)
-// export function newComment(values) {return console.log(values)}

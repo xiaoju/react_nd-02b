@@ -27,8 +27,19 @@ export const fetchComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
 
-export const editPost = (payload) =>
-  fetch(`${api}/posts/${payload.id}`, {
+export const editPost = (id, payload) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify(payload)
+    })
+    .then(res => res.json())
+
+export const editComment = (id, payload) =>
+  fetch(`${api}/comments/${id}`, {
     method: 'PUT',
     headers: {
       ...headers,

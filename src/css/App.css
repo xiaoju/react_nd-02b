@@ -54,7 +54,8 @@ body {
 
 .button {
   flex: auto;
-  background-color: rgb(33, 37, 43);
+  /*background-color: rgb(33, 37, 43);*/
+  background-color: transparent;
   border-style: solid;
   border-width: thin;
   color: rgb(157, 165, 180);
@@ -280,6 +281,7 @@ body {
   margin: 1px;
   padding: 1px;
   min-width: 2em;
+  color: #c678dd;
 }
 
 .votePlus {
@@ -287,7 +289,7 @@ body {
 }
 
 .voteButton {
-  background-color: rgb(33, 37, 43);
+  background-color: transparent;
   border-style: solid;
   border-width: thin;
   color: #c678dd;

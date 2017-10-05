@@ -34,11 +34,7 @@ class PostsToolbar extends Component {
   editPostButton() {
     return (
       this.props.selected ?
-      <button
-        onClick={() => this.props.editPost(this.props.selected)}
-        className="button">
-        Edit Post
-      </button>
+      <Link to={`/editpost/${this.props.selected}`} className="button">Edit Post</Link>
       :
       <button
         className="button inactive_button">
@@ -73,4 +69,4 @@ function mapDispatchToProps(dispatch){
   dispatch)
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostsToolbar));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostsToolbar))
