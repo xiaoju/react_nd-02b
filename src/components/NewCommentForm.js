@@ -54,10 +54,10 @@ class NewCommentForm extends Component {
 
   renderField(field) {
     return (
-      <div>
-        <label>{field.label}</label>
+      <div className='formItem'>
+        <label className='formLabel'>{field.label}</label>
         <input
-          className={`formField button w100 ${field.meta.touched && field.meta.error ? 'redBorder' : ''}`}
+          className={`formInput button ${field.meta.touched && field.meta.error ? 'redBorder' : ''}`}
           type='textarea'
           {...field.input}
         />
@@ -78,35 +78,28 @@ class NewCommentForm extends Component {
 
   render(){
     const { handleSubmit } = this.props
-
     return (
-      <div className='newCommentForm'>
-        <br />
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-
-
-              <Field
-                label='body'
-                name='body'
-                component={this.renderField}
-              />
-
-              <Field
-                label='author'
-                name='author'
-                component={this.renderField}
-              />
-              <div className='commentsToolbar'>
-                {this.deleteCommentButton()}
-                {this.editCommentButton()}
-                <button type="submit" className='button'>Submit comment</button>
-              </div>
-
-        </form>
-    </div>
+      <form className='newCommentForm' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <div className='formFields'>
+            <Field
+              label='body'
+              name='body'
+              component={this.renderField}
+            />
+            <Field
+              label='author'
+              name='author'
+              component={this.renderField}
+            />
+          </div>
+          <div className='commentsToolbar'>
+            {this.deleteCommentButton()}
+            {this.editCommentButton()}
+            <button type="submit" className='button'>Submit comment</button>
+          </div>
+      </form>
     )
   }
-
 }
 
 function validate(values){

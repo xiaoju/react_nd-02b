@@ -13,17 +13,14 @@ class CommentsList extends Component {
   render() {
     if (this.props.comments.allIds.length === 0) {
       return (
-        <div className='comments defaultMessage'>
-          <br />
+        <div className='commentsList defaultMessage'>
           No comment yet, please add one!
-          <br />
         </div>
       )
     }
 
     return (
-      <div className='comments'>
-        <br />
+      <div className='commentsList'>
         { this.props.comments.allIds.map((id)=>(
           <div
             key={id}

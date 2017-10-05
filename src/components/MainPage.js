@@ -35,11 +35,9 @@ class MainPage extends Component {
       <div className = 'mainPage'>
         <div className = 'postsContainer'>
 
-          <Categories
-            className = 'categories'/>
+          <Categories />
 
           <SortBar
-            className='sortBar'
             columns={[
               {field: 'category', label: 'Category'},
               {field: 'author', label: 'Author'},
@@ -52,20 +50,19 @@ class MainPage extends Component {
             sortThese={this.props.sortPosts}
           />
 
-          <PostsList
-            className='postsList'/>
+          <PostsList />
 
-          <PostsToolbar
-            className='postsToolbar'/>
+          <PostsToolbar />
 
         </div>
 
           { this.props.posts.selected &&
           <div className='detailsContainer'>
+
             <Details
               thisPost={this.props.posts.perId[this.props.posts.selected]}
             />
-            <br />
+
             <SortBar
               className='sortBar'
               columns={[
@@ -77,8 +74,12 @@ class MainPage extends Component {
               sortDirection={this.props.comments.sortDirection}
               sortThese={this.props.sortComments}
             />
+
             <CommentsList />
-            <NewCommentForm onSubmit={this.props.newComment}/>
+
+            <NewCommentForm
+              onSubmit={this.props.newComment}/>
+
           </div>
           }
         </div>

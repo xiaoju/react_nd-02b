@@ -11,7 +11,7 @@ class Categories extends Component {
 
   render() {
     return (
-      <div>
+      <div className = 'categories'>
           <Link
             to="/"
             onClick={() => this.props.fetchAllPosts()}

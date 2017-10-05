@@ -9,9 +9,8 @@ body {
 
 .mainPage {
   display: flex;
-  flex-direction: column;
-
-  /*margin: auto;*/
+  flex-flow: row wrap;
+  justify-content: center;
 }
 
 .postsContainer {
@@ -24,37 +23,46 @@ body {
 
 .detailsContainer {
   order: 2;
-  margin: auto;
-  flex-grow: 1;
-
+  max-width: 40%;
+  min-width: 450px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   justify-content: space-around;
+  padding: 3px;
+  margin: 3px;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
 }
 
 .categories {
   order: 11;
-  justify-content: space-between;
+
+  display: flex;
   color: rgb(157, 165, 180);
   border-bottom-color: rgb(33, 37, 43);
   border-bottom-style: solid;
   border-bottom-width: thick;
-  width: 100%;
+
+}
+
+.postsList {
+  order: 31;
 }
 
 .button {
-    background-color: rgb(33, 37, 43);
-    border-style: solid;
-    border-width: thin;
-    color: rgb(157, 165, 180);
-    border-color: rgb(192,192,192);
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    width: 140px;
-    margin: 3px;
+  flex: auto;
+  background-color: rgb(33, 37, 43);
+  border-style: solid;
+  border-width: thin;
+  color: rgb(157, 165, 180);
+  border-color: rgb(192,192,192);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  margin: 3px;
 }
 
 .button:focus {
@@ -75,29 +83,34 @@ body {
   border-width: thin;
   color: #c678dd;
   border-color: #c678dd;
-  /*padding: 5px 10px;*/
   text-align: center;
   text-decoration: none;
-  /*width: 140px;*/
-  /*margin: 3px;*/
 }
 .voteButton:focus {
-    outline: none !important;
-    box-shadow: 0 0 10px #719ECE;
+  outline: none !important;
+  box-shadow: 0 0 10px #719ECE;
 }
 
-/*.contentContainer{
-  order: 2;
-
+.formItem {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}*/
+  flex-flow: row wrap;
+}
 
+.formLabel {
+  order: 100;
+}
+
+.formInput {
+  order: 200;
+}
+
+.errorMessage {
+  order: 300;
+  color: rgb(190, 80, 70);
+}
 
 .postsToolbar{
-  order: 51;
+  order: 50;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -105,6 +118,7 @@ body {
 
 .defaultMessage {
   color: rgba(157, 165, 180, 0.2);
+  padding: 5%;
   font-size: 1.4em;
   font-weight: bold;
   text-align: center;
@@ -112,34 +126,35 @@ body {
 
 .details {
   order: 12;
-  background-color: #3a3f4b;
-  padding: 30px 30px;
+  padding: 10%;
   color: rgb(157, 165, 180);
-  border-top-color: rgb(24, 26, 31);
-  border-top-style: solid;
-  border-top-width: medium;
-  border-bottom-color: rgb(24, 26, 31);
-  border-bottom-style: solid;
-  border-bottom-width: medium;
 }
 
-.comments {
+.commentsList {
   order: 32;
-  border-top-color: rgb(24, 26, 31);
+  /*border-top-color: rgb(24, 26, 31);
   border-top-style: solid;
-  border-top-width: medium;
+  border-top-width: medium;*/
+  margin-top: 0.2em;
 }
 
 .newCommentForm {
     order: 40;
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: 0.5em;
+}
+
+.formFields {
+  order: 1;
+  flex-grow: 1;
 }
 
 .commentsToolbar{
-  order: 52;
+  order: 2;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: space-between;
-  width: 100%;
 }
 
 .sortBar{
@@ -214,13 +229,6 @@ body {
   background-color: #3a3f4b;
 }
 
-.formField {
-  background-color: rgb(33, 37, 43);
-  color: rgb(157, 165, 180);
-  border-style: solid;
-  border-width: thin;
-}
-
 .post {
   display: flex;
   flex-flow: column nowrap;
@@ -263,14 +271,6 @@ body {
   flex-flow: row wrap;
   flex-grow: 1;
   justify-content:space-between;
-}
-
-.w100 {
-  width: 100%;
-}
-
-.errorMessage {
-  color: rgb(190, 80, 70);
 }
 
 .redBorder {

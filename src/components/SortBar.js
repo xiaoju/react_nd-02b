@@ -16,7 +16,7 @@ class SortBar extends Component {
 
   render() {
     return (
-      <div>
+      <div className='sortBar'>
         {this.props.columns.map(column =>
           <button
             key={column.field}

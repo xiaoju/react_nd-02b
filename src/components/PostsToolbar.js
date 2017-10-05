@@ -49,7 +49,7 @@ class PostsToolbar extends Component {
 
   render() {
     return (
-      <div>
+      <div className='postsToolbar'>
         {this.deletePostButton()}
         {this.editPostButton()}
         <Link to="/newpost" className="button">New Post</Link>

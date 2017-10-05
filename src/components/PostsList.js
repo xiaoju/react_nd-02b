@@ -14,28 +14,18 @@ import VoteButton from './VoteButton'
 
 class PostsList extends Component {
 
-
-
   render() {
-
-    if (this.props.posts.allIds.length === 0) {
-      return (
-        <div className='list defaultMessage'>
-          Press 'New Post' to add content!
-        </div>
-      )
-    }
 
     if (this.props.posts.visible.length === 0) {
       return (
-        <div className='list defaultMessage'>
+        <div className='postsList defaultMessage'>
           Select another category<br /> or <br />press 'New Post' to add content!
         </div>
       )
     }
 
     return (
-      <div>
+      <div className='postsList'>
         {this.props.visible.map((id)=>(
           <div
             className={'post ' + (this.props.selected === id ? 'showDetails' : 'showNoDetails') }
