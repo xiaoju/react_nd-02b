@@ -20,7 +20,7 @@ class SortBar extends Component {
         {this.props.columns.map(column =>
           <button
             key={column.field}
-            className={`${column.field} button`}
+            className={`${column.field} button columnLabel`}
             onClick={() => this.props.sortThese(column.field)}
             >
             {this.decorateLabel(column)}

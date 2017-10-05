@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   selectComment,
+  voteComment,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
+import VoteButton from './VoteButton'
 
 class CommentsList extends Component {
 
@@ -22,18 +24,23 @@ class CommentsList extends Component {
     return (
       <div className='comments'>
         <br />
-        { this.props.comments.allIds.map((commentId)=>(
+        { this.props.comments.allIds.map((id)=>(
           <div
-            key={commentId}
-            className={'post ' + (this.props.comments.selected === commentId ? 'showDetails' : 'showNoDetails') }
-            onClick={() => this.props.selectComment(commentId)}
+            key={id}
+            className={'post ' + (this.props.comments.selected === id ? 'showDetails' : 'showNoDetails') }
+            onClick={() => this.props.selectComment(id)}
             >
             <div>
-              <div className='body'>{this.props.comments.perId[commentId].body}</div>
+              <div className='body'>{this.props.comments.perId[id].body}</div>
                 <div className='infoLabels'>
-                  <div className='timestamp'>{(new Date(this.props.comments.perId[commentId].timestamp)).toLocaleString()}</div>
-                  <div className='author'>{this.props.comments.perId[commentId].author}</div>
-                  <div className='voteScore'>{this.props.comments.perId[commentId].voteScore}</div>
+                  <div className='timestamp'>{(new Date(this.props.comments.perId[id].timestamp)).toLocaleString()}</div>
+                  <div className='author'>{this.props.comments.perId[id].author}</div>
+                  {/* <div className='voteScore'>{this.props.comments.perId[id].voteScore}</div> */}
+                  <VoteButton
+                    id={id}
+                    voteScore={this.props.comments.perId[id].voteScore}
+                    voteItem={this.props.voteComment}
+                  />
                 </div>
             </div>
           </div>
@@ -53,6 +60,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     selectComment: selectComment,
+    voteComment: voteComment,
   }, dispatch)
 }
 

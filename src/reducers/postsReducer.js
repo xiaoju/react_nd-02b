@@ -7,6 +7,7 @@ import {
   SHOW_LESS,
   SELECT_CATEGORY,
   SORT_POSTS,
+  VOTE_POST,
 } from '../actions'
 
 const empty = {

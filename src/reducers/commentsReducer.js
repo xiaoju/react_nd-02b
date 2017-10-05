@@ -3,6 +3,7 @@ import {
   SHOW_LESS,
   SELECT_COMMENT,
   SORT_COMMENTS,
+  VOTE_COMMENT,
 } from '../actions'
 
 const empty = {
@@ -15,6 +16,11 @@ const empty = {
 
 const commentsReducer = (state = empty, action) => {
   switch (action.type) {
+
+    case VOTE_COMMENT:
+      return {
+        state
+      }
 
     case SORT_COMMENTS:
       return {

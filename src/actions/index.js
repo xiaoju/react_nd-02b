@@ -21,6 +21,25 @@ export const NEW_COMMENT = 'NEW_COMMENT'
 export const SORT_POSTS = 'SORT_POSTS'
 export const SORT_COMMENTS = 'SORT_COMMENTS'
 
+export const VOTE_POST = 'VOTE_POST'
+export const VOTE_COMMENT = 'VOTE_COMMENT'
+
+export function votePost(id, voteDirection){
+  return {
+    type: VOTE_POST,
+    id,
+    voteDirection,
+  }
+}
+
+export function voteComment(id, voteDirection){
+  return {
+    type: VOTE_COMMENT,
+    id,
+    voteDirection,
+  }
+}
+
 export function sortPosts(field){
   return {
     type: SORT_POSTS,

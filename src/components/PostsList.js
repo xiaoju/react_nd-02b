@@ -5,11 +5,16 @@ import {
   fetchAllPosts,
   showMore,
   showLess,
+  votePost,
+  voteComment,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
+import VoteButton from './VoteButton'
 
 class PostsList extends Component {
+
+
 
   render() {
 
@@ -33,25 +38,37 @@ class PostsList extends Component {
       <div>
         {this.props.visible.map((id)=>(
           <div
-            key={id}
             className={'post ' + (this.props.selected === id ? 'showDetails' : 'showNoDetails') }
-            onClick={
-              this.props.selected === id ?
-              () => this.props.showLess() :
-              () => this.props.showMore(id)
-            }
+            key={id}
           >
-            <div>
-              <div className='title'>{this.props.posts.perId[id].title}</div>
-                <div className='infoLabels'>
-                  <div className='category'>{this.props.posts.perId[id].category}</div>
-                  <div className='author'>{this.props.posts.perId[id].author}</div>
-                  <div className='timestamp'>{(new Date(this.props.posts.perId[id].timestamp)).toLocaleString()}</div>
-                  <div className='commentsCount'>N/A</div>
-                  <div className='voteScore'>{this.props.posts.perId[id].voteScore}</div>
-                </div>
+            <div
+              className='title'
+              onClick={
+                this.props.selected === id ?
+                () => this.props.showLess() :
+                () => this.props.showMore(id)}
+              >
+                {this.props.posts.perId[id].title}
             </div>
-
+            <div className='infoLabels'>
+              <div
+                className='passiveLabels'
+                onClick={
+                  this.props.selected === id ?
+                  () => this.props.showLess() :
+                  () => this.props.showMore(id)}
+                >
+                <div className='category columnContent'>{this.props.posts.perId[id].category}</div>
+                <div className='author columnContent'>{this.props.posts.perId[id].author}</div>
+                <div className='timestamp columnContent'>{(new Date(this.props.posts.perId[id].timestamp)).toLocaleString()}</div>
+                <div className='commentsCount columnContent'>N/A</div>
+              </div>
+              <VoteButton
+                id={id}
+                voteScore={this.props.posts.perId[id].voteScore}
+                voteItem={this.props.votePost}
+              />
+            </div>
           </div>
         ))
         }
@@ -74,6 +91,8 @@ function mapDispatchToProps(dispatch){
     fetchAllPosts: fetchAllPosts,
     showLess: showLess,
     showMore: showMore,
+    votePost: votePost,
+    voteComment : voteComment,
   }, dispatch)
 }
 

@@ -53,6 +53,32 @@ export const postPost = (payload) =>
   })
   .then(res => res.json())
 
+export const votePost = (id, voteDirection) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify({
+      option: voteDirection,
+    })
+  })
+  .then(res => res.json())
+
+export const voteComment = (id, voteDirection) =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify({
+      option: voteDirection,
+    })
+  })
+  .then(res => res.json())
+
 export const newComment = (payload) =>
   fetch(`${api}/comments`, {
     method: 'POST',
