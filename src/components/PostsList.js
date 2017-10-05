@@ -6,7 +6,6 @@ import {
   showMore,
   showLess,
   votePost,
-  voteComment,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
@@ -82,7 +81,6 @@ function mapDispatchToProps(dispatch){
     showLess: showLess,
     showMore: showMore,
     votePost: votePost,
-    voteComment : voteComment,
   }, dispatch)
 }
 

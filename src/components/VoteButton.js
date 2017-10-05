@@ -7,18 +7,19 @@ class VoteButton extends Component {
 
   render() {
     return (
-      <div className='voteScore voteContainer'>
+      <div className='voteMachine'
+        >
         <button
-          className='voteButton voteElement'
+          className='voteButton votePlus'
           onClick={() => this.props.voteItem(this.props.id, 'upVote')}
           >
           +
         </button>
 
-        <div className='voteElement'>{this.props.voteScore}</div>
+        <div className='voteDigit'>{this.props.voteScore}</div>
 
         <button
-          className='voteButton voteElement'
+          className='voteButton voteMinus'
           onClick={() => this.props.voteItem(this.props.id, 'downVote')}
           >
           -

@@ -7,7 +7,7 @@ import {
   SHOW_LESS,
   SELECT_CATEGORY,
   SORT_POSTS,
-  VOTE_POST,
+  UPDATE_POST_STATE,
 } from '../actions'
 
 const empty = {
@@ -21,6 +21,15 @@ const empty = {
 
 const listReducer = (state = empty, action) => {
   switch (action.type) {
+
+    case UPDATE_POST_STATE:
+      return {
+        ...state,
+        perId: {
+          ...state.perId,
+          [action.thisPost.id]: action.thisPost,
+        },
+      }
 
     case SORT_POSTS:
       const descendingCompare = (id1, id2) => state.perId[id2][action.field] - state.perId[id1][action.field]
@@ -105,12 +114,6 @@ const listReducer = (state = empty, action) => {
         ...state,
         selected: ''
       }
-
-    // case SELECT_POST:
-    //   return {
-    //     ...state,
-    //     selected: action.id === state.selected ? '' : action.selected
-    //   }
 
     case SELECT_CATEGORY:
       // probably this will only be used when fetchCatPosts/fetchAllPosts API

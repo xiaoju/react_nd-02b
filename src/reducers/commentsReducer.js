@@ -3,7 +3,7 @@ import {
   SHOW_LESS,
   SELECT_COMMENT,
   SORT_COMMENTS,
-  VOTE_COMMENT,
+  UPDATE_COMMENT_STATE,
 } from '../actions'
 
 const empty = {
@@ -17,9 +17,13 @@ const empty = {
 const commentsReducer = (state = empty, action) => {
   switch (action.type) {
 
-    case VOTE_COMMENT:
+    case UPDATE_COMMENT_STATE:
       return {
-        state
+        ...state,
+        perId: {
+          ...state.perId,
+          [action.thisComment.id]: action.thisComment
+        }
       }
 
     case SORT_COMMENTS:

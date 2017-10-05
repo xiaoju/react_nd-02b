@@ -76,21 +76,6 @@ body {
   border-color: black;
 }
 
-.voteButton {
-  order: 200;
-  background-color: rgb(33, 37, 43);
-  border-style: solid;
-  border-width: thin;
-  color: #c678dd;
-  border-color: #c678dd;
-  text-align: center;
-  text-decoration: none;
-}
-.voteButton:focus {
-  outline: none !important;
-  box-shadow: 0 0 10px #719ECE;
-}
-
 .formItem {
   display: flex;
   flex-flow: row wrap;
@@ -128,6 +113,7 @@ body {
   order: 12;
   padding: 10%;
   color: rgb(157, 165, 180);
+  /*max-width: 50%;*/
 }
 
 .commentsList {
@@ -214,8 +200,7 @@ body {
   }
 
   .voteScore {
-    order: 500;
-    /*flex-basis: 0;*/
+    order: 5;
     color: #c678dd;
     border-color: #c678dd;
   }
@@ -277,13 +262,43 @@ body {
   border-color: rgb(190, 80, 70);
 }
 
-.voteContainer{
+.voteMachine{
+  order: 200;
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  /*justify-content: center;*/
 }
 
-.voteElement{
-  padding: 0 1em;
+.voteMinus {
+  order: 10;
+}
+
+.voteDigit {
+  order: 20;
+  margin: 1px;
+  padding: 1px;
+  min-width: 2em;
+}
+
+.votePlus {
+  order: 30;
+}
+
+.voteButton {
+  background-color: rgb(33, 37, 43);
+  border-style: solid;
+  border-width: thin;
+  color: #c678dd;
+  border-color: #c678dd;
+  text-align: center;
+  text-decoration: none;
+  margin: 3px;
+}
+.voteButton:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px #719ECE;
 }
 
 /*

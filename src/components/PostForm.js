@@ -60,8 +60,6 @@ class PostForm extends Component {
   onSubmit = (values) => {
     this.props.postPost(values)
       .then(resultPost => this.props.history.push(`/${resultPost.category}/${resultPost.id}`) )
-    // this.props.history.push(`/${values.category}/${values.id}`)
-    // BUG id is not yet created, only get created in ReadableAPI. Should create it here...
   }
 
   render(){

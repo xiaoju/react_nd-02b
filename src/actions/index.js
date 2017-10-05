@@ -21,22 +21,30 @@ export const NEW_COMMENT = 'NEW_COMMENT'
 export const SORT_POSTS = 'SORT_POSTS'
 export const SORT_COMMENTS = 'SORT_COMMENTS'
 
-export const VOTE_POST = 'VOTE_POST'
-export const VOTE_COMMENT = 'VOTE_COMMENT'
+export const UPDATE_POST_STATE = 'UPDATE_POST_STATE'
+export const UPDATE_COMMENT_STATE = 'UPDATE_COMMENT_STATE'
 
-export function votePost(id, voteDirection){
+export const votePost = (id, voteDirection) => dispatch => (
+  ReadableAPI
+    .votePost(id, voteDirection)
+    .then(thisPost => dispatch(updatePostState(thisPost)))
+)
+export function updatePostState(thisPost){
   return {
-    type: VOTE_POST,
-    id,
-    voteDirection,
+    type: UPDATE_POST_STATE,
+    thisPost,
   }
 }
 
-export function voteComment(id, voteDirection){
+export const voteComment = (id, voteDirection) => dispatch => (
+  ReadableAPI
+    .voteComment(id, voteDirection)
+    .then(thisComment => dispatch(updateCommentState(thisComment)))
+)
+export function updateCommentState(thisComment){
   return {
-    type: VOTE_COMMENT,
-    id,
-    voteDirection,
+    type: UPDATE_COMMENT_STATE,
+    thisComment,
   }
 }
 
