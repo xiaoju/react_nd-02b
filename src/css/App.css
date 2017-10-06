@@ -53,8 +53,10 @@ body {
 }
 
 .button {
+  font-family: 'Fira Mono', monospace;
+  font-size: 1em;
+  /*two lines above because of webkit issue on mac: https://stackoverflow.com/questions/21657379/css-button-font-size-doesnt-work*/
   flex: auto;
-  /*background-color: rgb(33, 37, 43);*/
   background-color: transparent;
   border-style: solid;
   border-width: thin;
