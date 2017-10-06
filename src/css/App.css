@@ -172,6 +172,7 @@ body {
 
   .columnLabel{
     white-space: pre;
+    border-color: transparent !important;
   }
 
   .category {

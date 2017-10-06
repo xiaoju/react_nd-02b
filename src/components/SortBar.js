@@ -10,7 +10,7 @@ class SortBar extends Component {
     return (
       column.field === this.props.sortCriteria ?
         `${directionSymbol} ${column.label} ${directionSymbol}` :
-        column.label
+        `- ${column.label} -`
     )
   }
 
