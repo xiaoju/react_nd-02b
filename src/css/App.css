@@ -89,20 +89,29 @@ body {
   flex-flow: row wrap;
 }
 
-/*.formLabel {
-  order: 100;
-}*/
-
 .formInput {
   order: 200;
   border-color: black;
-  /*color should be like .defaultMessage! */
+  color: rgba(157, 165, 180, 0.2);
 }
 
-.errorMessage {
+.failedValidation {
+  border-left: 8px solid rgb(190, 80, 70);
+  color: rgb(190, 80, 70)
+}
+
+/*this is actually before touching...*/
+.passedValidation {
+  text-align: left;
+  color: rgb(157, 165, 180);
+  border-left: 8px solid black;
+  font-weight: bold;
+}
+
+/*.errorMessage {
   order: 300;
   color: rgb(190, 80, 70);
-}
+}*/
 
 .postsToolbar{
   order: 50;
@@ -123,7 +132,6 @@ body {
   order: 12;
   padding: 10%;
   color: rgb(157, 165, 180);
-  /*max-width: 50%;*/
 }
 
 .commentsList {
@@ -258,7 +266,6 @@ body {
   order: 20;
   display: flex;
   flex-flow: row wrap;
-  /*justify-content: space-between;*/
 }
 
 .passiveLabels{
@@ -267,15 +274,6 @@ body {
   flex-flow: row wrap;
   flex-grow: 1;
   justify-content:space-between;
-}
-
-.failedValidation {
-  /*border-color: rgb(190, 80, 70);*/
-  border-left: 8px solid rgb(190, 80, 70);
-}
-
-.passedValidation {
-  border-left: 8px solid black;
 }
 
 .voteMachine{

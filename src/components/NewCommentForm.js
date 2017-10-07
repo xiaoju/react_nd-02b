@@ -66,11 +66,25 @@ class NewCommentForm extends Component {
 
   }
 
+  renderSubmitField(field) {
+    return (
+      <button
+        type={field.type}
+        className={`button ${field.meta.error ? 'inactive_button' : ''}`}
+        >Submit
+      </button>
+    )
+  }
+
   renderField(field) {
     return (
       <div className='formItem'>
         <input
-          className={`formInput button ${field.meta.touched && field.meta.error ? 'failedValidation' : 'passedValidation'}`}
+          className={
+            `formInput button ${field.meta.touched && field.meta.error ?
+            'failedValidation' :
+            'passedValidation'}`
+          }
           type={field.type}
           // placeholder={`${field.meta.touched && field.meta.error ? field.meta.error : ''}`}
           placeholder={field.placeholder}
@@ -94,7 +108,9 @@ class NewCommentForm extends Component {
   render(){
     const { handleSubmit } = this.props
     return (
-      <form className='newCommentForm' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form
+        className='newCommentForm'
+        onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div className='formFields'>
             <Field
               name='author'
@@ -113,10 +129,17 @@ class NewCommentForm extends Component {
             {this.deleteCommentButton()}
             {this.editCommentButton()}
 
-          {this.state.showEditForm === 'yes' ?
+            <Field
+              name='submit'
+              type={this.state.showEditForm === 'yes' ? 'submit' : ''}
+              component={this.renderSubmitField}
+
+            />
+
+          {/* {this.state.showEditForm === 'yes' ?
           <button className="button inactive_button">Submit</button>
           :
-          <button type="submit" className='button'>Submit</button>}
+          <button type="submit" className='button'>Submit</button>} */}
 
           </div>
       </form>
@@ -126,6 +149,7 @@ class NewCommentForm extends Component {
 
 function validate(values){
   const errors  = {}
+  if (!values.body || !values.author) {errors.submit='Not showing the submit button'}
   if (!values.author) {errors.author='Please choose a pseudo!'}
   if (!values.body) {errors.body='Please type your comment!'}
   return errors
