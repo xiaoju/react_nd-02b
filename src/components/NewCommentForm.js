@@ -18,58 +18,73 @@ class NewCommentForm extends Component {
     super(props)
     this.deleteCommentButton = this.deleteCommentButton.bind(this)
     this.editCommentButton = this.editCommentButton.bind(this)
+
+    this.state = {
+      showEditForm: 'no'
+    }
+
   }
 
   deleteCommentButton() {
     return (
-      this.props.commentId ?
-      <button
-        onClick={() => this.props.deleteComment(this.props.postId, this.props.commentId)}
-        className="button">
-        Delete Comment
-      </button>
+      (this.state.showEditForm === 'yes') || !this.props.commentId ?
+        <button
+          className="button inactive_button">
+          Delete Comment
+        </button>
       :
-      <button
-        className="button inactive_button">
-        Delete Comment
-      </button>
+        <button
+          onClick={() => this.props.deleteComment(this.props.postId, this.props.commentId)}
+          className="button">
+          Delete Comment
+        </button>
     )
   }
 
   editCommentButton() {
     return (
-      this.props.commentId ?
-      <button
-        onClick={() => this.props.editComment(this.props.postId, this.props.commentId)}
-        className="button">
-        Edit Comment
-      </button>
+      this.state.showEditForm === 'yes' ?
+        <button
+          onClick={() => this.setState({showEditForm: 'no'})}
+          className="button">
+          Cancel
+        </button>
       :
-      <button
-        className="button inactive_button">
-        Edit Comment
-      </button>
+        this.props.commentId ?
+          <button
+            onClick={() => this.setState({showEditForm: 'yes'})}
+            className="button">
+            Edit Comment
+          </button>
+        :
+          <button
+            className="button inactive_button">
+            Edit Comment
+          </button>
     )
+
+
   }
 
   renderField(field) {
     return (
       <div className='formItem'>
-        <label className='formLabel'>{field.label}</label>
         <input
-          className={`formInput button ${field.meta.touched && field.meta.error ? 'redBorder' : ''}`}
-          type='textarea'
+          className={`formInput button ${field.meta.touched && field.meta.error ? 'failedValidation' : 'passedValidation'}`}
+          type={field.type}
+          // placeholder={`${field.meta.touched && field.meta.error ? field.meta.error : ''}`}
+          placeholder={field.placeholder}
+          // rows={field.rows}
           {...field.input}
         />
-        <div className='errorMessage'>
+        {/* <div className='errorMessage'>
           {field.meta.touched ? field.meta.error : ''}
-        </div>
+        </div> */}
       </div>
     )
   }
 
   onSubmit(values) {
-    // console.log(values)
     this.props.newComment({
       ...values,
       parentId: this.props.postId,
@@ -82,20 +97,27 @@ class NewCommentForm extends Component {
       <form className='newCommentForm' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div className='formFields'>
             <Field
-              label='body'
-              name='body'
+              name='author'
+              type='text'
+              placeholder='Type pseudo here'
               component={this.renderField}
             />
             <Field
-              label='author'
-              name='author'
+              name='body'
+              type='textarea'
+              placeholder='Type new comment here'
               component={this.renderField}
             />
           </div>
           <div className='commentsToolbar'>
             {this.deleteCommentButton()}
             {this.editCommentButton()}
-            <button type="submit" className='button'>Submit comment</button>
+
+          {this.state.showEditForm === 'yes' ?
+          <button className="button inactive_button">Submit</button>
+          :
+          <button type="submit" className='button'>Submit</button>}
+
           </div>
       </form>
     )

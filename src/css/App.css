@@ -9,9 +9,14 @@ body {
 
 .mainPage {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: center;
 }
+/*TODO implement 'responsive design'. As screen gets narrower, progressively:
+- replace sortBar with single button
+- show either postsList, either DetailsContainer, adding a button to come back to postsList view
+
+.*/
 
 .postsContainer {
   order: 1;
@@ -23,8 +28,8 @@ body {
 
 .detailsContainer {
   order: 2;
-  max-width: 40%;
-  min-width: 450px;
+  min-width: 40%;
+  /*min-width: 450px;*/
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -84,12 +89,14 @@ body {
   flex-flow: row wrap;
 }
 
-.formLabel {
+/*.formLabel {
   order: 100;
-}
+}*/
 
 .formInput {
   order: 200;
+  border-color: black;
+  /*color should be like .defaultMessage! */
 }
 
 .errorMessage {
@@ -262,8 +269,13 @@ body {
   justify-content:space-between;
 }
 
-.redBorder {
-  border-color: rgb(190, 80, 70);
+.failedValidation {
+  /*border-color: rgb(190, 80, 70);*/
+  border-left: 8px solid rgb(190, 80, 70);
+}
+
+.passedValidation {
+  border-left: 8px solid black;
 }
 
 .voteMachine{
