@@ -4,10 +4,13 @@ import {
   selectComment,
   voteComment,
   deleteComment,
+  editComment,
+  showEditCommentForm,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import VoteButton from './VoteButton'
+import SimpleEditCommentForm from './SimpleEditCommentForm'
 
 class CommentsList extends Component {
 
@@ -21,38 +24,67 @@ class CommentsList extends Component {
     }
 
     return (
-      <div className='commentsList'>
-        { this.props.comments.allIds.map((id)=>(
-        <div
-          key={id}
-          className={'post ' + (this.props.comments.selected === id ? 'showDetails' : 'showNoDetails') }
-          // onClick={() => this.props.selectComment(id)}
-        >
-          <div className='body'>{this.props.comments.perId[id].body}</div>
+      <div>
+        <div className='commentsList'>
+          { this.props.comments.allIds.map((commentId)=>(
+          <div
+            key={commentId}
+            // className={'post ' + (this.props.comments.selected === commentId ? 'showDetails' : 'showNoDetails') }
+            // onClick={() => this.props.selectComment(commentId)}
+          >
 
-          <div className='infoLabels'>
+          {
+            // this.props.showingEditCommentForm ?
+            this.props.editingCommentId === commentId ?
 
-            <div className='passiveLabels'>
-              <div className='timestamp'>{(new Date(this.props.comments.perId[id].timestamp)).toLocaleString()}</div>
-              <div className='author'>{this.props.comments.perId[id].author}</div>
+            <SimpleEditCommentForm
+              commentId={commentId}
+              postId={this.props.comments.perId[commentId].parentId}
+              author={this.props.comments.perId[commentId].author}
+              timestamp={this.props.comments.perId[commentId].timestamp}
+              body={this.props.comments.perId[commentId].body}
+            />
 
-              <VoteButton
-                id={id}
-                voteScore={this.props.comments.perId[id].voteScore}
-                voteItem={this.props.voteComment}
-              />
+            :
 
-              <button
-                onClick={()=>this.props.deleteComment(this.props.comments.perId[id].parentId, id)}
-                // onClick={()=>console.log('this.props.comments.perId[id].parentId: ',this.props.comments.perId[id].parentId)}
-                >
-              Delete
-              </button>
-
+            <div>
+              <div className='body'>{this.props.comments.perId[commentId].body}</div>
+              <div className='infoLabels'>
+                <div className='passiveLabels'>
+                  <div className='timestamp'>{(new Date(this.props.comments.perId[commentId].timestamp)).toLocaleString()}</div>
+                  <div className='author'>{this.props.comments.perId[commentId].author}</div>
+                  <VoteButton
+                    id={commentId}
+                    voteScore={this.props.comments.perId[commentId].voteScore}
+                    voteItem={this.props.voteComment}
+                  />
+                  <button
+                    onClick={()=>this.props.deleteComment(this.props.comments.perId[commentId].parentId, commentId)}
+                    >
+                  Delete
+                  </button>
+                  <button
+                    onClick={() => this.props.showEditCommentForm(
+                      {
+                        commentId: commentId,
+                        postId: this.props.comments.perId[commentId].parentId,
+                        body: this.props.comments.perId[commentId].body,
+                      })}
+                    >
+                  Edit
+                  </button>
+                </div>
+              </div>
             </div>
+
+
+          }
+
+
           </div>
+          ))}
         </div>
-        ))}
+
       </div>
     )
   }
@@ -61,14 +93,18 @@ class CommentsList extends Component {
 function mapStateToProps(state) {
   return {
     comments: state.comments,
+    // showingEditCommentForm: state.editCommentFormReducer.showingEditCommentForm,
+    editingCommentId: state.editCommentFormReducer.commentId,
+    // showingEditCommentForm: state.ui.showingEditCommentForm,
   }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    selectComment: selectComment,
+    // selectComment: selectComment,
     voteComment: voteComment,
     deleteComment: deleteComment,
+    showEditCommentForm: showEditCommentForm,
   }, dispatch)
 }
 

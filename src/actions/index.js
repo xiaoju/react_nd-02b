@@ -1,5 +1,8 @@
 import * as ReadableAPI from '../utils/ReadableAPI'
 
+export const SHOW_EDIT_COMMENT_FORM = 'SHOW_EDIT_COMMENT_FORM'
+export const HIDE_EDIT_COMMENT_FORM = 'HIDE_EDIT_COMMENT_FORM'
+
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 export const SELECT_COMMENT = 'SELECT_COMMENT'
 
@@ -23,6 +26,22 @@ export const SORT_COMMENTS = 'SORT_COMMENTS'
 
 export const UPDATE_POST_STATE = 'UPDATE_POST_STATE'
 export const UPDATE_COMMENT_STATE = 'UPDATE_COMMENT_STATE'
+
+export function showEditCommentForm({body, commentId, postId}){
+// export function showEditCommentForm(){
+  return {
+    type: SHOW_EDIT_COMMENT_FORM,
+    body,
+    commentId,
+    postId,
+  }
+}
+
+export function hideEditCommentForm(){
+  return {
+    type: HIDE_EDIT_COMMENT_FORM,
+  }
+}
 
 export const votePost = (id, voteDirection) => dispatch => (
   ReadableAPI
@@ -152,10 +171,10 @@ export const deleteComment = (postId, commentId) => dispatch => (
 
 export const editComment = (postId, commentId, payload) => dispatch => (
   ReadableAPI.editComment(commentId, payload)
-    .then( () => ReadableAPI.fetchComments(postId) )
-    .then( comments => dispatch(loadDetails(postId, comments)))
-  // && ReadableAPI.fetchComments(postId)
-  //   .then(comments => dispatch(showMore(postId, comments)))
+    // .then( () => ReadableAPI.fetchComments(postId) )
+    // .then( comments => dispatch(loadDetails(postId, comments)))
+  && ReadableAPI.fetchComments(postId)
+    .then(comments => dispatch(showMore(postId, comments)))
 )
 
 export const newComment = (values) => dispatch => (

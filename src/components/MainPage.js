@@ -19,8 +19,8 @@ import PostsToolbar from './PostsToolbar'
 import Details from './Details'
 import CommentsList from './CommentsList'
 import CommentsToolbar from './CommentsToolbar'
-// import NewCommentForm from './NewCommentForm'
-import EditDeleteCommentForm from './EditDeleteCommentForm'
+import SimpleEditCommentForm from './SimpleEditCommentForm'
+// import EditDeleteCommentForm from './EditDeleteCommentForm'
 // import CreatenewCommentForm from './CreatenewCommentForm'
 
 class MainPage extends Component {
@@ -61,58 +61,30 @@ class MainPage extends Component {
         </div>
 
           { this.props.posts.selected &&
-          <div className='detailsContainer'>
+            <div className='detailsContainer'>
 
-            <Details
-              thisPost={this.props.posts.perId[this.props.posts.selected]}
-            />
+              <Details
+                thisPost={this.props.posts.perId[this.props.posts.selected]}
+              />
 
-            <SortBar
-              className='sortBar'
-              columns={[
-                {field: 'author', label: 'Author'},
-                {field: 'timestamp', label: 'Time'},
-                {field: 'voteScore', label: 'Score'},
-              ]}
-              sortCriteria={this.props.comments.sortCriteria}
-              sortDirection={this.props.comments.sortDirection}
-              sortThese={this.props.sortComments}
-            />
+              <SortBar
+                className='sortBar'
+                columns={[
+                  {field: 'author', label: 'Author'},
+                  {field: 'timestamp', label: 'Time'},
+                  {field: 'voteScore', label: 'Score'},
+                ]}
+                sortCriteria={this.props.comments.sortCriteria}
+                sortDirection={this.props.comments.sortDirection}
+                sortThese={this.props.sortComments}
+              />
 
-            <CommentsList />
+              <CommentsList />
 
-            {/* {this.props.comments.selected && <EditDeleteCommentForm /> } */}
 
-            {/* {!this.props.comments.selected ?
-              <EditDeleteCommentForm
-                postId={this.props.posts.perId[this.props.posts.selected]}
-                commentId={this.props.comments.perId[this.props.comment.selected]}
-                author={this.props.comments.perId[this.props.comment.selected].author}
-                body={this.props.comments.perId[this.props.comment.selected].body}
-                deleteComment={this.props.deleteComment}
-                editComment={this.props.editComment}
-                /> :
-              <CreatenewCommentForm
-                postId={this.props.posts.perId[this.props.posts.selected]}
-                commentId={this.props.comments.perId[this.props.comment.selected]}
-                newComment={this.props.newComment}
-                />
-            } */}
 
-            {/* <CommentForm
-              postId={this.props.posts.perId[this.props.posts.selected]}
-              commentId={this.props.comments.perId[this.props.comment.selected]}
-              author={this.props.comments.perId[this.props.comment.selected].author}
-              body={this.props.comments.perId[this.props.comment.selected].body}
-              deleteComment={this.props.deleteComment}
-              editComment={this.props.editComment}
-              newComment={this.props.newComment}
-            /> */}
 
-            {/* <NewCommentForm
-              onSubmit={this.props.newComment}/> */}
-
-          </div>
+            </div>
           }
         </div>
     )
@@ -124,6 +96,7 @@ function mapStateToProps(state) {
     posts: state.posts,
     selectedCat: state.categories.selected,
     comments: state.comments,
+
     // selectedComment: state.comments.selected,
   }
 }
