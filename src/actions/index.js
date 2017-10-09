@@ -142,11 +142,12 @@ export const catPostsIn = (path, posts) => ({
 })
 
 export const deleteComment = (postId, commentId) => dispatch => (
+  // console.log('postId: ', postId, ', commentId: ', commentId) &&
   ReadableAPI.deleteComment(commentId)
-    .then( () => ReadableAPI.fetchComments(postId) )
-    .then( comments => dispatch(loadDetails(postId, comments)))
-  // && ReadableAPI.fetchComments(postId)
-    // .then(comments => dispatch(showMore(postId, comments)))
+    // .then( () => ReadableAPI.fetchComments(postId) )
+    // .then( comments => dispatch(loadDetails(postId, comments)))
+  && ReadableAPI.fetchComments(postId)
+    .then(comments => dispatch(showMore(postId, comments)))
 )
 
 export const editComment = (postId, commentId, payload) => dispatch => (

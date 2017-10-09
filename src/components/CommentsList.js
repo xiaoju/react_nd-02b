@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {
   selectComment,
   voteComment,
+  deleteComment,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
@@ -25,7 +26,7 @@ class CommentsList extends Component {
         <div
           key={id}
           className={'post ' + (this.props.comments.selected === id ? 'showDetails' : 'showNoDetails') }
-          onClick={() => this.props.selectComment(id)}
+          // onClick={() => this.props.selectComment(id)}
         >
           <div className='body'>{this.props.comments.perId[id].body}</div>
 
@@ -40,6 +41,13 @@ class CommentsList extends Component {
                 voteScore={this.props.comments.perId[id].voteScore}
                 voteItem={this.props.voteComment}
               />
+
+              <button
+                onClick={()=>this.props.deleteComment(this.props.comments.perId[id].parentId, id)}
+                // onClick={()=>console.log('this.props.comments.perId[id].parentId: ',this.props.comments.perId[id].parentId)}
+                >
+              Delete
+              </button>
 
             </div>
           </div>
@@ -60,6 +68,7 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
     selectComment: selectComment,
     voteComment: voteComment,
+    deleteComment: deleteComment,
   }, dispatch)
 }
 
