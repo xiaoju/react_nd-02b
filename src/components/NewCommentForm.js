@@ -60,12 +60,19 @@ class NewCommentForm extends Component {
     )
   }
 
+  onSubmitEdit(values) {
+    console.log('values: ', values);
+    this.setState({startedInput: false});
+    this.props.newComment({...values, parentId: this.props.postId})
+  }
+
   submit_edit_Button() {
     return (
       this.state.startedInput ?
         this.props.commentId ?
           <button
             className='button'
+            type="submit"
             // onClick={}
               // add here API call to update this comment, will trigger re-render and so startedInput comes  back to false}
           >
@@ -73,8 +80,9 @@ class NewCommentForm extends Component {
           </button>
         :
           <button
+            type="submit"
             className='button'
-            onClick={() => this.setState({startedInput: false})}
+            onClick={this.onSubmitEdit.bind(this)}
             // and here should also create the new comment
           >
             (B) Submit new comment
@@ -94,45 +102,6 @@ class NewCommentForm extends Component {
           </button>
     )
   }
-
-  // cancel_delete_Button() {
-  //   return (
-  //     (this.state.showEditForm === 'yes') || !this.props.commentId ?
-  //       <button
-  //         className="button inactive_button">
-  //         Delete Comment
-  //       </button>
-  //     :
-  //       <button
-  //         onClick={() => this.props.deleteComment(this.props.postId, this.props.commentId)}
-  //         className="button">
-  //         Delete Comment
-  //       </button>
-  //   )
-  // }
-
-  // submit_edit_Button() {
-  //   return (
-  //     this.state.showEditForm === 'yes' ?
-  //       <button
-  //         onClick={() => this.setState({showEditForm: 'no'})}
-  //         className="button">
-  //         Cancel
-  //       </button>
-  //     :
-  //       this.props.commentId ?
-  //         <button
-  //           onClick={() => this.setState({showEditForm: 'yes'})}
-  //           className="button">
-  //           Edit Comment
-  //         </button>
-  //       :
-  //         <button
-  //           className="button inactive_button">
-  //           Edit Comment
-  //         </button>
-  //   )
-  // }
 
   // renderSubmitField(field) {
   //   return (
@@ -167,12 +136,12 @@ class NewCommentForm extends Component {
     )
   }
 
-  onSubmit(values) {
-    this.props.newComment({
-      ...values,
-      parentId: this.props.postId,
-    })
-  }
+  // onSubmit(values) {
+  //   this.props.newComment({
+  //     ...values,
+  //     parentId: this.props.postId,
+  //   })
+  // }
 
   onInputChange(values){
     this.setState({startedInput: true})
@@ -181,30 +150,33 @@ class NewCommentForm extends Component {
   render(){
     const { handleSubmit } = this.props
     return (
-      <form
-        className='newCommentForm'
-        onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <div className='formFields'>
-            <Field
-              name='body'
-              type='textarea'
-              placeholder='Type new comment here'
-              onChange={this.onInputChange.bind(this)}
-              component={this.renderField}
-            />
-            <Field
-              name='author'
-              type='text'
-              placeholder='Type pseudo here'
-              onChange={this.onInputChange.bind(this)}
-              component={this.renderField}
-            />
-          </div>
-          <div className='commentsToolbar'>
-            {this.cancel_delete_Button()}
-            {this.submit_edit_Button()}
-
-            {/* <Field
+      <div>
+        <form
+          className='newCommentForm'>
+          {/* onSubmit={handleSubmit(this.onSubmit.bind(this))} */}
+            <div className='formFields'>
+              <Field
+                name='body'
+                type='textarea'
+                placeholder='Type new comment here'
+                onChange={this.onInputChange.bind(this)}
+                component={this.renderField}
+              />
+              <Field
+                name='author'
+                type='text'
+                placeholder='Type pseudo here'
+                onChange={this.onInputChange.bind(this)}
+                component={this.renderField}
+              />
+            </div>
+        </form>
+            <div className='commentsToolbar'>
+              {this.cancel_delete_Button()}
+              {this.submit_edit_Button()}
+            </div>
+      </div>
+            /* <Field
               name='submit'
               type={this.state.showEditForm === 'yes' ? 'submit' : ''}
               component={this.renderSubmitField}
@@ -223,15 +195,12 @@ class NewCommentForm extends Component {
                   () => this.setState({showEditForm: 'yes'}) :
                   ''
               }
-            /> */}
+            /> */
 
-          {/* {this.state.showEditForm === 'yes' ?
+          /* {this.state.showEditForm === 'yes' ?
           <button className="button inactive_button">Submit</button>
           :
-          <button type="submit" className='button'>Submit</button>} */}
-
-          </div>
-      </form>
+          <button type="submit" className='button'>Submit</button>} */
     )
   }
 }

@@ -142,20 +142,28 @@ export const catPostsIn = (path, posts) => ({
 })
 
 export const deleteComment = (postId, commentId) => dispatch => (
-  ReadableAPI.deleteComment(commentId) &&
-  ReadableAPI.fetchComments(postId)
-    .then(comments => dispatch(showMore(postId, comments)))
+  ReadableAPI.deleteComment(commentId)
+    .then( () => ReadableAPI.fetchComments(postId) )
+    .then( comments => dispatch(loadDetails(postId, comments)))
+  // && ReadableAPI.fetchComments(postId)
+    // .then(comments => dispatch(showMore(postId, comments)))
 )
+
 export const editComment = (postId, commentId, payload) => dispatch => (
-  ReadableAPI.editComment(commentId, payload) &&
-  ReadableAPI.fetchComments(postId)
-    .then(comments => dispatch(showMore(postId, comments)))
+  ReadableAPI.editComment(commentId, payload)
+    .then( () => ReadableAPI.fetchComments(postId) )
+    .then( comments => dispatch(loadDetails(postId, comments)))
+  // && ReadableAPI.fetchComments(postId)
+  //   .then(comments => dispatch(showMore(postId, comments)))
 )
+
 export const newComment = (values) => dispatch => (
   ReadableAPI.newComment(values)
     .then( (newComment) => ReadableAPI.fetchComments(newComment.parentId) )
-    .then(comments => dispatch(showMore(comments[0].parentId, comments)))
+    .then( comments => dispatch(loadDetails(comments[0].parentId, comments)))
+    // .then(comments => dispatch(showMore(comments[0].parentId, comments)))
 )
+
 export const showMore = (postId) => dispatch => (
   ReadableAPI
     .fetchComments(postId)
