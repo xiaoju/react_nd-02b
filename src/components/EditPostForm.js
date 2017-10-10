@@ -12,9 +12,17 @@ import {
 
 class EditPostForm extends Component {
 
-  // constructor(props) {
-  //   super(props)
-  // }
+  componentDidMount(){
+    this.handleInitialize()
+  }
+
+  handleInitialize() {
+    const initialData = {
+      'title': this.props.postsPerId[this.props.match.params.id].title,
+      'body': this.props.postsPerId[this.props.match.params.id].body,
+    }
+    this.props.initialize(initialData);
+  }
 
   renderField(field) {
     return (
@@ -66,13 +74,6 @@ class EditPostForm extends Component {
 
           <Link to='/' className='button' >Cancel</Link>
 
-          {/* <button
-            className='button'
-            onClick={this.props.history.goback}>
-            Cancel
-          </button> */}
-          {/* why this not working? */}
-
         </form>
     </div>
     )
@@ -91,6 +92,7 @@ function mapStateToProps(state) {
   return {
     selectedCategory: state.categories.selected,
     allCats: state.categories.allPaths,
+    postsPerId: state.posts.perId,
   }
 }
 
@@ -106,10 +108,6 @@ export default withRouter(
     reduxForm({
       validate,
       form: 'editPostForm',
-      initialValues: {
-        title: 'xxx',
-        body: 'xxx',
-      }
     }
   )(EditPostForm)
   )
