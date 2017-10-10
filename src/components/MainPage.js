@@ -22,6 +22,7 @@ import CommentsToolbar from './CommentsToolbar'
 import SimpleEditCommentForm from './SimpleEditCommentForm'
 // import EditDeleteCommentForm from './EditDeleteCommentForm'
 // import CreatenewCommentForm from './CreatenewCommentForm'
+import AddCommentForm from './AddCommentForm'
 
 class MainPage extends Component {
 
@@ -81,7 +82,9 @@ class MainPage extends Component {
 
               <CommentsList />
 
-
+              <AddCommentForm
+                postId={this.props.posts.selected}
+              />
 
 
             </div>

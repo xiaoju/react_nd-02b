@@ -19,7 +19,6 @@ export const FETCH_CATEGORY = 'FETCH_CATEGORY'
 
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
-export const NEW_COMMENT = 'NEW_COMMENT'
 
 export const SORT_POSTS = 'SORT_POSTS'
 export const SORT_COMMENTS = 'SORT_COMMENTS'

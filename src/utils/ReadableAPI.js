@@ -23,9 +23,13 @@ export const fetchCatPosts = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
     .then(res => res.json())
 
-export const fetchComments = (id) =>
-  fetch(`${api}/posts/${id}/comments`, { headers })
+export const fetchComments = (postId) =>
+// {
+//   console.log('postId :',postId)
+  fetch(`${api}/posts/${postId}/comments`, { headers })
     .then(res => res.json())
+    // .then((res) => console.log(res))
+// }
 
 export const editPost = (id, payload) =>
   fetch(`${api}/posts/${id}`, {
