@@ -25,36 +25,38 @@ class PostsList extends Component {
 
     return (
       <div className='postsList'>
-        {this.props.visible.map((id)=>(
+        {this.props.visible.map((postId)=>(
           <div
-            className={'post ' + (this.props.selected === id ? 'showDetails' : 'showNoDetails') }
-            key={id}
+            className={'post ' + (this.props.selected === postId ? 'showDetails' : 'showNoDetails') }
+            key={postId}
           >
             <div
               className='title'
               onClick={
-                this.props.selected === id ?
+                this.props.selected === postId ?
                 () => this.props.showLess() :
-                () => this.props.showMore(id)}
+                // () => this.props.showMore(postId)}
+                () => this.props.showMore(postId)
+                .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${postId}`) )}
               >
-                {this.props.posts.perId[id].title}
+                {this.props.posts.perId[postId].title}
             </div>
             <div className='infoLabels'>
               <div
                 className='passiveLabels'
                 onClick={
-                  this.props.selected === id ?
+                  this.props.selected === postId ?
                   () => this.props.showLess() :
-                  () => this.props.showMore(id)}
+                  () => this.props.showMore(postId)}
                 >
-                <div className='category columnContent'>{this.props.posts.perId[id].category}</div>
-                <div className='author columnContent'>{this.props.posts.perId[id].author}</div>
-                <div className='timestamp columnContent'>{(new Date(this.props.posts.perId[id].timestamp)).toLocaleString()}</div>
+                <div className='category columnContent'>{this.props.posts.perId[postId].category}</div>
+                <div className='author columnContent'>{this.props.posts.perId[postId].author}</div>
+                <div className='timestamp columnContent'>{(new Date(this.props.posts.perId[postId].timestamp)).toLocaleString()}</div>
                 <div className='commentsCount columnContent'>N/A</div>
               </div>
               <VoteButton
-                id={id}
-                voteScore={this.props.posts.perId[id].voteScore}
+                id={postId}
+                voteScore={this.props.posts.perId[postId].voteScore}
                 voteItem={this.props.votePost}
               />
             </div>
@@ -70,7 +72,7 @@ function mapStateToProps(state) {
   return {
     posts: state.posts,
     selected: state.posts.selected,
-    selectedCategory: state.comments.selected,
+    selectedCategory: state.categories.selected,
     visible: state.posts.visible,
   }
 }
