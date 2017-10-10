@@ -28,11 +28,14 @@ class MainPage extends Component {
 
   componentDidMount(){
     this.props.fetchCategories()
+      .then(()=>(console.log('this.props.match.params.category: ', this.props.match.params.category)))
       .then( () => (
-        this.props.match.params.category == null ?
+        (this.props.match.params.category == null) || (this.props.match.params.category === '_') ?
           this.props.fetchAllPosts() :
           this.props.fetchCatPosts(this.props.match.params.category)
       ))
+      // .then(()=>())
+      // TODO here to set the selectedCategory to what's written in url
   }
 
   render() {

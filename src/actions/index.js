@@ -80,10 +80,10 @@ export function sortComments(field){
   }
 }
 
-export function selectCategory(path){
+export function selectCategory(category){
   return {
     type: SELECT_CATEGORY,
-    path
+    category
   }
 }
 
@@ -148,32 +148,36 @@ export const updatePostsList = posts => ({
   posts
 })
 
-export const fetchCatPosts = (path) => dispatch => (
+export const fetchCatPosts = (category) => dispatch => (
   ReadableAPI
-    .fetchCatPosts(path)
-    .then(posts => dispatch(catPostsIn(path, posts)))
+    .fetchCatPosts(category)
+    .then(posts => dispatch(catPostsIn(category, posts)))
 )
-export const catPostsIn = (path, posts) => ({
+export const catPostsIn = (category, posts) => ({
   type: CAT_POSTS_IN,
-  path,
+  category,
   posts
 })
 
-export const deleteComment = (postId, commentId) => dispatch => (
+// bug in all lines below, showMore requires selectedCategory and postId
+// but deletecomment doesn't pass selectedCategory
+
+export const deleteComment = (commentId) => dispatch => (
   // console.log('postId: ', postId, ', commentId: ', commentId) &&
   ReadableAPI.deleteComment(commentId)
     // .then( () => ReadableAPI.fetchComments(postId) )
     // .then( comments => dispatch(loadDetails(postId, comments)))
-  && ReadableAPI.fetchComments(postId)
-    .then(comments => dispatch(showMore(postId, comments)))
+  // && ReadableAPI.fetchComments(postId)
+  //   .then(comments => dispatch(showMore(null, postId)))
 )
 
-export const editComment = (postId, commentId, payload) => dispatch => (
-  ReadableAPI.editComment(commentId, payload)
+// export const editComment = (postId, commentId, body) => dispatch => (
+export const editComment = (commentId, body) => dispatch => (
+  ReadableAPI.editComment(commentId, body)
     // .then( () => ReadableAPI.fetchComments(postId) )
     // .then( comments => dispatch(loadDetails(postId, comments)))
-  && ReadableAPI.fetchComments(postId)
-    .then(comments => dispatch(showMore(postId, comments)))
+  // && ReadableAPI.fetchComments(postId)
+  //   .then(comments => dispatch(showMore(null, postId)))
 )
 
 export const newComment = (values) => dispatch => (
@@ -183,10 +187,12 @@ export const newComment = (values) => dispatch => (
     // .then(comments => dispatch(showMore(comments[0].parentId, comments)))
 )
 
-export const showMore = (postId) => dispatch => (
+export const showMore = (selectedCategory, postId) => dispatch => (
   ReadableAPI
     .fetchComments(postId)
     .then( comments => dispatch(loadDetails(postId, comments)))
+    // .then(() => this.props.history.push(`/${selectedCategory || '_'}/${postId}`) )
+    // BUG this history.push should be by the caller of the api
 )
 export const loadDetails = (postId, comments) => ({
   type: SHOW_MORE,

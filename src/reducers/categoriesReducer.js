@@ -37,7 +37,7 @@ import {
 const empty = {
   perPath: {},
   allPaths: [],
-  selected: null,
+  selected: '',
 }
 
 const categoryReducer = (state = empty, action) => {
@@ -58,7 +58,7 @@ const categoryReducer = (state = empty, action) => {
       return {
         ...state,
         // '== null' catches both null and undefined
-        selected: action.path == null ? null : action.path
+        selected: action.category == null ? '' : action.category
       }
 
     default:

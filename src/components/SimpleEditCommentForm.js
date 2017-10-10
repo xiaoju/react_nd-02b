@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import {
   editComment,
   hideEditCommentForm,
+  showMore,
 } from '../actions/index'
 import PropTypes from 'prop-types'
 
@@ -50,14 +51,12 @@ class SimpleEditCommentForm extends Component {
             className='button'
             onClick={()=>
                 this.props.editComment(
-                  this.props.postId,
+                  // this.props.postId,
                   this.props.commentId,
-                  {
-                    timestamp: Date.now(),
-                    body: this.state.body,
-                  }
+                  this.state.body
                 )
                 .then(()=>this.props.hideEditCommentForm())
+                .then(()=>(this.props.showMore(this.props.selectedCategory, this.props.postId)))
             }
           >
           submit
@@ -72,6 +71,7 @@ class SimpleEditCommentForm extends Component {
 function mapStateToProps(state) {
   return {
     comments: state.comments,
+    selectedCategory: state.categories.selected,
   }
 }
 
@@ -79,15 +79,21 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
     editComment: editComment,
     hideEditCommentForm: hideEditCommentForm,
+    showMore: showMore,
   }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleEditCommentForm)
 
 SimpleEditCommentForm.propTypes = {
+  comments: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
   commentId: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  timestamp: PropTypes.number.isRequired,
   author: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  selectedCategory: PropTypes.string,
+  editComment: PropTypes.func.isRequired,
+  hideEditCommentForm: PropTypes.func.isRequired,
+  showMore: PropTypes.func.isRequired,
 }

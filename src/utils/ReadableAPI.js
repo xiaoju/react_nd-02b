@@ -42,14 +42,21 @@ export const editPost = (id, payload) =>
     })
     .then(res => res.json())
 
-export const editComment = (id, payload) =>
-  fetch(`${api}/comments/${id}`, {
+export const editComment = (commentId, body) =>
+// payload = {timestamp: ..., body: ...}
+  fetch(`${api}/comments/${commentId}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify(payload)
+    body : JSON.stringify(
+      {
+        body: body,
+        id: uuid(),
+        timestamp: Date.now(),
+      }
+    )
     })
     .then(res => res.json())
 

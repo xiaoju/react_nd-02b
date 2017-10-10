@@ -34,10 +34,15 @@ class PostsList extends Component {
               className='title'
               onClick={
                 this.props.selected === postId ?
-                () => this.props.showLess() :
+                () => {
+                  this.props.showLess();
+                  this.props.history.push(`/${this.props.selectedCategory}`)
+                }
+                :
                 // () => this.props.showMore(postId)}
-                () => this.props.showMore(postId)
-                .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${postId}`) )}
+                () => this.props.showMore(this.props.selectedCategory, postId)
+                .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${postId}`) )
+              }
               >
                 {this.props.posts.perId[postId].title}
             </div>
@@ -46,8 +51,14 @@ class PostsList extends Component {
                 className='passiveLabels'
                 onClick={
                   this.props.selected === postId ?
-                  () => this.props.showLess() :
-                  () => this.props.showMore(postId)}
+                  () => {
+                    this.props.showLess();
+                    this.props.history.push(`/${this.props.selectedCategory}`)
+                  }
+                  :
+                  () => this.props.showMore(this.props.selectedCategory, postId)
+                  .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${postId}`) )
+                }
                 >
                 <div className='category columnContent'>{this.props.posts.perId[postId].category}</div>
                 <div className='author columnContent'>{this.props.posts.perId[postId].author}</div>

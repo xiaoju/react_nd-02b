@@ -17,7 +17,7 @@ class Categories extends Component {
             onClick={() => this.props.fetchAllPosts()}
             className={
               'button ' +
-              (this.props.categories.selected === null ? 'selected' : 'unselected') }
+              (this.props.categories.selected === '' ? 'selected' : 'unselected') }
             >
             Show All
           </Link>

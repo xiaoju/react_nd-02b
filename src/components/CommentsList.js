@@ -5,6 +5,7 @@ import {
   voteComment,
   deleteComment,
   // editComment,
+  showMore,
   showEditCommentForm,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
@@ -59,7 +60,12 @@ class CommentsList extends Component {
                     voteItem={this.props.voteComment}
                   />
                   <button
-                    onClick={()=>this.props.deleteComment(this.props.comments.perId[commentId].parentId, commentId)}
+                    onClick={
+                      // ()=>this.props.deleteComment(this.props.comments.perId[commentId].parentId, commentId)
+                      // ()=>console.log('commentId: ', commentId)
+                      ()=>this.props.deleteComment(commentId)
+                      .then(()=>this.props.showMore(this.props.selectedCategory, this.props.selectedPost))
+                    }
                     >
                   Delete
                   </button>
@@ -96,6 +102,8 @@ function mapStateToProps(state) {
     // showingEditCommentForm: state.editCommentFormReducer.showingEditCommentForm,
     editingCommentId: state.editCommentFormReducer.commentId,
     // showingEditCommentForm: state.ui.showingEditCommentForm,
+    selectedCategory: state.categories.selected,
+    selectedPost: state.posts.selected,
   }
 }
 
@@ -105,6 +113,7 @@ function mapDispatchToProps(dispatch){
     voteComment: voteComment,
     deleteComment: deleteComment,
     showEditCommentForm: showEditCommentForm,
+    showMore: showMore,
   }, dispatch)
 }
 
