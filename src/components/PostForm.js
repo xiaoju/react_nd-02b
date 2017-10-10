@@ -13,9 +13,9 @@ import {
 
 class PostForm extends Component {
 
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   componentDidMount(){
     // this to avoid bug if user open app directly on /newPostForm

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 class SortBar extends Component {
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   decorateLabel(column) {
     const directionSymbol = (this.props.sortDirection === 'ascending') ? '\u2227' : '\u2228'

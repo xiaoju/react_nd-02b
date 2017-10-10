@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  selectComment,
+  // selectComment,
   voteComment,
   deleteComment,
-  editComment,
+  // editComment,
   showEditCommentForm,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'

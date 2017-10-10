@@ -7,7 +7,7 @@ import {
 } from '../actions/index'
 import PropTypes from 'prop-types'
 
-class EditDeleteCommentForm extends Component {
+class SimpleEditCommentForm extends Component {
 
   constructor(props) {
     super(props)
@@ -48,14 +48,17 @@ class EditDeleteCommentForm extends Component {
 
           <button
             className='button'
-            onClick={()=>editComment(
-              this.props.postId,
-              this.props.commentId,
-              {
-                timestamp: Date.now(),
-                body: this.state.body,
-              }
-            )}
+            onClick={()=>
+                this.props.editComment(
+                  this.props.postId,
+                  this.props.commentId,
+                  {
+                    timestamp: Date.now(),
+                    body: this.state.body,
+                  }
+                )
+                .then(()=>this.props.hideEditCommentForm())
+            }
           >
           submit
           </button>
@@ -79,12 +82,12 @@ function mapDispatchToProps(dispatch){
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditDeleteCommentForm)
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleEditCommentForm)
 
-EditDeleteCommentForm.propTypes = {
+SimpleEditCommentForm.propTypes = {
   postId: PropTypes.string.isRequired,
   commentId: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  timestamp: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
   author: PropTypes.string.isRequired,
 }

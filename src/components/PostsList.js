@@ -70,6 +70,7 @@ function mapStateToProps(state) {
   return {
     posts: state.posts,
     selected: state.posts.selected,
+    selectedCategory: state.comments.selected,
     visible: state.posts.visible,
   }
 }

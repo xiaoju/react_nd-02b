@@ -12,9 +12,9 @@ import {
 
 class EditPostForm extends Component {
 
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   renderField(field) {
     return (

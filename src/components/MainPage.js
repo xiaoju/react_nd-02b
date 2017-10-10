@@ -9,8 +9,8 @@ import {
   fetchCatPosts,
   fetchAllPosts,
   newComment,
-  editComment,
-  deleteComment,
+  // editComment,
+  // deleteComment,
 } from '../actions/index'
 import Categories from './Categories'
 import SortBar from './SortBar'
@@ -18,8 +18,8 @@ import PostsList from './PostsList'
 import PostsToolbar from './PostsToolbar'
 import Details from './Details'
 import CommentsList from './CommentsList'
-import CommentsToolbar from './CommentsToolbar'
-import SimpleEditCommentForm from './SimpleEditCommentForm'
+// import CommentsToolbar from './CommentsToolbar'
+// import SimpleEditCommentForm from './SimpleEditCommentForm'
 // import EditDeleteCommentForm from './EditDeleteCommentForm'
 // import CreatenewCommentForm from './CreatenewCommentForm'
 import AddCommentForm from './AddCommentForm'
