@@ -184,15 +184,12 @@ export const newComment = (values) => dispatch => (
   ReadableAPI.newComment(values)
     .then( (newComment) => ReadableAPI.fetchComments(newComment.parentId) )
     .then( comments => dispatch(loadDetails(comments[0].parentId, comments)))
-    // .then(comments => dispatch(showMore(comments[0].parentId, comments)))
 )
 
-export const showMore = (useless, postId) => dispatch => (
+export const showMore = (postId) => dispatch => (
   ReadableAPI
     .fetchComments(postId)
     .then( comments => dispatch(loadDetails(postId, comments)))
-    // .then(() => this.props.history.push(`/${selectedCategory || '_'}/${postId}`) )
-    // BUG this history.push should be by the caller of the api
 )
 export const loadDetails = (postId, comments) => ({
   type: SHOW_MORE,

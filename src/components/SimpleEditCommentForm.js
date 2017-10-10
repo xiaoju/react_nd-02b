@@ -56,7 +56,7 @@ class SimpleEditCommentForm extends Component {
                   this.state.body
                 )
                 .then(()=>this.props.hideEditCommentForm())
-                .then(()=>(this.props.showMore(this.props.selectedCategory, this.props.postId)))
+                .then(()=>(this.props.showMore(this.props.postId)))
             }
           >
           submit

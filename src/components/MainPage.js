@@ -30,7 +30,7 @@ class MainPage extends Component {
       ))
       .then(()=>(
         this.props.match.params.id &&
-        this.props.showMore('useless', this.props.match.params.id)
+        this.props.showMore(this.props.match.params.id)
       ))
   }
 

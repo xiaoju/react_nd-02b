@@ -64,7 +64,7 @@ class CommentsList extends Component {
                       // ()=>this.props.deleteComment(this.props.comments.perId[commentId].parentId, commentId)
                       // ()=>console.log('commentId: ', commentId)
                       ()=>this.props.deleteComment(commentId)
-                      .then(()=>this.props.showMore(this.props.selectedCategory, this.props.selectedPost))
+                      .then(()=>this.props.showMore(this.props.selectedPost))
                     }
                     >
                   Delete

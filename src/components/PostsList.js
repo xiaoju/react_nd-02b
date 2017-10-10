@@ -39,8 +39,7 @@ class PostsList extends Component {
                   this.props.history.push(`/${this.props.selectedCategory}`)
                 }
                 :
-                // () => this.props.showMore(postId)}
-                () => this.props.showMore(this.props.selectedCategory, postId)
+                () => this.props.showMore(postId)
                 .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${postId}`) )
               }
               >
@@ -56,7 +55,7 @@ class PostsList extends Component {
                     this.props.history.push(`/${this.props.selectedCategory}`)
                   }
                   :
-                  () => this.props.showMore(this.props.selectedCategory, postId)
+                  () => this.props.showMore(postId)
                   .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${postId}`) )
                 }
                 >
