@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import {
   editPost,
+  fetchCategories,
+  fetchAllPosts,
  } from '../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -13,7 +15,17 @@ import {
 class EditPostForm extends Component {
 
   componentDidMount(){
-    this.handleInitialize()
+
+    // this to avoid bug if user open app directly on /editPost/:id
+    // without this code, there would be nothing inside state.posts,
+    // would crash the app.
+    // TODO better would be to redirect to /_/:id
+    !this.props.postsPerId[this.props.match.params.id] ?
+      this.props.fetchCategories()
+        .then(()=>this.props.fetchAllPosts())
+        .then(()=>this.handleInitialize())
+    :
+      this.handleInitialize()
   }
 
   handleInitialize() {
@@ -99,6 +111,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
      editPost: editPost,
+     fetchAllPosts: fetchAllPosts,
+     fetchCategories: fetchCategories,
    },
   dispatch)
 }

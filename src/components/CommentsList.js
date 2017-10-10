@@ -30,6 +30,7 @@ class CommentsList extends Component {
           { this.props.comments.allIds.map((commentId)=>(
           <div
             key={commentId}
+            className='commentItem'
             // className={'post ' + (this.props.comments.selected === commentId ? 'showDetails' : 'showNoDetails') }
             // onClick={() => this.props.selectComment(commentId)}
           >

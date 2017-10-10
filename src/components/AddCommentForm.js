@@ -33,12 +33,14 @@ class AddCommentForm extends Component {
       <div>
         <form
           className='newCommentForm'>
-            <div className='formFields'>
+            <div>
               <textarea
+                className='formFields'
                 name="body"
                 value={this.state.body}
                 onChange={this.handleInputChange} />
               <input
+                className='formFields'
                 name="author"
                 value={this.state.author}
                 onChange={this.handleInputChange} />
