@@ -9,8 +9,7 @@ import {
   fetchCatPosts,
   fetchAllPosts,
   newComment,
-  // editComment,
-  // deleteComment,
+  showMore,
 } from '../actions/index'
 import Categories from './Categories'
 import SortBar from './SortBar'
@@ -18,24 +17,21 @@ import PostsList from './PostsList'
 import PostsToolbar from './PostsToolbar'
 import Details from './Details'
 import CommentsList from './CommentsList'
-// import CommentsToolbar from './CommentsToolbar'
-// import SimpleEditCommentForm from './SimpleEditCommentForm'
-// import EditDeleteCommentForm from './EditDeleteCommentForm'
-// import CreatenewCommentForm from './CreatenewCommentForm'
 import AddCommentForm from './AddCommentForm'
 
 class MainPage extends Component {
 
   componentDidMount(){
     this.props.fetchCategories()
-      .then(()=>(console.log('this.props.match.params.category: ', this.props.match.params.category)))
       .then( () => (
         (this.props.match.params.category == null) || (this.props.match.params.category === '_') ?
           this.props.fetchAllPosts() :
           this.props.fetchCatPosts(this.props.match.params.category)
       ))
-      // .then(()=>())
-      // TODO here to set the selectedCategory to what's written in url
+      .then(()=>(
+        this.props.match.params.id &&
+        this.props.showMore('useless', this.props.match.params.id)
+      ))
   }
 
   render() {
@@ -89,7 +85,6 @@ class MainPage extends Component {
                 postId={this.props.posts.selected}
               />
 
-
             </div>
           }
         </div>
@@ -102,8 +97,6 @@ function mapStateToProps(state) {
     posts: state.posts,
     selectedCat: state.categories.selected,
     comments: state.comments,
-
-    // selectedComment: state.comments.selected,
   }
 }
 
@@ -115,6 +108,7 @@ function mapDispatchToProps(dispatch){
     newComment: newComment,
     sortPosts: sortPosts,
     sortComments: sortComments,
+    showMore: showMore,
   }, dispatch)
 }
 

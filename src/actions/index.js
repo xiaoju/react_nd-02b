@@ -187,7 +187,7 @@ export const newComment = (values) => dispatch => (
     // .then(comments => dispatch(showMore(comments[0].parentId, comments)))
 )
 
-export const showMore = (selectedCategory, postId) => dispatch => (
+export const showMore = (useless, postId) => dispatch => (
   ReadableAPI
     .fetchComments(postId)
     .then( comments => dispatch(loadDetails(postId, comments)))
