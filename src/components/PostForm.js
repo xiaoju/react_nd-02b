@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, initialize } from 'redux-form'
 import {
   postPost,
   fetchCategories,
@@ -13,31 +13,17 @@ import {
 
 class PostForm extends Component {
 
-  constructor(props) {
-    super(props)
-    this.renderCategoryField = this.renderCategoryField.bind(this)
-  }
-
   componentDidMount(){
     // this to avoid bug if user open app directly on /newPostForm
     // without this code, there would be no category choice to show inside postForm
     if (this.props.allCats.length === 0) { this.props.fetchCategories() }
+
+    this.handleInitialize()
   }
 
-  renderCategoryField(field) {
-    return (
-      <div>
-        <label>{field.label}</label>
-        <br />
-        <select value={this.props.selectedCategory === '' ? undefined : this.props.selectedCategory}>
-          {field.allCats.map((thisCategory)=>(
-            <option key={thisCategory} value={thisCategory}>{thisCategory}</option>
-          ))}
-        </select>
-        <br /><br />
-      </div>
-// BUG category value doesn't connect to redux-form
-    )
+  handleInitialize() {
+    const initData = {'category': this.props.selectedCategory, 'title': 'test title'}
+    this.props.initialize(initData);
   }
 
   renderField(field) {
@@ -70,57 +56,58 @@ class PostForm extends Component {
         <br />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
-              <Field
-                label='Title'
-                name='title'
-                type= 'text'
-                component={this.renderField}
-              />
+          <Field
+            label='Title'
+            name='title'
+            type= 'text'
+            component={this.renderField}
+          />
 
-              <Field
-                label='Category'
-                name='category'
-                component={this.renderCategoryField}
-                allCats={this.props.allCats}
-              />
+          <Field
+            label='Category'
+            name='category'
+            component='select'>
+            {this.props.allCats.map((thisCategory)=>(
+              <option key={thisCategory} value={thisCategory}>{thisCategory}</option>
+            ))}
+          </Field>
 
-              <Field
-                label='Body'
-                name='body'
-                type= 'textarea'
-                component={this.renderField}
-              />
+          <Field
+            label='Body'
+            name='body'
+            type= 'textarea'
+            component={this.renderField}
+          />
 
-              <Field
-                label='Author'
-                name='author'
-                type= 'text'
-                component={this.renderField}
-              />
+          <Field
+            label='Author'
+            name='author'
+            type= 'text'
+            component={this.renderField}
+          />
 
-              <div className='postsToolbar'>
-                <button type="submit" className='button'>Submit</button>
-              </div>
+          <div className='postsToolbar'>
+            <button type="submit" className='button'>Submit</button>
+          </div>
 
-              {this.props.selectedCategory ?
-                <Link
-                  to={`/${this.props.selectedCategory}/`}
-                  className='button'
-                  >Cancel
-                </Link>
-              :
-                <Link
-                  to={`/`}
-                  className='button'
-                  >Cancel
-                </Link>
-              }
+          {this.props.selectedCategory ?
+            <Link
+              to={`/${this.props.selectedCategory}/`}
+              className='button'
+              >Cancel
+            </Link>
+          :
+            <Link
+              to={`/`}
+              className='button'
+              >Cancel
+            </Link>
+          }
 
         </form>
     </div>
     )
   }
-
 }
 
 function validate(values){
