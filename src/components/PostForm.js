@@ -13,9 +13,10 @@ import {
 
 class PostForm extends Component {
 
-  // constructor(props) {
-  //   super(props)
-  // }
+  constructor(props) {
+    super(props)
+    this.renderCategoryField = this.renderCategoryField.bind(this)
+  }
 
   componentDidMount(){
     // this to avoid bug if user open app directly on /newPostForm
@@ -28,10 +29,9 @@ class PostForm extends Component {
       <div>
         <label>{field.label}</label>
         <br />
-        <select
-          >
+        <select value={this.props.selectedCategory === '' ? undefined : this.props.selectedCategory}>
           {field.allCats.map((thisCategory)=>(
-            <option value={thisCategory}>{thisCategory}</option>
+            <option key={thisCategory} value={thisCategory}>{thisCategory}</option>
           ))}
         </select>
         <br /><br />
@@ -146,18 +146,11 @@ function mapDispatchToProps(dispatch){
   dispatch)
 }
 
-// TODO how to access state.categories.selected from here below?
-// just above I show as per redux-form example, however I don't know how to
-// replace the mapStateToProps and mapDispatchToProps
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
       validate,
       form: 'newPostForm',
-      initialValues: {
-        category: 'udacity',
-        // category: this.props.selectedCategory,
-      }
     }
   )(PostForm)
   )
