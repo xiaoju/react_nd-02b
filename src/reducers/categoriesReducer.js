@@ -51,10 +51,17 @@ const categoryReducer = (state = empty, action) => {
         allPaths: action.categories.categories.map((item)=>(item.name))
       }
 
+    case SINGLE_POST_IN:
+      // after creating a post, we don't change the selectedCategory,
+      // otherwise after post creation the app would push the category name
+      // into the url. Better not. For example a post in category 'udacity' was
+      // created from the 'see all categories' view. After post creating, we want back
+      // to that view, no to the /udacity one.
+      return state
+
     case SELECT_CATEGORY:
     case ALL_POSTS_IN:
     case CAT_POSTS_IN:
-    case SINGLE_POST_IN:
       return {
         ...state,
         // '== null' catches both null and undefined
