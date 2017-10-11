@@ -156,14 +156,59 @@ body {
 
 .newCommentForm {
   order: 14;
-  display: flex;
-  flex-flow: row wrap;
   padding-top: 0.5em;
 }
 
-.formFields {
+.commentBody {
+  padding: 0.5em;
+  margin: 1em, 0;
+}
+
+#zzz {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+#aaa {
   order: 1;
+  /*background-color: red;*/
   flex-grow: 1;
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+#bbb {
+  order: 2;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  /*background-color: green;*/
+}
+
+#yyy {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#ccc {
+  order: 1;
+  /*background-color: red;*/
+  flex-grow: 1;
+  padding: 0.5em;
+  margin: 0.5em 0.25em 0.5em 0;
+}
+
+#ddd {
+  order: 2;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  margin: 0.5em 0 0.5em 0.25em;
+
+  /*background-color: green;*/
+}
+
+.formFields {
+  /*order: 1;*/
+  /*flex-grow: 1;*/
   background-color: transparent;
   color: rgb(157, 165, 180);
   font-family: 'Fira Mono', monospace;

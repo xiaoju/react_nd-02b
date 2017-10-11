@@ -50,7 +50,7 @@ class CommentsList extends Component {
             :
 
             <div>
-              <div className='body'>{this.props.comments.perId[commentId].body}</div>
+              <div className='commentBody'>{this.props.comments.perId[commentId].body}</div>
               <div className='infoLabels'>
                 <div className='passiveLabels'>
                   <div className='timestamp'>{(new Date(this.props.comments.perId[commentId].timestamp)).toLocaleString()}</div>
@@ -61,6 +61,7 @@ class CommentsList extends Component {
                     voteItem={this.props.voteComment}
                   />
                   <button
+                    className='button'
                     onClick={
                       // ()=>this.props.deleteComment(this.props.comments.perId[commentId].parentId, commentId)
                       // ()=>console.log('commentId: ', commentId)
@@ -71,6 +72,7 @@ class CommentsList extends Component {
                   Delete
                   </button>
                   <button
+                    className='button'
                     onClick={() => this.props.showEditCommentForm(
                       {
                         commentId: commentId,

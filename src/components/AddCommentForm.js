@@ -30,25 +30,34 @@ class AddCommentForm extends Component {
 
   render(){
     return (
-      <div>
+      <div >
         <form
           className='newCommentForm'>
-            <div>
+            <div id='zzz'>
               <textarea
+                id='aaa'
                 className='formFields'
                 name="body"
                 value={this.state.body}
-                onChange={this.handleInputChange} />
+                onChange={this.handleInputChange}
+                placeholder='Type new comment here'
+               />
               <input
+                id='bbb'
                 className='formFields'
                 name="author"
                 value={this.state.author}
-                onChange={this.handleInputChange} />
+                onChange={this.handleInputChange}
+                placeholder='Here your pseudo'
+              />
             </div>
         </form>
-        <div className='commentsToolbar'>
+        <div
+          className='commentsToolbar'
+          id='yyy'>
 
           <button
+            id='ccc'
             className='button'
             onClick={this.cancel}
           >
@@ -56,6 +65,7 @@ class AddCommentForm extends Component {
           </button>
 
           <button
+            id='ddd'
             className='button'
             onClick={()=>
               this.props.newComment(
