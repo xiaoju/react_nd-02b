@@ -24,10 +24,10 @@ class PostsList extends Component {
       <div className='postsList'>
         {this.props.visible.map((postId)=>(
           <div
-          className={'post ' + (this.props.selectedPost === postId ? 'showDetails' : 'showNoDetails')}
+            key={postId}
+            className={'post ' + (this.props.selectedPost === postId ? 'showDetails' : 'showNoDetails')}
           >
             <OnePost
-              key={postId}
               thisPost={this.props.posts.perId[postId]}
             />
           </div>
