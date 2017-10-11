@@ -30,6 +30,7 @@ class MainPage extends Component {
       ))
       .then(()=>(
         this.props.match.params.id &&
+        this.props.posts.allIds.includes(this.props.match.params.id) &&   // this to avoid crash of fetchComments when postId is wrong
         this.props.showMore(this.props.match.params.id)
       ))
   }
