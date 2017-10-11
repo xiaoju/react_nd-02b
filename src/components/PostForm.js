@@ -22,7 +22,10 @@ class PostForm extends Component {
   }
 
   handleInitialize() {
-    const initData = {'category': this.props.selectedCategory, 'title': 'test title'}
+    const initData = {
+      'category': this.props.selectedCategory === '' ? this.props.allCats[0] : this.props.selectedCategory,
+      // 'title': 'test title',
+    }
     this.props.initialize(initData);
   }
 
@@ -45,7 +48,10 @@ class PostForm extends Component {
 
   onSubmit = (values) => {
     this.props.postPost(values)
-      .then(resultPost => this.props.history.push(`/${resultPost.category}/${resultPost.id}`) )
+      .then(resultPost => this.props.history.push(
+        // `/${resultPost.category}/${resultPost.id}`
+        `/${this.props.selectedCategory === '' ? '_' : this.props.selectedCategory}/${resultPost.id}`
+      ))
   }
 
   render(){

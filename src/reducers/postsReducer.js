@@ -17,6 +17,7 @@ const empty = {
   visible: [],
   sortCriteria: 'timestamp',
   sortDirection: 'descending',
+  commentCount: {},
 }
 
 const listReducer = (state = empty, action) => {
@@ -32,8 +33,11 @@ const listReducer = (state = empty, action) => {
       }
 
     case SORT_POSTS:
-      const descendingCompare = (id1, id2) => state.perId[id2][action.field] - state.perId[id1][action.field]
-      const ascendingCompare = (id1, id2) => this.descendingCompare(id2, id1)
+      // const descendingCompare = (id1, id2) => state.perId[id2][action.field] - state.perId[id1][action.field]
+      const descendingCompare = (id1, id2) => id1 - id2
+      // const ascendingCompare = (id1, id2) => this.descendingCompare(id2, id1)
+      const ascendingCompare = (id1, id2) => id2 - id1
+      // const ascendingCompare = (id1, id2) => state.perId[id1][action.field] - state.perId[id2][action.field]
       return {
         ...state,
         sortCriteria: action.field,
@@ -41,8 +45,9 @@ const listReducer = (state = empty, action) => {
           (state.sortDirection === 'descending' ? 'ascending' : 'descending') :
           'descending',
         visible: action.sortDirection === 'descending' ?
-          state.visible.slice().sort(this.descendingCompare) :
-          state.visible.slice().sort(this.ascendingCompare),
+          state.visible.slice().sort( function(id1, id2) { return (state.perId[id2][action.field] - state.perId[id1][action.field])} )
+          :
+          state.visible.slice().sort( function(id1, id2) { return (state.perId[id1][action.field] - state.perId[id2][action.field])} )
       }
 
     case ALL_POSTS_IN:

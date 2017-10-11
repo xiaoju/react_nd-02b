@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class SortBar extends Component {
   // constructor(props) {
@@ -31,3 +32,10 @@ class SortBar extends Component {
   }
 }
 export default SortBar
+
+SortBar.propTypes = {
+  columns: PropTypes.array.isRequired,
+  sortCriteria: PropTypes.string.isRequired,
+  sortDirection: PropTypes.string.isRequired,
+  sortThese: PropTypes.func.isRequired,
+}
