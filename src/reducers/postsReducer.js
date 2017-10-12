@@ -33,9 +33,6 @@ const listReducer = (state = empty, action) => {
       }
 
     case SORT_POSTS:
-      // const descendingCompare = (id1, id2) => state.perId[id2][action.field] - state.perId[id1][action.field]
-      // const ascendingCompare = (id1, id2) => this.descendingCompare(id2, id1)
-      // const ascendingCompare = (id1, id2) => state.perId[id1][action.field] - state.perId[id2][action.field]
       return {
         ...state,
         sortCriteria: action.field,

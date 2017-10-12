@@ -293,7 +293,7 @@ body {
   order: 20;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
   .sortBarTag{
@@ -397,7 +397,7 @@ body {
   display: flex;
   flex-flow: row wrap;
   flex-grow: 1;
-  justify-content:space-between;
+  justify-content: space-evenly;
 }
 
 .voteMachine{

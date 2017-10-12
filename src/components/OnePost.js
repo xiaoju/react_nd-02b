@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   downloadComments,
-  showMore,
+  showMorePlus,
   showLess,
   votePost,
  } from '../actions/index'
@@ -30,7 +30,7 @@ class OnePost extends Component {
               this.props.history.push(`/${this.props.selectedCategory}`)
             }
             :
-            () => this.props.showMore(this.props.thisPost.id)
+            () => this.props.showMorePlus(this.props.thisPost.id)
             .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${this.props.thisPost.id}`) )
           }
           >
@@ -46,7 +46,7 @@ class OnePost extends Component {
                 this.props.history.push(`/${this.props.selectedCategory}`)
               }
               :
-              () => this.props.showMore(this.props.thisPost.id)
+              () => this.props.showMorePlus(this.props.thisPost.id)
               .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${this.props.thisPost.id}`) )
             }
             >
@@ -78,7 +78,7 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
     downloadComments: downloadComments,
     showLess: showLess,
-    showMore: showMore,
+    showMorePlus: showMorePlus,
     votePost: votePost,
   }, dispatch)
 }

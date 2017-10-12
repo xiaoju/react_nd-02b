@@ -3,7 +3,6 @@ import {
   COUNT_COMMENTS_LOAD_DETAILS,
   SHOW_MORE,
   SHOW_LESS,
-  SELECT_COMMENT,
   SORT_COMMENTS,
   UPDATE_COMMENT_STATE,
 } from '../actions'
@@ -11,7 +10,6 @@ import {
 const empty = {
   allIds: [],
   perId: {},
-  selected: '',
   sortCriteria: 'timestamp',
   sortDirection: 'descending',
   commentsCount: {},
@@ -24,8 +22,8 @@ const commentsReducer = (state = empty, action) => {
     return {
       ...state,
       allIds: action.comments.map(thisComment => thisComment.id),
-      perId: action.comments.reduce((result,thisComment) => {result[thisComment.id] = thisComment; return result;}, {}),
-      selected: '',
+      perId: action.comments.reduce((result,thisComment) => {
+        result[thisComment.id] = thisComment; return result;}, {}),
       commentsCount: {
         ...state.commentsCount,
         [action.postId]: action.comments.length,
@@ -70,16 +68,13 @@ const commentsReducer = (state = empty, action) => {
         allIds: action.comments.map(thisComment => thisComment.id),
         perId: action.comments.reduce((result,thisComment) => {
           result[thisComment.id] = thisComment; return result;}, {}),
-        selected: '',
       }
 
     case SHOW_LESS:
-      return empty
-
-    case SELECT_COMMENT:
       return {
         ...state,
-        selected: state.selected === action.commentId ? '' : action.commentId,
+        perId: {},
+        allIds: [],
       }
 
     default:
