@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
+  downloadComments,
   showMore,
   showLess,
   votePost,
@@ -12,6 +13,10 @@ import SortBar from './SortBar'
 import VoteButton from './VoteButton'
 
 class OnePost extends Component {
+
+  componentDidMount() {
+    this.props.downloadComments(this.props.thisPost.id)
+  }
 
   render() {
     return (
@@ -48,7 +53,7 @@ class OnePost extends Component {
             <div className='category columnContent'>{this.props.thisPost.category}</div>
             <div className='author columnContent'>{this.props.thisPost.author}</div>
             <div className='timestamp columnContent'>{(new Date(this.props.thisPost.timestamp)).toLocaleString()}</div>
-            <div className='commentsCount columnContent'>{this.props.commentCount[this.props.thisPost.id] || '_'}</div>
+            <div className='commentsCount columnContent'>{this.props.commentsCount[this.props.thisPost.id]}</div>
           </div>
           <VoteButton
             id={this.props.thisPost.id}
@@ -64,13 +69,14 @@ class OnePost extends Component {
 function mapStateToProps(state) {
   return {
     selectedPost: state.posts.selected,
-    commentCount: state.posts.commentCount,
     selectedCategory: state.categories.selected,
+    commentsCount: state.comments.commentsCount,
   }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
+    downloadComments: downloadComments,
     showLess: showLess,
     showMore: showMore,
     votePost: votePost,
@@ -85,4 +91,5 @@ SortBar.propTypes = {
   showLess: PropTypes.func.isRequired,
   showMore: PropTypes.func.isRequired,
   votePost: PropTypes.func.isRequired,
+  commentsCount: PropTypes.number.isRequired,
 }

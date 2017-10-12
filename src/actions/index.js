@@ -26,6 +26,8 @@ export const SORT_COMMENTS = 'SORT_COMMENTS'
 export const UPDATE_POST_STATE = 'UPDATE_POST_STATE'
 export const UPDATE_COMMENT_STATE = 'UPDATE_COMMENT_STATE'
 
+export const COUNT_COMMENTS = 'COUNT_COMMENTS'
+
 export function showEditCommentForm({body, commentId, postId}){
 // export function showEditCommentForm(){
   return {
@@ -185,6 +187,17 @@ export const newComment = (values) => dispatch => (
     .then( (newComment) => ReadableAPI.fetchComments(newComment.parentId) )
     .then( comments => dispatch(loadDetails(comments[0].parentId, comments)))
 )
+
+export const downloadComments = (postId) => dispatch => (
+  ReadableAPI
+    .fetchComments(postId)
+    .then( comments => dispatch(countComments(postId, comments)))
+)
+export const countComments = (postId, comments) => ({
+  type: COUNT_COMMENTS,
+  postId,
+  comments,
+})
 
 export const showMore = (postId) => dispatch => (
   ReadableAPI

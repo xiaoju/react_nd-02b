@@ -17,7 +17,6 @@ const empty = {
   visible: [],
   sortCriteria: 'timestamp',
   sortDirection: 'descending',
-  commentCount: {},
 }
 
 const listReducer = (state = empty, action) => {
