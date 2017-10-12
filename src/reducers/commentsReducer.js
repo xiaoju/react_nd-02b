@@ -54,14 +54,22 @@ const commentsReducer = (state = empty, action) => {
       return {
         ...state,
         sortCriteria: action.field,
-        sortDirection: state.sortCriteria === action.field ? (state.sortDirection === 'descending' ? 'ascending' : 'descending') : 'descending'
+        sortDirection: state.sortCriteria === action.field ?
+          (state.sortDirection === 'descending' ? 'ascending' : 'descending') :
+          'descending',
+        allIds: state.sortDirection === 'descending' ?
+          state.allIds.slice().sort(function(id1, id2) { return (
+            state.perId[id2][action.field] - state.perId[id1][action.field])}) :
+          state.allIds.slice().sort(function(id1, id2) { return (
+            state.perId[id1][action.field] - state.perId[id2][action.field])}),
       }
 
     case SHOW_MORE:
       return {
         ...state,
         allIds: action.comments.map(thisComment => thisComment.id),
-        perId: action.comments.reduce((result,thisComment) => {result[thisComment.id] = thisComment; return result;}, {}),
+        perId: action.comments.reduce((result,thisComment) => {
+          result[thisComment.id] = thisComment; return result;}, {}),
         selected: '',
       }
 
