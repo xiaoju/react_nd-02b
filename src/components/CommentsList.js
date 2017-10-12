@@ -25,7 +25,6 @@ class CommentsList extends Component {
     }
 
     return (
-      <div>
         <div className='commentsList'>
           { this.props.comments.allIds.map((commentId)=>(
           <div
@@ -93,8 +92,6 @@ class CommentsList extends Component {
           </div>
           ))}
         </div>
-
-      </div>
     )
   }
 }

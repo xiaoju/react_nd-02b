@@ -30,7 +30,7 @@ class AddCommentForm extends Component {
 
   render(){
     return (
-      <div >
+      <div className='newCommentForm'>
         <form
           className='newCommentForm'>
             <div id='zzz'>

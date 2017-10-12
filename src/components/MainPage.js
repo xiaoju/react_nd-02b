@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
@@ -8,7 +9,6 @@ import {
   fetchCategories,
   fetchCatPosts,
   fetchAllPosts,
-  newComment,
   showMore,
 } from '../actions/index'
 import Categories from './Categories'
@@ -22,16 +22,19 @@ import AddCommentForm from './AddCommentForm'
 class MainPage extends Component {
 
   componentDidMount(){
+    const urlPostId = this.props.match.params.id
+    const urlCategory = this.props.match.params.category
     this.props.fetchCategories()
       .then( () => (
-        (this.props.match.params.category == null) || (this.props.match.params.category === '_') ?
+        (urlCategory == null) || (urlCategory === '_') ?
           this.props.fetchAllPosts() :
-          this.props.fetchCatPosts(this.props.match.params.category)
+          this.props.fetchCatPosts(urlCategory)
       ))
       .then(()=>(
-        this.props.match.params.id &&
-        this.props.posts.allIds.includes(this.props.match.params.id) &&   // this to avoid crash of fetchComments when postId is wrong
-        this.props.showMore(this.props.match.params.id)
+        urlPostId &&
+        this.props.posts.allIds.includes(urlPostId) &&
+        // above line to avoid crash of fetchComments when postId is wrong
+        this.props.showMore(urlPostId)
       ))
   }
 
@@ -47,7 +50,7 @@ class MainPage extends Component {
               {field: 'category', label: 'Category'},
               {field: 'author', label: 'Author'},
               {field: 'timestamp', label: 'Time'},
-              {field: 'commentsCount', label: 'Comments'},
+              {field: 'commentsCount', label: 'Comments count'},
               {field: 'voteScore', label: 'Score'},
             ]}
             sortCriteria={this.props.posts.sortCriteria}
@@ -61,11 +64,11 @@ class MainPage extends Component {
 
         </div>
 
-          { this.props.posts.selected &&
+          { this.props.selectedPostId &&
             <div className='detailsContainer'>
 
               <Details
-                thisPost={this.props.posts.perId[this.props.posts.selected]}
+                thisPost={this.props.posts.perId[this.props.selectedPostId]}
               />
 
               <SortBar
@@ -83,7 +86,7 @@ class MainPage extends Component {
               <CommentsList />
 
               <AddCommentForm
-                postId={this.props.posts.selected}
+                postId={this.props.selectedPostId}
               />
 
             </div>
@@ -95,8 +98,8 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
+    selectedPostId: state.posts.selected,
     posts: state.posts,
-    selectedCat: state.categories.selected,
     comments: state.comments,
   }
 }
@@ -106,7 +109,6 @@ function mapDispatchToProps(dispatch){
     fetchCategories: fetchCategories,
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,
-    newComment: newComment,
     sortPosts: sortPosts,
     sortComments: sortComments,
     showMore: showMore,
@@ -114,3 +116,16 @@ function mapDispatchToProps(dispatch){
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage))
+
+MainPage.propTypes = {
+  selectedPostId: PropTypes.string,
+  posts: PropTypes.object.isRequired,
+  comments: PropTypes.object,
+
+  fetchCategories: PropTypes.func.isRequired,
+  fetchCatPosts: PropTypes.func.isRequired,
+  fetchAllPosts: PropTypes.func.isRequired,
+  sortPosts: PropTypes.func.isRequired,
+  sortComments: PropTypes.func.isRequired,
+  showMore: PropTypes.func.isRequired,
+}
