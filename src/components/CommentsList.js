@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  // selectComment,
   voteComment,
   deleteComment,
-  // editComment,
-  showMore,
+  showMorePlus,
   showEditCommentForm,
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
@@ -25,19 +23,14 @@ class CommentsList extends Component {
     }
 
     return (
-        <div className='commentsList'>
-          { this.props.comments.allIds.map((commentId)=>(
-          <div
-            key={commentId}
-            className='commentItem'
-            // className={'post ' + (this.props.comments.selected === commentId ? 'showDetails' : 'showNoDetails') }
-            // onClick={() => this.props.selectComment(commentId)}
-          >
-
-          {
-            // this.props.showingEditCommentForm ?
-            this.props.editingCommentId === commentId ?
-
+      <div className='commentsList'>
+        { this.props.comments.allIds.map((commentId)=>(
+        <div
+          key={commentId}
+          className='commentItem'
+        >
+        {
+          this.props.editingCommentId === commentId ?
             <SimpleEditCommentForm
               commentId={commentId}
               postId={this.props.comments.perId[commentId].parentId}
@@ -45,9 +38,7 @@ class CommentsList extends Component {
               timestamp={this.props.comments.perId[commentId].timestamp}
               body={this.props.comments.perId[commentId].body}
             />
-
-            :
-
+          :
             <div>
               <div className='commentBody'>{this.props.comments.perId[commentId].body}</div>
               <div className='infoLabels'>
@@ -62,13 +53,10 @@ class CommentsList extends Component {
                   <button
                     className='button'
                     onClick={
-                      // ()=>this.props.deleteComment(this.props.comments.perId[commentId].parentId, commentId)
-                      // ()=>console.log('commentId: ', commentId)
                       ()=>this.props.deleteComment(commentId)
-                      .then(()=>this.props.showMore(this.props.selectedPost))
+                        .then(()=>this.props.showMorePlus(this.props.selectedPost))
                     }
-                    >
-                  Delete
+                    >Delete
                   </button>
                   <button
                     className='button'
@@ -78,20 +66,15 @@ class CommentsList extends Component {
                         postId: this.props.comments.perId[commentId].parentId,
                         body: this.props.comments.perId[commentId].body,
                       })}
-                    >
-                  Edit
+                    >Edit
                   </button>
                 </div>
               </div>
             </div>
-
-
-          }
-
-
-          </div>
-          ))}
+        }
         </div>
+        ))}
+      </div>
     )
   }
 }
@@ -99,9 +82,7 @@ class CommentsList extends Component {
 function mapStateToProps(state) {
   return {
     comments: state.comments,
-    // showingEditCommentForm: state.editCommentFormReducer.showingEditCommentForm,
     editingCommentId: state.editCommentFormReducer.commentId,
-    // showingEditCommentForm: state.ui.showingEditCommentForm,
     selectedCategory: state.categories.selected,
     selectedPost: state.posts.selected,
   }
@@ -109,11 +90,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    // selectComment: selectComment,
     voteComment: voteComment,
     deleteComment: deleteComment,
     showEditCommentForm: showEditCommentForm,
-    showMore: showMore,
+    showMorePlus: showMorePlus,
   }, dispatch)
 }
 

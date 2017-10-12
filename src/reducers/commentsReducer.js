@@ -1,5 +1,6 @@
 import {
   COUNT_COMMENTS,
+  COUNT_COMMENTS_LOAD_DETAILS,
   SHOW_MORE,
   SHOW_LESS,
   SELECT_COMMENT,
@@ -18,6 +19,18 @@ const empty = {
 
 const commentsReducer = (state = empty, action) => {
   switch (action.type) {
+
+    case COUNT_COMMENTS_LOAD_DETAILS:
+    return {
+      ...state,
+      allIds: action.comments.map(thisComment => thisComment.id),
+      perId: action.comments.reduce((result,thisComment) => {result[thisComment.id] = thisComment; return result;}, {}),
+      selected: '',
+      commentsCount: {
+        ...state.commentsCount,
+        [action.postId]: action.comments.length,
+      }
+    }
 
     case COUNT_COMMENTS:
       return {

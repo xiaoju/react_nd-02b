@@ -3,6 +3,7 @@ import {
   CAT_POSTS_IN,
   SINGLE_POST_IN,
   REMOVE_POST,
+  COUNT_COMMENTS_LOAD_DETAILS,
   SHOW_MORE,
   SHOW_LESS,
   SELECT_CATEGORY,
@@ -105,6 +106,12 @@ const listReducer = (state = empty, action) => {
         },
         visible: [action.id].concat(previousVisibles)
         // need add to 'visible' specifically that post just created through form, because that post wasn't present in previous state.
+      }
+
+    case COUNT_COMMENTS_LOAD_DETAILS:
+      return {
+        ...state,
+        selected: action.postId
       }
 
     case SHOW_MORE:

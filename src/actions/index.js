@@ -2,34 +2,25 @@ import * as ReadableAPI from '../utils/ReadableAPI'
 
 export const SHOW_EDIT_COMMENT_FORM = 'SHOW_EDIT_COMMENT_FORM'
 export const HIDE_EDIT_COMMENT_FORM = 'HIDE_EDIT_COMMENT_FORM'
-
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 export const SELECT_COMMENT = 'SELECT_COMMENT'
-
 export const ALL_POSTS_IN = 'ALL_POSTS_IN'
 export const CAT_POSTS_IN = 'CAT_POSTS_IN'
 export const SINGLE_POST_IN = 'SINGLE_POST_IN'
-
 export const SHOW_MORE = 'SHOW_MORE'
 export const SHOW_LESS = 'SHOW_LESS'
-
 export const REMOVE_POST = 'REMOVE_POST'
-
 export const FETCH_CATEGORY = 'FETCH_CATEGORY'
-
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
-
 export const SORT_POSTS = 'SORT_POSTS'
 export const SORT_COMMENTS = 'SORT_COMMENTS'
-
 export const UPDATE_POST_STATE = 'UPDATE_POST_STATE'
 export const UPDATE_COMMENT_STATE = 'UPDATE_COMMENT_STATE'
-
 export const COUNT_COMMENTS = 'COUNT_COMMENTS'
+export const COUNT_COMMENTS_LOAD_DETAILS = 'COUNT_COMMENTS_LOAD_DETAILS'
 
 export function showEditCommentForm({body, commentId, postId}){
-// export function showEditCommentForm(){
   return {
     type: SHOW_EDIT_COMMENT_FORM,
     body,
@@ -161,32 +152,26 @@ export const catPostsIn = (category, posts) => ({
   posts
 })
 
-// bug in all lines below, showMore requires selectedCategory and postId
-// but deletecomment doesn't pass selectedCategory
-
 export const deleteComment = (commentId) => dispatch => (
-  // console.log('postId: ', postId, ', commentId: ', commentId) &&
   ReadableAPI.deleteComment(commentId)
-    // .then( () => ReadableAPI.fetchComments(postId) )
-    // .then( comments => dispatch(loadDetails(postId, comments)))
-  // && ReadableAPI.fetchComments(postId)
-  //   .then(comments => dispatch(showMore(null, postId)))
 )
 
-// export const editComment = (postId, commentId, body) => dispatch => (
 export const editComment = (commentId, body) => dispatch => (
   ReadableAPI.editComment(commentId, body)
-    // .then( () => ReadableAPI.fetchComments(postId) )
-    // .then( comments => dispatch(loadDetails(postId, comments)))
-  // && ReadableAPI.fetchComments(postId)
-  //   .then(comments => dispatch(showMore(null, postId)))
 )
 
 export const newComment = (values) => dispatch => (
   ReadableAPI.newComment(values)
-    .then( (newComment) => ReadableAPI.fetchComments(newComment.parentId) )
-    .then( comments => dispatch(loadDetails(comments[0].parentId, comments)))
+    .then(newComment => ReadableAPI.fetchComments(newComment.parentId))
+    .then(comments => dispatch(countCommentsLoadDetails(comments[0].parentId, comments)))
 )
+// TODO how to clean this line above: how to pass 'newComment.parentId to the next api call?'
+export const countCommentsLoadDetails = (postId, comments) => ({
+    // this simply does COUNT_COMMENTS and SHOW_MORE
+    type: COUNT_COMMENTS_LOAD_DETAILS,
+    postId,
+    comments,
+})
 
 export const downloadComments = (postId) => dispatch => (
   ReadableAPI
@@ -198,6 +183,12 @@ export const countComments = (postId, comments) => ({
   postId,
   comments,
 })
+
+export const showMorePlus = (postId) => dispatch => (
+  ReadableAPI
+    .fetchComments(postId)
+    .then(comments => dispatch(countCommentsLoadDetails(postId, comments)))
+)
 
 export const showMore = (postId) => dispatch => (
   ReadableAPI
