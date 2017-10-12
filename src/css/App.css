@@ -12,11 +12,25 @@ body {
   flex-flow: row nowrap;
   justify-content: center;
 }
+
 /*TODO implement 'responsive design'. As screen gets narrower, progressively:
 - replace sortBar with single button
 - show either postsList, either DetailsContainer, adding a button to come back to postsList view
 
 .*/
+
+.newPostForm {
+  padding: 10%;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  margin: 10%;
+}
+
+.newPostForm h2{
+
+  text-align: center;
+}
 
 .postsContainer {
   order: 1;
@@ -101,21 +115,23 @@ body {
 
 .failedValidation {
   border-left: 8px solid rgb(190, 80, 70);
-  color: rgb(190, 80, 70)
+  color: rgb(190, 80, 70);
+  border-color: rgb(190, 80, 70);
 }
+
+
 
 /*this is actually before touching...*/
 .passedValidation {
   text-align: left;
   color: rgb(157, 165, 180);
-  border-left: 8px solid black;
+  border-left: 8px solid rgb(157, 165, 180);
   font-weight: bold;
 }
 
-/*.errorMessage {
-  order: 300;
+.errorMessage {
   color: rgb(190, 80, 70);
-}*/
+}
 
 .postsToolbar{
   order: 50;
@@ -214,6 +230,11 @@ body {
   margin: 1em, 0;
 }
 
+.postFormField{
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 #zzz {
   display: flex;
   flex-flow: column wrap;
@@ -221,8 +242,7 @@ body {
 
 #aaa {
   order: 1;
-  /*background-color: red;*/
-  flex-grow: 1;
+  /*flex-grow: 1;*/
   padding: 0.5em;
   margin: 0.5em 0;
 }
@@ -231,7 +251,6 @@ body {
   order: 2;
   padding: 0.5em;
   margin: 0.5em 0;
-  /*background-color: green;*/
 }
 
 #yyy {
@@ -241,7 +260,6 @@ body {
 
 #ccc {
   order: 1;
-  /*background-color: red;*/
   flex-grow: 1;
   padding: 0.5em;
   margin: 0.5em 0.25em 0.5em 0;
@@ -252,13 +270,9 @@ body {
   padding: 0.5em;
   margin: 0.5em 0;
   margin: 0.5em 0 0.5em 0.25em;
-
-  /*background-color: green;*/
 }
 
 .formFields {
-  /*order: 1;*/
-  /*flex-grow: 1;*/
   background-color: transparent;
   color: rgb(157, 165, 180);
   font-family: 'Fira Mono', monospace;
@@ -306,28 +320,24 @@ body {
 
   .category {
     order: 1;
-    /*flex-basis: 0;*/
     color: rgb(190, 80, 70);
     border-color: rgb(190, 80, 70);
   }
 
   .author {
     order: 2;
-    /*flex-basis: 0;*/
     color: rgb(86, 182, 194);
     border-color: rgb(86, 182, 194);
   }
 
   .timestamp {
     order: 3;
-    /*flex-basis: 0;*/
     color: rgb(152, 195, 121);
     border-color: rgb(152, 195, 121);
   }
 
   .commentsCount {
     order: 4;
-    /*flex-basis: 0;*/
     color: rgb(97, 175, 239);
     border-color: rgb(97, 175, 239);
   }
@@ -396,7 +406,6 @@ body {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  /*justify-content: center;*/
 }
 
 .voteMinus {

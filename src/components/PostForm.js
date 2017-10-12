@@ -24,17 +24,20 @@ class PostForm extends Component {
   handleInitialize() {
     const initData = {
       'category': this.props.selectedCategory === '' ? this.props.allCats[0] : this.props.selectedCategory,
-      // 'title': 'test title',
     }
     this.props.initialize(initData);
   }
 
   renderField(field) {
     return (
-      <div>
-        <label>{field.label}</label>
+      <div className='postFormField'>
+        <label>{field.label}<br /></label>
         <input
-          className={`formField button w100 ${field.meta.touched && field.meta.error ? 'redBorder' : ''}`}
+          className={
+            `formField button ${field.meta.touched && field.meta.error ?
+              'failedValidation' :
+              'passedValidation'}`
+          }
           type={field.type}
           {...field.input}
         />
@@ -49,7 +52,6 @@ class PostForm extends Component {
   onSubmit = (values) => {
     this.props.postPost(values)
       .then(resultPost => this.props.history.push(
-        // `/${resultPost.category}/${resultPost.id}`
         `/${this.props.selectedCategory === '' ? '_' : this.props.selectedCategory}/${resultPost.id}`
       ))
   }
@@ -59,6 +61,7 @@ class PostForm extends Component {
 
     return (
       <div className='newPostForm'>
+        <h2>New post</h2>
         <br />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
@@ -69,14 +72,18 @@ class PostForm extends Component {
             component={this.renderField}
           />
 
-          <Field
-            label='Category'
-            name='category'
-            component='select'>
-            {this.props.allCats.map((thisCategory)=>(
-              <option key={thisCategory} value={thisCategory}>{thisCategory}</option>
-            ))}
-          </Field>
+          <div>
+            <label>Category<br /></label>
+              <Field
+                name='category'
+                component='select'
+                className='formField button'>
+                {this.props.allCats.map((thisCategory)=>(
+                  <option key={thisCategory} value={thisCategory}>{thisCategory}</option>
+                ))}
+              </Field>
+            </div>
+            <br />
 
           <Field
             label='Body'
@@ -84,6 +91,10 @@ class PostForm extends Component {
             type= 'textarea'
             component={this.renderField}
           />
+
+          {/*
+            BUG: how to have multiline texarea?!
+          */}
 
           <Field
             label='Author'
@@ -94,22 +105,21 @@ class PostForm extends Component {
 
           <div className='postsToolbar'>
             <button type="submit" className='button'>Submit</button>
+
+            {this.props.selectedCategory ?
+              <Link
+                to={`/${this.props.selectedCategory}/`}
+                className='button'
+                >Cancel
+              </Link>
+            :
+              <Link
+                to={`/`}
+                className='button'
+                >Cancel
+              </Link>
+            }
           </div>
-
-          {this.props.selectedCategory ?
-            <Link
-              to={`/${this.props.selectedCategory}/`}
-              className='button'
-              >Cancel
-            </Link>
-          :
-            <Link
-              to={`/`}
-              className='button'
-              >Cancel
-            </Link>
-          }
-
         </form>
     </div>
     )
