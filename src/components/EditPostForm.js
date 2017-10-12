@@ -38,10 +38,11 @@ class EditPostForm extends Component {
 
   renderField(field) {
     return (
-      <div>
+      <div className='postFormField'>
         <label>{field.label}</label>
+        <br />
         <input
-          className={`formField button ${field.meta.touched && field.meta.error ? 'redBorder' : ''}`}
+          className={`formField button ${field.meta.touched && field.meta.error ? 'failedValidation' : 'passedValidation'}`}
           type={field.type}
           {...field.input}
         />
@@ -63,6 +64,7 @@ class EditPostForm extends Component {
 
     return (
       <div className='newPostForm'>
+        <h2>Edit post</h2>
         <br />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
@@ -82,10 +84,8 @@ class EditPostForm extends Component {
 
           <div className='postsToolbar'>
             <button type="submit" className='button'>Submit</button>
+            <Link to='/' className='button' >Cancel</Link>
           </div>
-
-          <Link to='/' className='button' >Cancel</Link>
-
         </form>
     </div>
     )
