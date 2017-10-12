@@ -52,35 +52,47 @@ class AddCommentForm extends Component {
               />
             </div>
         </form>
-        <div
-          className='commentsToolbar'
-          id='yyy'>
-
-          <button
-            id='ccc'
-            className='button'
-            onClick={this.cancel}
-          >
-          Cancel
-          </button>
-
-          <button
-            id='ddd'
-            className='button'
-            onClick={()=>
-              this.props.newComment(
-                {
-                  body: this.state.body,
-                  author: this.state.author,
-                  parentId: this.props.postId,
-                }
-              )
-              .then(() => this.cancel())
+          <div className='commentsToolbar' id='yyy' >
+            {
+              this.state.body === '' && this.state.author === '' ?
+                  <button
+                    id='ccc'
+                    className='button inactive_button'
+                    >Cancel
+                  </button>
+              :
+                  <button
+                    id='ccc'
+                    className='button'
+                    onClick={this.cancel}
+                    >Cancel
+                  </button>
             }
-          >
-          Submit New Comment
-          </button>
-        </div>
+            {
+              this.state.body === '' || this.state.author === '' ?
+                <button
+                  id='ddd'
+                  className='button inactive_button'
+                  >Submit
+                </button>
+              :
+                <button
+                  id='ddd'
+                  className='button'
+                  onClick={()=>
+                    this.props.newComment(
+                      {
+                        body: this.state.body,
+                        author: this.state.author,
+                        parentId: this.props.postId,
+                      }
+                    )
+                    .then(() => this.cancel())
+                  }
+                  >Submit
+                </button>
+            }
+          </div>
       </div>
     )
   }
