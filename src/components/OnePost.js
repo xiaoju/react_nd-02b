@@ -15,7 +15,6 @@ import VoteButton from './VoteButton'
 class OnePost extends Component {
 
   componentDidMount() {
-    console.log('OnePost did mount: ', this.props.thisPost.title)
     this.props.downloadComments(this.props.thisPost.id)
   }
 

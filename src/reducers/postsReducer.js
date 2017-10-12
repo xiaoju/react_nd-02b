@@ -34,9 +34,7 @@ const listReducer = (state = empty, action) => {
 
     case SORT_POSTS:
       // const descendingCompare = (id1, id2) => state.perId[id2][action.field] - state.perId[id1][action.field]
-      const descendingCompare = (id1, id2) => id1 - id2
       // const ascendingCompare = (id1, id2) => this.descendingCompare(id2, id1)
-      const ascendingCompare = (id1, id2) => id2 - id1
       // const ascendingCompare = (id1, id2) => state.perId[id1][action.field] - state.perId[id2][action.field]
       return {
         ...state,
@@ -44,10 +42,9 @@ const listReducer = (state = empty, action) => {
         sortDirection: state.sortCriteria === action.field ?
           (state.sortDirection === 'descending' ? 'ascending' : 'descending') :
           'descending',
-        visible: action.sortDirection === 'descending' ?
-          state.visible.slice().sort( function(id1, id2) { return (state.perId[id2][action.field] - state.perId[id1][action.field])} )
-          :
-          state.visible.slice().sort( function(id1, id2) { return (state.perId[id1][action.field] - state.perId[id2][action.field])} )
+        visible: state.sortDirection === 'descending' ?
+          state.visible.slice().sort(function(id1, id2) { return (state.perId[id2][action.field] - state.perId[id1][action.field])}) :
+          state.visible.slice().sort( function(id1, id2) { return (state.perId[id1][action.field] - state.perId[id2][action.field])}),
       }
 
     case ALL_POSTS_IN:
@@ -127,18 +124,12 @@ const listReducer = (state = empty, action) => {
       }
 
     case SELECT_CATEGORY:
-      // probably this will only be used when fetchCatPosts/fetchAllPosts API
-      // call failed and you still want to show something to user
-      // if path is undefined, show all categories. If path is defined, show that category.
-      // '== null' catches both null and undefined
       return {
         ...state,
         selected: '',
         visible: action.path == null ?
           state.allIds.filter(id => state.perId[id].deleted === false) :
           state.allIds.filter(id => state.perId[id].deleted === false && state.perId[id].category === action.path)
-        // This '|| []' at ends of above line avoids a bug where user enters the app by directly typing a category name.
-        // By then state.allIds is still not populated, results in undefined, crashes the app.
       }
 
     default:
