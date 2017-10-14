@@ -9,7 +9,7 @@ import {
   SELECT_CATEGORY,
   SORT_POSTS,
   UPDATE_POST_STATE,
-} from '../actions'
+} from '../actions/types'
 
 const empty = {
   perId : {},

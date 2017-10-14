@@ -1,7 +1,7 @@
 import {
   SHOW_EDIT_COMMENT_FORM,
   HIDE_EDIT_COMMENT_FORM,
-} from '../actions'
+} from '../actions/types'
 
 const empty = {
   showingEditCommentForm: false,

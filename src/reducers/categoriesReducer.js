@@ -3,7 +3,7 @@ import {
   SELECT_CATEGORY,
   ALL_POSTS_IN,
   CAT_POSTS_IN,
-} from '../actions'
+} from '../actions/types'
 
 const empty = {
   allPaths: [],

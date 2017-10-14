@@ -5,7 +5,7 @@ import {
   SHOW_LESS,
   SORT_COMMENTS,
   UPDATE_COMMENT_STATE,
-} from '../actions'
+} from '../actions/types'
 
 const empty = {
   allIds: [],
