@@ -11,13 +11,13 @@ import {
   fetchAllPosts,
   showMore,
 } from '../actions/index'
-import Categories from './Categories'
+import CategoriesBar from './CategoriesBar'
 import SortBar from './SortBar'
 import PostsList from './PostsList'
 import PostsToolbar from './PostsToolbar'
-import Details from './Details'
+import PostDetails from './PostDetails'
 import CommentsList from './CommentsList'
-import AddCommentForm from './AddCommentForm'
+import NewCommentForm from './NewCommentForm'
 
 class MainPage extends Component {
 
@@ -43,7 +43,7 @@ class MainPage extends Component {
       <div className = 'mainPage'>
         <div className = 'postsContainer'>
 
-          <Categories />
+          <CategoriesBar />
 
           <SortBar
             columns={[
@@ -67,7 +67,7 @@ class MainPage extends Component {
           { this.props.selectedPostId &&
             <div className='detailsContainer'>
 
-              <Details
+              <PostDetails
                 thisPost={this.props.posts.perId[this.props.selectedPostId]}
               />
 
@@ -85,7 +85,7 @@ class MainPage extends Component {
 
               <CommentsList />
 
-              <AddCommentForm
+              <NewCommentForm
                 postId={this.props.selectedPostId}
               />
 

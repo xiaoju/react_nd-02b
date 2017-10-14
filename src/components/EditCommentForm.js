@@ -8,7 +8,7 @@ import {
 } from '../actions/index'
 import PropTypes from 'prop-types'
 
-class SimpleEditCommentForm extends Component {
+class EditCommentForm extends Component {
 
   constructor(props) {
     super(props)
@@ -51,7 +51,6 @@ class SimpleEditCommentForm extends Component {
             className='button'
             onClick={()=>
                 this.props.editComment(
-                  // this.props.postId,
                   this.props.commentId,
                   this.state.body
                 )
@@ -83,9 +82,9 @@ function mapDispatchToProps(dispatch){
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SimpleEditCommentForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditCommentForm)
 
-SimpleEditCommentForm.propTypes = {
+EditCommentForm.propTypes = {
   comments: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
   commentId: PropTypes.string.isRequired,

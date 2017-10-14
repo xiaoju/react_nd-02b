@@ -6,7 +6,7 @@ import {
 } from '../actions/index'
 import PropTypes from 'prop-types'
 
-class AddCommentForm extends Component {
+class NewCommentForm extends Component {
 
   constructor(props) {
     super(props)
@@ -110,9 +110,9 @@ function mapDispatchToProps(dispatch){
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCommentForm)
+export default connect(mapStateToProps, mapDispatchToProps)(NewCommentForm)
 
-AddCommentForm.propTypes = {
+NewCommentForm.propTypes = {
   postId: PropTypes.string.isRequired,
   newComment: PropTypes.func.isRequired,
   comments: PropTypes.object.isRequired,

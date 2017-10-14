@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { Field, reduxForm, initialize } from 'redux-form'
+import PropTypes from 'prop-types'
+import {
+  Field,
+  reduxForm,
+} from 'redux-form'
 import {
   postPost,
   fetchCategories,
@@ -18,12 +22,10 @@ class PostForm extends Component {
     // without this code, there would be no category choice to show inside postForm
     if (this.props.allCats.length === 0) { this.props.fetchCategories() }
 
-    this.handleInitialize()
-  }
-
-  handleInitialize() {
     const initData = {
-      'category': this.props.selectedCategory === '' ? this.props.allCats[0] : this.props.selectedCategory,
+      'category': this.props.selectedCategory === '' ?
+      this.props.allCats[0] :
+      this.props.selectedCategory,
     }
     this.props.initialize(initData);
   }
@@ -158,3 +160,11 @@ export default withRouter(
   )(PostForm)
   )
 )
+
+PostForm.propTypes = {
+  selectedCategory: PropTypes.string.isRequired,
+  allCats: PropTypes.array.isRequired,
+
+  postPost: PropTypes.func.isRequired,
+  fetchCategories: PropTypes.func.isRequired,
+}

@@ -9,10 +9,9 @@ import {
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
-import SortBar from './SortBar'
 import VoteButton from './VoteButton'
 
-class OnePost extends Component {
+class PostItem extends Component {
 
   componentDidMount() {
     this.props.downloadComments(this.props.thisPost.id)
@@ -83,13 +82,16 @@ function mapDispatchToProps(dispatch){
   }, dispatch)
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OnePost))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostItem))
 
-SortBar.propTypes = {
+PostItem.propTypes = {
   thisPost: PropTypes.object.isRequired,
+
+  selectedPost: PropTypes.string.isRequired,
   selectedCategory: PropTypes.string.isRequired,
+  commentsCount: PropTypes.object.isRequired,
+
   showLess: PropTypes.func.isRequired,
-  showMore: PropTypes.func.isRequired,
+  showMorePlus: PropTypes.func.isRequired,
   votePost: PropTypes.func.isRequired,
-  commentsCount: PropTypes.number.isRequired,
 }

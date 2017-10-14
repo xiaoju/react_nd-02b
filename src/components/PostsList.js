@@ -6,7 +6,7 @@ import {
  } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
-import OnePost from './OnePost'
+import PostItem from './PostItem'
 
 class PostsList extends Component {
 
@@ -27,7 +27,7 @@ class PostsList extends Component {
             key={postId}
             className={'post ' + (this.props.selectedPost === postId ? 'showDetails' : 'showNoDetails')}
           >
-            <OnePost
+            <PostItem
               thisPost={this.props.posts.perId[postId]}
             />
           </div>

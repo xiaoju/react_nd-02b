@@ -9,7 +9,7 @@ import {
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import VoteButton from './VoteButton'
-import SimpleEditCommentForm from './SimpleEditCommentForm'
+import EditCommentForm from './EditCommentForm'
 
 class CommentsList extends Component {
 
@@ -31,7 +31,7 @@ class CommentsList extends Component {
         >
         {
           this.props.editingCommentId === commentId ?
-            <SimpleEditCommentForm
+            <EditCommentForm
               commentId={commentId}
               postId={this.props.comments.perId[commentId].parentId}
               author={this.props.comments.perId[commentId].author}

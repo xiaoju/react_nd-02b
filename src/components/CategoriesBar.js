@@ -7,7 +7,7 @@ import {
 import { bindActionCreators } from 'redux'
 import { withRouter, Link } from 'react-router-dom'
 
-class Categories extends Component {
+class CategoriesBar extends Component {
 
   render() {
     return (
@@ -49,4 +49,4 @@ function mapDispatchToProps(dispatch){
   }, dispatch)
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Categories))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoriesBar))
