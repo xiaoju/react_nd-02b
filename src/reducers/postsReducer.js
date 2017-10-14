@@ -20,7 +20,7 @@ const empty = {
   sortDirection: 'descending',
 }
 
-const listReducer = (state = empty, action) => {
+const postsReducer = (state = empty, action) => {
   switch (action.type) {
 
     case UPDATE_POST_STATE:
@@ -134,4 +134,4 @@ const listReducer = (state = empty, action) => {
   }
 }
 
-export default listReducer
+export default postsReducer
