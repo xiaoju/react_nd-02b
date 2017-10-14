@@ -41,6 +41,9 @@ class MainPage extends Component {
   render() {
     return (
       <div className = 'mainPage'>
+
+{ !this.props.selectedPostId &&
+
         <div className = 'postsContainer'>
 
           <CategoriesBar />
@@ -60,10 +63,10 @@ class MainPage extends Component {
 
           <PostsList />
 
-          <PostsToolbar />
+          {/* <PostsToolbar /> */}
 
         </div>
-
+}
           { this.props.selectedPostId &&
             <div className='detailsContainer'>
 
