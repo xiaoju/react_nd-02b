@@ -16,8 +16,8 @@ const empty = {
   allIds : [],
   selected: '',
   visible: [],
-  sortCriteria: 'timestamp',
-  sortDirection: 'descending',
+  sortCriteria: '',
+  sortDirection: 'desc',
 }
 
 const postsReducer = (state = empty, action) => {
@@ -36,12 +36,14 @@ const postsReducer = (state = empty, action) => {
       return {
         ...state,
         sortCriteria: action.field,
-        sortDirection: state.sortCriteria === action.field ?
-          (state.sortDirection === 'descending' ? 'ascending' : 'descending') :
-          'descending',
-        visible: state.sortDirection === 'descending' ?
-          state.visible.slice().sort(function(id1, id2) { return (state.perId[id2][action.field] - state.perId[id1][action.field])}) :
-          state.visible.slice().sort( function(id1, id2) { return (state.perId[id1][action.field] - state.perId[id2][action.field])}),
+        sortDirection: state.sortDirection === 'desc' ? 'asc' : 'desc',
+        // NB the sortDirection set here above will only be applied next time,
+        // as 'visible' below is calculated based on previous state.
+        visible: state.sortDirection === 'asc' ?
+          state.visible.slice().sort(function(id1, id2) { return (
+            state.perId[id2][action.field] - state.perId[id1][action.field])}) :
+          state.visible.slice().sort( function(id1, id2) { return (
+            state.perId[id1][action.field] - state.perId[id2][action.field])}),
       }
 
     case ALL_POSTS_IN:

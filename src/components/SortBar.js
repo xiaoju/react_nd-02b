@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 class SortBar extends Component {
 
   decorateLabel(column) {
-    const directionSymbol = (this.props.sortDirection === 'ascending') ? '\u2227' : '\u2228'
+    const directionSymbol = (this.props.sortDirection === 'asc') ? '\u2227' : '\u2228'
     return (
       column.field === this.props.sortCriteria ?
         `${directionSymbol} ${column.label} ${directionSymbol}` :

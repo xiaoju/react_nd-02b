@@ -10,8 +10,8 @@ import {
 const empty = {
   allIds: [],
   perId: {},
-  sortCriteria: 'timestamp',
-  sortDirection: 'descending',
+  sortCriteria: '',
+  sortDirection: 'desc',
   commentsCount: {},
 }
 
@@ -52,10 +52,8 @@ const commentsReducer = (state = empty, action) => {
       return {
         ...state,
         sortCriteria: action.field,
-        sortDirection: state.sortCriteria === action.field ?
-          (state.sortDirection === 'descending' ? 'ascending' : 'descending') :
-          'descending',
-        allIds: state.sortDirection === 'descending' ?
+        sortDirection: state.sortDirection === 'desc' ? 'asc' : 'desc',
+        allIds: state.sortDirection === 'asc' ?
           state.allIds.slice().sort(function(id1, id2) { return (
             state.perId[id2][action.field] - state.perId[id1][action.field])}) :
           state.allIds.slice().sort(function(id1, id2) { return (
