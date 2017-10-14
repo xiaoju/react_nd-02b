@@ -243,12 +243,16 @@ body {
 #aaa {
   order: 1;
   /*flex-grow: 1;*/
+  border-left: 8px solid rgb(157, 165, 180);
+  /*width: 100%;*/
   padding: 0.5em;
   margin: 0.5em 0;
 }
 
 #bbb {
   order: 2;
+  /*width: 100%;*/
+  border-left: 8px solid rgb(157, 165, 180);
   padding: 0.5em;
   margin: 0.5em 0;
 }
@@ -274,12 +278,14 @@ body {
 
 .formFields {
   background-color: transparent;
+  border-left: 8px solid rgb(157, 165, 180);
   color: rgb(157, 165, 180);
   font-family: 'Fira Mono', monospace;
   font-size: 1em;
   border-style: solid;
   border-width: thin;
   border-color: rgb(192,192,192);
+  width: 100%;
 }
 
 textarea{
@@ -288,6 +294,7 @@ textarea{
   color: rgb(157, 165, 180);
   font-size: 1.1em;
   border-left: 8px solid rgb(157, 165, 180);
+  border-width: 0 0 0 8px;
 }
 
 .commentsToolbar{
