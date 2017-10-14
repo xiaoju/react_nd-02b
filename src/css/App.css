@@ -282,6 +282,14 @@ body {
   border-color: rgb(192,192,192);
 }
 
+textarea{
+  width: 100%;
+  background-color: transparent;
+  color: rgb(157, 165, 180);
+  font-size: 1.1em;
+  border-left: 8px solid rgb(157, 165, 180);
+}
+
 .commentsToolbar{
   order: 2;
   display: flex;
