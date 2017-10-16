@@ -46,8 +46,8 @@ class PostsToolbar extends Component {
   render() {
     return (
       <div className='postsToolbar'>
-        {this.deletePostButton()}
-        {this.editPostButton()}
+        {/* {this.deletePostButton()}
+        {this.editPostButton()} */}
         <Link to="/newpost" className="button">New Post</Link>
       </div>
     )

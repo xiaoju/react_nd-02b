@@ -56,7 +56,7 @@ class EditPostForm extends Component {
 
   onSubmit = (payload) => {
     this.props.editPost(this.props.match.params.id, payload)
-      .then(resultPost => this.props.history.push(`/${resultPost.category}/${resultPost.id}`) )
+      .then(resultPost => this.props.history.push(`/${resultPost.category}`) )
   }
 
   render(){

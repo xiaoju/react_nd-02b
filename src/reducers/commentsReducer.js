@@ -11,7 +11,7 @@ const empty = {
   allIds: [],
   perId: {},
   sortCriteria: '',
-  sortDirection: 'desc',
+  sortDirection: 'asc',
   commentsCount: {},
 }
 

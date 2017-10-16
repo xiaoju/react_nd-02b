@@ -17,7 +17,7 @@ const empty = {
   selected: '',
   visible: [],
   sortCriteria: '',
-  sortDirection: 'desc',
+  sortDirection: 'asc',
 }
 
 const postsReducer = (state = empty, action) => {

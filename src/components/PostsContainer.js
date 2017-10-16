@@ -8,16 +8,15 @@ import {
   fetchCategories,
   fetchCatPosts,
   fetchAllPosts,
-  // showMore,
 } from '../actions/index'
 import CategoriesBar from './CategoriesBar'
 import SortBar from './SortBar'
 import PostsList from './PostsList'
+import PostsToolbar from './PostsToolbar'
 
 class PostsContainer extends Component {
 
   componentDidMount(){
-    // const urlPostId = this.props.match.params.id
     const urlCategory = this.props.match.params.category
 
     this.props.fetchCategories()
@@ -26,12 +25,6 @@ class PostsContainer extends Component {
           this.props.fetchAllPosts() :
           this.props.fetchCatPosts(urlCategory)
       ))
-      // .then(()=>(
-      //   urlPostId &&
-      //   this.props.posts.allIds.includes(urlPostId) &&
-      //   // above line to avoid crash of fetchComments when postId is wrong
-      //   this.props.showMore(urlPostId)
-      // ))
   }
 
   render() {
@@ -39,6 +32,8 @@ class PostsContainer extends Component {
       <div className = 'postsContainer'>
 
         <CategoriesBar />
+
+        <PostsToolbar />
 
         <SortBar
           columns={[
@@ -71,7 +66,6 @@ function mapDispatchToProps(dispatch){
     fetchCatPosts: fetchCatPosts,
     fetchAllPosts: fetchAllPosts,
     sortPosts: sortPosts,
-    // showMore: showMore,
   }, dispatch)
 }
 
@@ -84,5 +78,4 @@ PostsContainer.propTypes = {
   fetchCatPosts: PropTypes.func.isRequired,
   fetchAllPosts: PropTypes.func.isRequired,
   sortPosts: PropTypes.func.isRequired,
-  // showMore: PropTypes.func.isRequired,
 }

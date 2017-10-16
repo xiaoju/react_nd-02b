@@ -15,7 +15,7 @@ import {
   Link,
 } from 'react-router-dom'
 
-class PostForm extends Component {
+class NewPostForm extends Component {
 
   componentDidMount(){
     // this to avoid bug if user open app directly on /newPostForm
@@ -54,7 +54,7 @@ class PostForm extends Component {
   onSubmit = (values) => {
     this.props.postPost(values)
       .then(resultPost => this.props.history.push(
-        `/${this.props.selectedCategory === '' ? '_' : this.props.selectedCategory}/${resultPost.id}`
+        `/${this.props.selectedCategory === '' ? '_' : this.props.selectedCategory}`
       ))
   }
 
@@ -157,11 +157,11 @@ export default withRouter(
       validate,
       form: 'newPostForm',
     }
-  )(PostForm)
+  )(NewPostForm)
   )
 )
 
-PostForm.propTypes = {
+NewPostForm.propTypes = {
   selectedCategory: PropTypes.string.isRequired,
   allCats: PropTypes.array.isRequired,
 
