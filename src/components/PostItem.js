@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   downloadComments,
-  showMorePlus,
-  showLess,
   votePost,
   deletePost,
   editPost,
@@ -27,32 +25,12 @@ class PostItem extends Component {
       <div>
         <div
           className='title'
-          onClick={
-            this.props.selectedPost === this.props.thisPost.id ?
-            () => {
-              this.props.showLess();
-              this.props.history.push(`/${this.props.selectedCategory}`)
-            }
-            :
-            () => this.props.showMorePlus(this.props.thisPost.id)
-            .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${this.props.thisPost.id}`) )
-          }
           >
             {this.props.thisPost.title}
         </div>
         <div className='infoLabels'>
           <div
             className='passiveLabels'
-            // onClick={
-            //   this.props.selectedPost === this.props.thisPost.id ?
-            //   () => {
-            //     this.props.showLess();
-            //     this.props.history.push(`/${this.props.selectedCategory}`)
-            //   }
-            //   :
-            //   () => this.props.showMorePlus(this.props.thisPost.id)
-            //   .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${this.props.thisPost.id}`) )
-            // }
             >
             <div className='category columnContent'>{this.props.thisPost.category}</div>
             <div className='author columnContent'>{this.props.thisPost.author}</div>
@@ -60,19 +38,18 @@ class PostItem extends Component {
             <div className='commentsCount columnContent'>{this.props.commentsCount[this.props.thisPost.id]}</div>
           </div>
 
-          <button
-            onClick={() => this.props.showMorePlus(this.props.thisPost.id)
-            .then(() => this.props.history.push(`/${this.props.selectedCategory || '_'}/${this.props.thisPost.id}`) )
-            }
-            className="uglyButton">
-            ugly DETAILS
-          </button>
+          <Link
+            className='button'
+            to={`/${this.props.selectedCategory || '_'}/${this.props.thisPost.id}`}
+            >details
+          </Link>
+
           <button
             onClick={() => this.props.deletePost(this.props.thisPost.id)}
-            className="uglyButton">
-            ugly DEL
+            className="button">
+            delete
           </button>
-          <Link to={`/editpost/${this.props.thisPost.id}`} className="uglyButton">ugly EDIT</Link>
+          <Link to={`/editpost/${this.props.thisPost.id}`} className="button">edit</Link>
 
           <VoteButton
             id={this.props.thisPost.id}
@@ -96,8 +73,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     downloadComments: downloadComments,
-    showLess: showLess,
-    showMorePlus: showMorePlus,
     votePost: votePost,
     deletePost: deletePost,
     editPost: editPost,
@@ -112,8 +87,7 @@ PostItem.propTypes = {
   selectedPost: PropTypes.string.isRequired,
   selectedCategory: PropTypes.string.isRequired,
   commentsCount: PropTypes.object.isRequired,
-
-  showLess: PropTypes.func.isRequired,
-  showMorePlus: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+  editPost: PropTypes.func.isRequired,
   votePost: PropTypes.func.isRequired,
 }

@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-  downloadComments,
-  showMorePlus,
-  showLess,
   votePost,
-  deletePost,
-  editPost,
  } from '../actions/index'
  import VoteButton from './VoteButton'
  import { bindActionCreators } from 'redux'
@@ -17,62 +13,59 @@ import {
 
 class PostDetails extends Component {
 
-  componentDidMount() {
-    this.props.downloadComments(this.props.thisPost.id)
-  }
-
   render() {
+    const empty = {
+      title: '',
+      body: '',
+      author: '',
+      timestamp: '',
+      commentsCount: '',
+    }
+    const thisPost=this.props.posts.perId[this.props.postId] || empty
+    // above line to avoid crash of app if coming to app directly onto specific post
     return (
-
-  <div className='details'>
-    ugly title:
-    <div className='uglyDetails'>{this.props.thisPost.title}</div>
-    <br />
-    ugly body:
-    <div className='body'>{this.props.thisPost.body}</div>
-    <br />
-    ugly score:
-    <VoteButton
-      id={this.props.thisPost.id}
-      voteScore={this.props.thisPost.voteScore}
-      voteItem={this.props.votePost}
-    />
-    <br />
-    ugly time:
-    <div className='uglyDetails'>{(new Date(this.props.thisPost.timestamp)).toLocaleString()}</div>
-    <br />
-    ugly author:
-    <div className='uglyDetails'>{this.props.thisPost.author}</div>
-    <br />
-    ugly comments count:
-    <div className='uglyDetails'>{this.props.commentsCount[this.props.thisPost.id]}</div>
-    <br />
-    <button
-      onClick={() => {
-        this.props.history.push(`/${this.props.selectedCategory}`);
-        this.props.showLess();
-      }}
-      className="uglyButton">
-      HIDE ugly
-    </button>
-  </div>
-)}}
+      <div className='details'>
+        <div className='title'>{thisPost.title}</div>
+        <br />
+        <div className='body'>{thisPost.body}</div>
+        <br />
+        <VoteButton
+          id={thisPost.id}
+          voteScore={thisPost.voteScore}
+          voteItem={this.props.votePost}
+        />
+        <br />
+        <div className='timestamp'>{(new Date(thisPost.timestamp)).toLocaleString()}</div>
+        <br />
+        Author:
+        <div className='author'>{thisPost.author}</div>
+        <br />
+        Comments count:
+        <div className='commentsCount'>{this.props.commentsCount[thisPost.id]}</div>
+        <br />
+        <Link className='button' to={`/${this.props.currentCategory}`}>Back</Link>
+      </div>
+    )
+  }
+}
 
 function mapStateToProps(state) {
   return {
-    selectedPost: state.posts.selected,
-    selectedCategory: state.categories.selected,
     commentsCount: state.comments.commentsCount,
+    posts: state.posts,
   }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    downloadComments: downloadComments,
-    showLess: showLess,
-    showMorePlus: showMorePlus,
     votePost: votePost,
   }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostDetails))
+
+PostDetails.propTypes = {
+  postId: PropTypes.string.isRequired,
+  currentCategory: PropTypes.string.isRequired,
+  posts: PropTypes.object.isRequired,
+}

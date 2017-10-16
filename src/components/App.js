@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import '../css/App.css'
-import MainPage from './MainPage'
 import PostForm from './PostForm'
 import EditPostForm from './EditPostForm'
+import DetailsContainer from './DetailsContainer'
+import PostsContainer from './PostsContainer'
 
 class App extends Component {
   render() {
     return (
       <div className='app' >
-        <Switch>
-          <Route exact path='/newpost' component={PostForm} />
-          <Route exact path='/editpost/:id' component={EditPostForm} />
-          <Route path='/:category?/:id?' component={MainPage} />
-        </Switch>
+        <div className = 'mainPage'>
+          <Switch>
+            <Route exact path='/' component={PostsContainer} />
+            <Route path='/newpost' component={PostForm} />
+            <Route path='/editpost/:id' component={EditPostForm} />
+            <Route exact path='/:category/' component={PostsContainer} />
+            <Route path='/:category/:id' component={DetailsContainer} />
+          </Switch>
+        </div>
       </div>
     )
   }

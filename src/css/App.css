@@ -86,27 +86,6 @@ body {
   margin: 3px;
 }
 
-.uglyButton {
-  font-size: 0.5em;
-  flex: auto;
-  background-color: pink;
-  border-style: dotted;
-  border-width: thin;
-  color: green;
-  border-color: blue;
-  /*padding: 5px 10px;*/
-  text-align: center;
-  /*text-decoration: none;*/
-  margin: 1px;
-}
-
-.uglyDetails {
-  font-size: 0.5em;
-  background-color: pink;
-  color: green;
-  border-color: blue;
-}
-
 .button:focus {
     outline: none !important;
     box-shadow: 0 0 10px #719ECE;
