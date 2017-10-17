@@ -15,8 +15,7 @@ import {
 class EditPostForm extends Component {
 
   componentDidMount(){
-
-    // this to avoid bug if user open app directly on /editPost/:id
+    // following is to avoid bug if user open app directly on /editPost/:id
     // without this code, there would be nothing inside state.posts,
     // would crash the app.
     // TODO better would be to redirect to /_/:id
@@ -29,9 +28,12 @@ class EditPostForm extends Component {
   }
 
   handleInitialize() {
+    const postId = this.props.match.params.id
     const initialData = {
-      'title': this.props.postsPerId[this.props.match.params.id].title,
-      'body': this.props.postsPerId[this.props.match.params.id].body,
+      // 'title': this.props.postsPerId[this.props.match.params.id].title,
+      // 'body': this.props.postsPerId[this.props.match.params.id].body,
+      'title': this.props.postsPerId[postId].title,
+      'body': this.props.postsPerId[postId].body,
     }
     this.props.initialize(initialData);
   }
@@ -56,7 +58,7 @@ class EditPostForm extends Component {
 
   onSubmit = (payload) => {
     this.props.editPost(this.props.match.params.id, payload)
-      .then(resultPost => this.props.history.push(`/${resultPost.category}`) )
+      .then(resultPost => this.props.history.push(`/${resultPost.category}/${resultPost.id}`) )
   }
 
   render(){
@@ -83,10 +85,25 @@ class EditPostForm extends Component {
           />
 
           <div className='postsToolbar'>
-            <button type="submit" className='button'>Submit</button>
-            <Link to='/' className='button' >Cancel</Link>
+            <button
+              type="submit"
+              className='button'
+              >
+              Submit
+            </button>
+
           </div>
         </form>
+
+        <button
+          className='button'
+          onClick={this.props.history.goBack}
+          // TODO how to 'preventDefault' so I can put this button back inside <form> tags?
+          // goBack to '/' or '/category' or '/category/id' depending where from
+          >
+          Cancel
+        </button>
+
     </div>
     )
   }
@@ -102,7 +119,7 @@ function validate(values){
 
 function mapStateToProps(state) {
   return {
-    selectedCategory: state.categories.selected,
+    selectedCategory: state.categories.selected || '_',
     allCats: state.categories.allPaths,
     postsPerId: state.posts.perId,
   }

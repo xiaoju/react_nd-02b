@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   votePost,
+  deletePost,
+
  } from '../actions/index'
  import VoteButton from './VoteButton'
  import { bindActionCreators } from 'redux'
@@ -44,6 +46,17 @@ class PostDetails extends Component {
         <div className='commentsCount'>{this.props.commentsCount[thisPost.id]}</div>
         <br />
         <Link className='button' to={`/${this.props.currentCategory}`}>Back</Link>
+        <button
+          onClick={() =>
+            {
+            this.props.deletePost(thisPost.id)
+            this.props.history.push(`/${this.props.selectedCategory}`)
+            }
+          }
+          className="button">
+          Delete Post
+        </button>
+        <Link to={`/editpost/${thisPost.id}`} className="button">Edit Post</Link>
       </div>
     )
   }
@@ -53,12 +66,14 @@ function mapStateToProps(state) {
   return {
     commentsCount: state.comments.commentsCount,
     posts: state.posts,
+    selectedCategory: state.categories.selected,
   }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     votePost: votePost,
+    deletePost: deletePost,
   }, dispatch)
 }
 
@@ -68,4 +83,6 @@ PostDetails.propTypes = {
   postId: PropTypes.string.isRequired,
   currentCategory: PropTypes.string.isRequired,
   posts: PropTypes.object.isRequired,
+  selectedCategory: PropTypes.string.isRequired,
+  deletePost: PropTypes.func.isRequired,
 }

@@ -48,7 +48,16 @@ class PostsToolbar extends Component {
       <div className='postsToolbar'>
         {/* {this.deletePostButton()}
         {this.editPostButton()} */}
-        <Link to="/newpost" className="button">New Post</Link>
+        <Link
+          to="/newpost"
+          className="button"
+          style={{
+            backgroundColor: 'rgb(157, 165, 180)',
+            color: 'black',
+          }}
+          >Press here to create a New Post!!!
+        </Link>
+
       </div>
     )
   }
