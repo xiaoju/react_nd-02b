@@ -6,7 +6,7 @@ import {
   showMorePlus,
   showEditCommentForm,
  } from '../actions/index'
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import VoteButton from './VoteButton'
 import EditCommentForm from './EditCommentForm'
@@ -88,16 +88,25 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({
-    voteComment: voteComment,
-    deleteComment: deleteComment,
-    showEditCommentForm: showEditCommentForm,
-    showMorePlus: showMorePlus,
-  }, dispatch)
-}
+// function mapDispatchToProps(dispatch){
+//   return bindActionCreators({
+//     voteComment: voteComment,
+//     deleteComment: deleteComment,
+//     showEditCommentForm: showEditCommentForm,
+//     showMorePlus: showMorePlus,
+//   }, dispatch)
+// }
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CommentsList))
+export default withRouter(
+  connect(mapStateToProps, {
+    voteComment,
+    deleteComment,
+    showEditCommentForm,
+    showMorePlus
+  })(CommentsList)
+)
+
+// export default withRouter(connect(
+//   mapStateToProps,
+//   mapDispatchToProps,
+// )(CommentsList))
