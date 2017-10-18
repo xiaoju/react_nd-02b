@@ -11,14 +11,11 @@ import {
   withRouter,
   Link,
 } from 'react-router-dom'
+import Page404 from './Page404'
 
 class EditPostForm extends Component {
 
   componentDidMount(){
-    // following is to avoid bug if user open app directly on /editPost/:id
-    // without this code, there would be nothing inside state.posts,
-    // would crash the app.
-    // TODO better would be to redirect to /_/:id
     !this.props.postsPerId[this.props.match.params.id] ?
       this.props.fetchCategories()
         .then(()=>this.props.fetchAllPosts())
@@ -30,8 +27,6 @@ class EditPostForm extends Component {
   handleInitialize() {
     const postId = this.props.match.params.id
     const initialData = {
-      // 'title': this.props.postsPerId[this.props.match.params.id].title,
-      // 'body': this.props.postsPerId[this.props.match.params.id].body,
       'title': this.props.postsPerId[postId].title,
       'body': this.props.postsPerId[postId].body,
     }
@@ -63,6 +58,11 @@ class EditPostForm extends Component {
 
   render(){
     const { handleSubmit } = this.props
+
+    const urlPostId = this.props.match.params.id
+    const urlCategory = this.props.match.params.category
+    if (!this.props.visible.includes(urlPostId))
+      {return <Page404 urlPostId={urlPostId} urlCategory='' />}
 
     return (
       <div className='newPostForm'>
@@ -122,6 +122,7 @@ function mapStateToProps(state) {
     selectedCategory: state.categories.selected || '_',
     allCats: state.categories.allPaths,
     postsPerId: state.posts.perId,
+    visible: state.posts.visible,
   }
 }
 

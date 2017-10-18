@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+// import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import {
   sortComments,
@@ -14,6 +15,7 @@ import PostDetails from './PostDetails'
 import SortBar from './SortBar'
 import CommentsList from './CommentsList'
 import NewCommentForm from './NewCommentForm'
+import Page404 from './Page404'
 
 class DetailsContainer extends Component {
 
@@ -23,8 +25,7 @@ class DetailsContainer extends Component {
     this.props.fetchCategories()
       .then(()=>this.props.fetchAllPosts())
       .then(()=>(
-        this.props.posts.allIds.includes(urlPostId) &&
-        // above line to avoid crash of fetchComments when there is no post with postId as an id.
+        this.props.posts.visible.includes(urlPostId) &&
         this.props.showMore(urlPostId)
       ))
   }
@@ -32,6 +33,8 @@ class DetailsContainer extends Component {
   render() {
     const urlPostId = this.props.match.params.id
     const urlCategory = this.props.match.params.category
+    if (!this.props.posts.visible.includes(urlPostId))
+      {return <Page404 urlPostId={urlPostId} urlCategory={urlCategory} />}
 
     return (
       <div className='detailsContainer'>
