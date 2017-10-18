@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-// import { Redirect } from 'react-router'
+// import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
-import {
-  sortComments,
-  fetchCategories,
-  fetchCatPosts,
-  fetchAllPosts,
-  showMore,
-} from '../actions/index'
+
+import * as actions from '../actions/index'
+// import {
+//   sortComments,
+//   fetchCategories,
+//   fetchCatPosts,
+//   fetchAllPosts,
+//   showMore,
+// } from '../actions/index'
+
 import PostDetails from './PostDetails'
 import SortBar from './SortBar'
 import CommentsList from './CommentsList'
@@ -74,17 +76,18 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({
-    fetchCategories: fetchCategories,
-    fetchCatPosts: fetchCatPosts,
-    fetchAllPosts: fetchAllPosts,
-    sortComments: sortComments,
-    showMore: showMore,
-  }, dispatch)
-}
+// function mapDispatchToProps(dispatch){
+//   return bindActionCreators({
+//     fetchCategories: fetchCategories,
+//     fetchCatPosts: fetchCatPosts,
+//     fetchAllPosts: fetchAllPosts,
+//     sortComments: sortComments,
+//     showMore: showMore,
+//   }, dispatch)
+// }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DetailsContainer))
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DetailsContainer))
+export default withRouter(connect(mapStateToProps, actions)(DetailsContainer))
 
 DetailsContainer.propTypes = {
   posts: PropTypes.object.isRequired,
