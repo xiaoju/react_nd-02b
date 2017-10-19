@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
   withRouter,
-  Link,
 } from 'react-router-dom'
 import Page404 from './Page404'
 
@@ -60,7 +59,6 @@ class EditPostForm extends Component {
     const { handleSubmit } = this.props
 
     const urlPostId = this.props.match.params.id
-    const urlCategory = this.props.match.params.category
     if (!this.props.visible.includes(urlPostId))
       {return <Page404 urlPostId={urlPostId} urlCategory='' />}
 
