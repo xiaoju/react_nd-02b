@@ -15,7 +15,7 @@ I built this project from scrap as part of the [React Udacity NanoDegree](https:
 
   `cd react_nd-02-readable_server`
 
-  `npm Install`
+  `npm install`
 
   `node server`
 
