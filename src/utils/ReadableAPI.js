@@ -1,34 +1,33 @@
-import uuid from 'uuid4'
+import uuid from 'uuid4';
 
-const api = "//localhost:5001"
+// const api = '//localhost:5001';
+const api = 'https://xiaoju-readable-backend.herokuapp.com';
 
-let token = localStorage.token
+let token = localStorage.token;
 if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
+  token = localStorage.token = Math.random()
+    .toString(36)
+    .substr(-8);
 
 const headers = {
-  'Accept': 'application/json',
-  'Authorization': token
-}
+  Accept: 'application/json',
+  Authorization: token
+};
 
 export const fetchCategories = () =>
-  fetch(`${api}/categories`, { headers })
-    .then(res => res.json())
+  fetch(`${api}/categories`, { headers }).then(res => res.json());
 
 export const fetchAllPosts = () =>
-  fetch(`${api}/posts`, { headers })
-    .then(res => res.json())
+  fetch(`${api}/posts`, { headers }).then(res => res.json());
 
-export const fetchCatPosts = (category) =>
-  fetch(`${api}/${category}/posts`, { headers })
-    .then(res => res.json())
+export const fetchCatPosts = category =>
+  fetch(`${api}/${category}/posts`, { headers }).then(res => res.json());
 
-export const fetchComments = (postId) =>
-// {
-//   console.log('postId :',postId)
-  fetch(`${api}/posts/${postId}/comments`, { headers })
-    .then(res => res.json())
-    // .then((res) => console.log(res))
+export const fetchComments = postId =>
+  // {
+  //   console.log('postId :',postId)
+  fetch(`${api}/posts/${postId}/comments`, { headers }).then(res => res.json());
+// .then((res) => console.log(res))
 // }
 
 export const editPost = (id, payload) =>
@@ -38,42 +37,37 @@ export const editPost = (id, payload) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify(payload)
-    })
-    .then(res => res.json())
+    body: JSON.stringify(payload)
+  }).then(res => res.json());
 
 export const editComment = (commentId, body) =>
-// payload = {timestamp: ..., body: ...}
+  // payload = {timestamp: ..., body: ...}
   fetch(`${api}/comments/${commentId}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify(
-      {
-        body: body,
-        id: uuid(),
-        timestamp: Date.now(),
-      }
-    )
+    body: JSON.stringify({
+      body: body,
+      id: uuid(),
+      timestamp: Date.now()
     })
-    .then(res => res.json())
+  }).then(res => res.json());
 
-export const postPost = (payload) =>
+export const postPost = payload =>
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify({
+    body: JSON.stringify({
       ...payload,
       id: uuid(),
-      timestamp: Date.now(),
+      timestamp: Date.now()
     })
-  })
-  .then(res => res.json())
+  }).then(res => res.json());
 
 export const votePost = (id, voteDirection) =>
   fetch(`${api}/posts/${id}`, {
@@ -82,11 +76,10 @@ export const votePost = (id, voteDirection) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify({
-      option: voteDirection,
+    body: JSON.stringify({
+      option: voteDirection
     })
-  })
-  .then(res => res.json())
+  }).then(res => res.json());
 
 export const voteComment = (id, voteDirection) =>
   fetch(`${api}/comments/${id}`, {
@@ -95,42 +88,40 @@ export const voteComment = (id, voteDirection) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify({
-      option: voteDirection,
+    body: JSON.stringify({
+      option: voteDirection
     })
-  })
-  .then(res => res.json())
+  }).then(res => res.json());
 
-export const newComment = (payload) =>
+export const newComment = payload =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body : JSON.stringify({
+    body: JSON.stringify({
       ...payload,
       id: uuid(),
-      timestamp: Date.now(),
+      timestamp: Date.now()
     })
-  })
-  .then(res => res.json())
-  // TODO parentId: Should match a post id in the database.
+  }).then(res => res.json());
+// TODO parentId: Should match a post id in the database.
 
-export const deletePost = (id) =>
+export const deletePost = id =>
   fetch(`${api}/posts/${id}`, {
     method: 'DELETE',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     }
-  })
+  });
 
-export const deleteComment = (commentId) =>
+export const deleteComment = commentId =>
   fetch(`${api}/comments/${commentId}`, {
     method: 'DELETE',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     }
-  })
+  });
