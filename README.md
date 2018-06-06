@@ -1,6 +1,6 @@
 # Readable
 Readable is a message board webapp to post/delete/edit messages and comments,
-I built this project from scrap as part of the [React Udacity NanoDegree](https://www.udacity.com/course/react-nanodegree--nd019) [_MOOC_](https://en.wikipedia.org/wiki/Massive_open_online_course), of which I joined the first cohort starting july 2017. This was the second 'project' out of three, focused on [Redux](http://redux.js.org/).
+I built this project from scrap as part of the [React Udacity NanoDegree](https://www.udacity.com/course/react-nanodegree--nd019) [_MOOC_](https://en.wikipedia.org/wiki/Massive_open_online_course), of which I joined the first cohort starting july 2017. This was the second 'project' out of three. This project was focused on applying our newly acquired [Redux](http://redux.js.org/) skills.
 
 ## Try the app
 
@@ -71,7 +71,7 @@ It was bootstrapped with [Create React App](https://github.com/facebookincubator
 
 Create, edit and delete categories directly within the code of the backend, file `categories.js`.
 
-Following keywords cannot be used as category names , as they would interfere with the routing in the client app):
+Note however that following keywords shouldn't be used as category names, as they would interfere with the routing in the client app:
 - `newPost`,
 - `editComment`,
 - `editPost`.
@@ -145,10 +145,10 @@ The following endpoints are available:
 
 # Contributing
   - As per release 0.1.0, this project passed Udacity review, and I'm not working on it anymore. However, feel free to contact me per email to `me@xiaoju.io` regarding any comments or suggestions.
-  - If you would like to work deeper on this app, I suggest you take the excellent [`React Udacity NanoDegree`](https://www.udacity.com/course/react-nanodegree--nd019) and create your own version of the project.
+  - If you would like to work deeper on this app, I suggest you take the excellent [`React Udacity NanoDegree`](https://www.udacity.com/course/react-nanodegree--nd019) program and create your own version of the project.
   - [Semantic versioning guidelines](http://semver.org/).
   - [Udacity style guides](https://udacity.github.io/git-styleguide/).
 
 # License
   - See [Udacity legal terms](https://www.udacity.com/legal), _License to Educational Content_ section.
-  - Color theme is copied from [One Dark UI](https://github.com/atom/one-dark-ui) and [One Dark syntax](https://github.com/atom/one-dark-syntax). As these are the standard themes used by [Atom Nuclide](https://nuclide.io/), the colors can also be checked directly within Atom Nuclide, by opening a Chrome Dev Tools panel.
+  - Color theme was inspired by [One Dark UI](https://github.com/atom/one-dark-ui) and [One Dark syntax](https://github.com/atom/one-dark-syntax). As these are the standard themes used by [Atom Nuclide](https://nuclide.io/), the colors can also be checked directly within Atom Nuclide, by opening a Chrome Dev Tools panel.
